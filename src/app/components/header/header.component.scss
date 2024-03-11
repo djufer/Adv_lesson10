@@ -1,0 +1,349 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/base";
+@import "../../shared/styles/mixins";
+* {
+  font-family: "RotondaC";
+}
+// стиль рухомого бордера, який береться з міксина
+.run-border {
+  @include customBorder;
+}
+.bold {
+  font-weight: bold;
+}
+.border-none {
+  &::before {
+    display: none;
+  }
+  &::after {
+    display: none;
+  }
+}
+.header {
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+  .header-logo {
+    height: 100%;
+    width: 140px;
+    height: 100%;
+    padding: 0 15px;
+    background-color: $mainColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 134px;
+    }
+  }
+  .menu {
+    margin: 0;
+    padding: 0;
+    margin-left: 15px;
+    width: 36 0px;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .menu-item {
+      margin: 0 0;
+      padding: 0;
+      list-style: none;
+      height: 66px;
+      width: 71px;
+      font-size: 14px;
+      font-weight: bold;
+      a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        div {
+          display: block;
+          justify-content: center;
+          align-items: center;
+          height: 50%;
+          img {
+            display: block;
+          }
+        }
+        .menu-item-name {
+          color: black;
+        }
+      }
+    }
+  }
+  .burger-block {
+    height: 100%;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .burger-menu {
+      width: 50px;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include customBorder;
+      // =====
+      .burger {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        position: absolute;
+        z-index: 5;
+      }
+      .burger:before,
+      .burger:after {
+        content: "";
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        transition: all 0.2s ease-in-out;
+        position: absolute;
+      }
+      .burger:before {
+        top: -8px;
+      }
+      .burger:after {
+        top: 8px;
+      }
+      .dropdown-menu.active {
+        display: flex;
+        opacity: 100;
+        height: 220px;
+        top: -24px;
+      }
+      .dropdown-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        opacity: 0;
+        position: absolute;
+        top: 0px;
+        left: -26px;
+        align-items: flex-start;
+        border: 2px solid $mainColor;
+        border-radius: 10px;
+        padding: 0 20px 20px;
+        height: 0px;
+        width: max-content;
+        transition: all 0.3s ease;
+        background-color: #fff;
+        z-index: 2;
+        .dropdown-item {
+          height: 40px;
+          width: 90%;
+          font-size: 16px;
+          font-weight: bold;
+          padding: 0 14px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          cursor: pointer;
+          border: 2px solid transparent;
+          transition: all 0.3s ease;
+        }
+        .dropdown-item:hover {
+          border: 2px solid $mainColor;
+          border-radius: 10px;
+        }
+      }
+      // =====
+    }
+    .open .burger {
+      transform: rotate(45deg);
+    }
+
+    .open .burger:before {
+      transform: translateY(8px) rotate(90deg);
+    }
+
+    .open .burger:after {
+      transform: translateY(-8px) rotate(90deg);
+    }
+  }
+  .call-back {
+    width: max-content;
+    height: 34%;
+    background-color: $mainColor;
+    margin: 0 60px;
+    border: 2px solid $mainColor;
+    border-radius: 10px;
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    cursor: pointer;
+    &:hover {
+      background-color: #fff;
+    }
+    .call-back-img {
+      position: relative;
+      top: 1px;
+      margin-right: 6px;
+    }
+    .call-back-span {
+      position: relative;
+      top: 1px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+  .phone-block {
+    margin: 0 26px;
+    width: 180px;
+    .phone-num {
+      text-align: center;
+      transition: 0.5s;
+      cursor: pointer;
+      &:hover {
+        color: $mainColor;
+      }
+    }
+    .schedule {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .admin-block {
+    // width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .admin-btn {
+      // border: 1px solid red;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  }
+  .basket-block {
+    position: relative;
+    height: 100%;
+    padding: 0 10px;
+    background-color: $mainColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: #fff;
+      transition: all 0.3s ease-out;
+    }
+    .basket-img-block {
+      position: relative;
+      padding: 4px;
+      z-index: 1;
+      .goods-quantity {
+        position: absolute;
+        min-width: 30%;
+        // width: max-content;
+        height: max-content;
+        padding: 3px;
+        background-color: #fff;
+        border: 1px solid lightgray;
+        border-radius: 50%;
+        right: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+      }
+    }
+
+    .basket-sum-block {
+      margin-right: 4px;
+      z-index: 1;
+      .sum {
+        margin-right: 4px;
+      }
+    }
+  }
+  .active::after {
+    height: 96%;
+  }
+}
+.cart-modal {
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  top: 95px;
+  border-radius: 0 0 10px 10px;
+  width: 640px;
+  min-height: max-content;
+  max-height: 85vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .empty-cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    img {
+      z-index: 99;
+    }
+    p {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .empty-cart-btn {
+      width: 200px;
+      height: 50px;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      background-color: $mainColor;
+    }
+  }
+  .cart-footer {
+    box-sizing: border-box;
+    height: 100px;
+    width: 100%;
+    background-color: $mainColor;
+    border-radius: 0 0 10px 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    .sum-block {
+      width: 100px;
+    }
+    .checkout-btn {
+      display: block;
+      padding: 15px;
+      padding-bottom: 14px;
+      border: none;
+      border-radius: 10px;
+    }
+  }
+}

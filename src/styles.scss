@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "RotondaC";
+  src: url("./assets/fonts/RotondaC/RotondaC.ttf");
+  src: url("./assets/fonts/RotondaC/RotondaC.woff");
+  font-family: "RotondaC-bold";
+  src: url('./assets/fonts/RotondaC/RotondaC-Bold.ttf');
+  src: url('./assets/fonts/RotondaC/RotondaC-Bold.woff');
+}

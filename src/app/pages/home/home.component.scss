@@ -1,0 +1,33 @@
+.carousel {
+  position: relative;
+  box-sizing: border-box;
+  width: 98vw;
+  margin: 0 auto;
+  overflow: hidden;
+  height: 400px;
+  border: 1px solid red;
+}
+.grabbed {
+  cursor: grab;
+}
+.carousel-track {
+  position: absolute;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  border: 1px dashed;
+  user-select: none;
+}
+.magnet {
+  transition: 0.2s;
+}
+.carousel-item {
+  box-sizing: border-box;
+  font-size: 100px;
+  padding: 2%;
+  // width: 300px; // ширину задаю в ts
+  border: 1px solid blue;
+}
+// .carousel-item:not(:last-of-type) {
+//   margin-right: 1vw;
+// }

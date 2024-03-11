@@ -1,0 +1,139 @@
+<div class="header">
+  <a href="#" class="header-logo">
+    <img src="../../../assets/images/logo.svg" alt="logo" />
+  </a>
+  <ul class="menu">
+    <li class="promotions run-border promotion menu-item">
+      <a href="#">
+        <div class="for-border">
+          <img
+            src="../../../assets/images/nav-img-gift.svg"
+            alt="nav-img-gift"
+          />
+        </div>
+        <span class="menu-item-name">Акції</span>
+      </a>
+    </li>
+    <li class="promotions run-border promotion menu-item">
+      <a href="#">
+        <div class="for-border">
+          <img
+            src="../../../assets/images/nav-img-rolls.svg"
+            alt="nav-img-gift"
+          />
+        </div>
+        <span class="menu-item-name">Роли</span>
+      </a>
+    </li>
+    <li class="promotions run-border promotion menu-item">
+      <a href="#">
+        <div class="for-border">
+          <img
+            src="../../../assets/images/nav-img-sets.svg"
+            alt="nav-img-gift"
+          />
+        </div>
+        <span class="menu-item-name">Сети</span>
+      </a>
+    </li>
+    <li class="promotions run-border promotion menu-item">
+      <a href="#">
+        <div class="for-border">
+          <img
+            src="../../../assets/images/nav-img-drinks.svg"
+            alt="nav-img-gift"
+          />
+        </div>
+        <span class="menu-item-name">Напої</span>
+      </a>
+    </li>
+    <li class="promotions run-border promotion menu-item">
+      <a href="#">
+        <div class="for-border">
+          <img
+            src="../../../assets/images/nav-img-sauces.svg"
+            alt="nav-img-gift"
+          />
+        </div>
+        <span class="menu-item-name">Соуси</span>
+      </a>
+    </li>
+  </ul>
+  <div class="burger-block">
+    <div
+      (click)="toggleBurger()"
+      [ngClass]="{ 'open border-none': isOpenBurger }"
+      class="burger-menu"
+    >
+      <span
+        class="for-border"
+        [ngClass]="{ 'border-none': isOpenBurger }"
+      ></span>
+      <div class="burger"></div>
+      <div [ngClass]="{ active: isOpenBurger }" class="dropdown-menu">
+        <div class="dropdown-item">Доставка та оплата</div>
+        <div class="dropdown-item">Про нас</div>
+        <div class="dropdown-item">Акції на суші</div>
+      </div>
+    </div>
+  </div>
+  <div class="call-back">
+    <div class="call-back-img">
+      <img src="../../../assets/images/phone.svg" alt="" />
+    </div>
+    <div class="call-back-span">МИ ЗАТЕЛЕФОНУЄМО</div>
+  </div>
+  <div class="phone-block">
+    <div class="bold phone-num">+380961234567</div>
+    <div class="schedule">
+      Працюємо з <span class="bold">11:00</span> до
+      <span class="bold">22:30</span>
+    </div>
+  </div>
+  <div class="admin-block">
+    <div class="admin-btn run-border">
+      <div class="for-border"></div>
+      <img src="../../../assets/images/user.svg" alt="" />
+    </div>
+  </div>
+  <div (click)="openCloseCart()" class="basket-block"
+    [ngClass]="{active: isCartStatus}"
+  >
+    <div class="basket-img-block">
+      <div class="goods-quantity">0</div>
+      <img src="../../../assets/images/basket.svg" alt="" />
+    </div>
+    <div class="basket-sum-block">
+      <span class="sum bold">129</span>
+      <span>грн</span>
+    </div>
+    <!-- модалка -->
+
+    <!-- ============================ -->
+  </div>
+
+  <!-- <app-cart-modal></app-cart-modal> -->
+</div>
+<div *ngIf="isCartStatus" class="cart-modal">
+  <ng-container *ngIf="shoppingList.length; else emptyCartTemplate">
+  </ng-container>
+
+  <ng-template #emptyCartTemplate>
+    <div class="empty-cart-container">
+      <img
+        src="../../../assets/images/cart-empty-img.svg"
+        alt="cart-empty-img"
+        width="80px"
+      />
+      <p class="">Кошик порожній</p>
+      <button class="empty-cart-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</button>
+    </div>
+  </ng-template>
+
+  <div class="basket-list"></div>
+  <div class="cart-footer">
+    <div class="sum-block">Сума: <span class="sum bold">0</span> грн</div>
+
+    <button type="button" class="checkout-btn bold">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+  </div>
+</div>
