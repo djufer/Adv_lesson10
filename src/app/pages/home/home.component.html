@@ -1,22 +1,6 @@
-<div class="carousel">
-  <div
-    #carouselTrack
-    (mousedown)="grab($event)"
-    (mousemove)="move($event)"
-    (mouseup)="releaseMouseBtn()"
-    [style.left.px]="offsetX"
-    [ngClass]="{
-      magnet: isMagnetActive,
-      grabbed: isGrabbed
-    }"
-    class="carousel-track"
-  >
-    <div
-      *ngFor="let item of items; index as i"
-      [style.width.vw]="widthOfItem"
-      class="carousel-item"
-    >
-      {{ i + 1 }}
-    </div>
-  </div>
+<div>
+  <app-carrusel></app-carrusel>
+  <h2  >home component</h2>
 </div>
+  
+

@@ -23,6 +23,7 @@ import { AdminPromotionComponent } from './admin/admin-promotion/admin-promotion
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { CarruselComponent } from './pages/home/carrusel/carrusel.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
     AdminCategoriesComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
+    CarruselComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [OverlayService, ModalsService],

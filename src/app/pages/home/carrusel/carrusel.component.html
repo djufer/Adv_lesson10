@@ -1,0 +1,29 @@
+<div class="carousel">
+  <div
+    class="carousel-track"
+    #carouselTrack
+    (mousedown)="grab($event)"
+    (mousemove)="move($event)"
+    (mouseup)="releaseMouseBtn()"
+    [style.left.px]="offsetX"
+    [ngClass]="{
+      magnet: isMagnetActive,
+      grabbed: isGrabbed
+    }"
+  >
+    <div
+      *ngFor="let item of items; index as i"
+      [style.width.vw]="widthOfItem"
+      class="carousel-item"
+    >
+      {{ i + 1 }}
+    </div>
+  </div>
+</div>
+<ul class="carousel-indicators">
+  <li
+    *ngFor="let point of points, index as i, first as f"
+    [ngClass]="{ active: selectedIndex == i }"
+    (click)="setActiveIndex(i)"
+  ></li>
+</ul>

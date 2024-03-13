@@ -3,7 +3,8 @@ app/
         header.component
         footer.component
     pages/
-        home.component
+        home.component/
+            carrusel.component
         promotion.component
         promotion-info.component
         product-category/

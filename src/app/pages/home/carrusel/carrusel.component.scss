@@ -1,0 +1,53 @@
+@import "../../../shared/styles/variables";
+
+.grabbed {
+  cursor: grab;
+}
+.carousel {
+  position: relative;
+  box-sizing: border-box;
+  width: 98vw;
+  margin: 0 auto;
+  margin-top: 135px;
+  overflow: hidden;
+  height: 340px;
+}
+.carousel-track {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  width: fit-content;
+  user-select: none;
+  margin: 0 auto;
+}
+.magnet {
+  transition: 0.2s;
+}
+.carousel-item {
+  box-sizing: border-box;
+  font-size: 100px;
+  padding: 2%;
+  border-radius: 15px;
+  border: 1px solid;
+}
+
+.carousel-indicators {
+  padding: 24px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+
+  li {
+    list-style: none;
+    width: 12px;
+    height: 12px;
+    margin-right: 40px;
+    background-color: $mainColor;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .active {
+    background-color: rgb(47, 79, 131);
+  }
+}
