@@ -1,0 +1,110 @@
+@import "../../shared/styles/base";
+@import "../../shared/styles/custome";
+@import "../../shared/styles/mixins";
+@import "../../shared/styles/variables";
+
+.adm-category-cont {
+  padding: 0 30px;
+}
+.add-category-btn {
+  background-color: $mainColor;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 40px;
+}
+.add-block {
+  width: 60%;
+  input {
+    border: 2px solid lightgray;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 3px;
+  }
+  .err{
+    position: relative;
+    top: -28px;
+  }
+  input[type="text"] {
+    width: 100%;
+  }
+  input[readonly] {
+    color: blue;
+  }
+  .delete-btn{
+    background-color: rgb(218, 104, 28);
+    padding: 10px;
+    float: right;
+    color: #fff;
+    &:hover{
+      background-color: darken(rgb(228, 104, 28), $amount: 5%);
+      box-shadow: 0 0 2px rgb(228, 104, 28);
+    }
+  }
+  .submit-btn {
+    float: right;
+    padding: 10px;
+    margin-top: 20px;
+    color: #000;
+    border-radius: 3px;
+    background-color: $mainColor;
+    &:hover {
+      background-color: darken($color: $mainColor, $amount: 5%);
+      box-shadow: 0 0 2px $mainColor;
+    }
+  }
+
+  .submit-btn.disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: auto;
+    box-shadow: none;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  thead {
+    border-bottom: 4px solid $mainColor;
+    th {
+      padding: 20px;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 2px solid lightgrey;
+      td {
+        max-width: 200px;
+        padding: 10px 20px;
+      }
+      .table-icon {
+        width: 100%;
+        height: auto;
+        max-width: 50px; /* Максимальна ширина зображення */
+        max-height: 50px; /* Максимальна висота зображення */
+        object-fit: contain; /* Збереження співвідношення сторін */
+      }
+      button {
+        height: 20px;
+        font-weight: bold;
+        color: $mainColor;
+        background-color: transparent;
+        @include dynamicUnderline;
+        display: block;
+      }
+      button[disabled] {
+        opacity: 0.5;
+        cursor: auto;
+        &::after,
+        &::before {
+          display: none;
+        }
+      }
+      button[type="submit"]{
+        display: block;
+      }
+    }
+  }
+}

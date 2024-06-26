@@ -1,29 +1,27 @@
 <div class="carousel">
   <div
     class="carousel-track"
-    #carouselTrack
-    (mousedown)="grab($event)"
+    (mousedown)="grab()"
     (mousemove)="move($event)"
-    (mouseup)="releaseMouseBtn()"
+    (mouseup)="mouseUp()"
     [style.left.px]="offsetX"
     [ngClass]="{
       magnet: isMagnetActive,
       grabbed: isGrabbed
     }"
   >
-    <div
-      *ngFor="let item of items; index as i"
-      [style.width.vw]="widthOfItem"
-      class="carousel-item"
-    >
-      {{ i + 1 }}
+    <div *ngFor="let promotion of carouselPromotions" class="item" >
+      <a [routerLink]="[ '/promotion', promotion.id ]"><img [src]="promotion.imagePath"></a> 
+      <!-- тут є проблемка, бо через події миші mousedown, mouseup, grab - не працює клік... -->
     </div>
   </div>
 </div>
-<ul class="carousel-indicators">
+<ul *ngIf="carouselPromotions.length > 2" class="indicators">
   <li
-    *ngFor="let point of points, index as i, first as f"
-    [ngClass]="{ active: selectedIndex == i }"
+    *ngFor="let indicator of indicators; index as i; first as f"
     (click)="setActiveIndex(i)"
+    [class.activeindicator]="i === selectedIndex"
+    [class.inactiveindicator]="i !== selectedIndex"
   ></li>
 </ul>
+

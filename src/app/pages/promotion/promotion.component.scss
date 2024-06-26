@@ -1,0 +1,120 @@
+@import "../../shared/styles/base";
+@import "../../shared/styles/custome";
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+
+* {
+  font-family: "RotondaC";
+  font-size: 18px;
+}
+.spacer-md {
+  height: 60px;
+}
+.center-info {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 550px;
+  .title {
+    position: relative;
+    display: inline-block;
+    padding-top: 10px;
+    color: #252525;
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 1.2em;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+      width: 100%;
+      height: 5px;
+      background: #b5d8f7;
+    }
+  }
+}
+
+.block-info {
+  margin-bottom: 30px;
+  .block-info-link {
+    display: block;
+    .block-info-img {
+      max-width: 697px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      img {
+        display: block;
+        width: 100%;
+        -webkit-transition: 0.35s;
+        transition: 0.35s;
+      }
+    }
+    .title {
+      margin-top: 20px;
+      margin-bottom: 11px;
+      line-height: 1.4em;
+      text-transform: uppercase;
+      -webkit-transition: 0.35s;
+      transition: 0.35s;
+    }
+  }
+  hr {
+    width: 100%;
+    height: 3px;
+    border: none;
+    margin: 15px 0;
+    bottom: none;
+    background-color: $mainColor;
+    opacity: 1;
+    overflow: hidden;
+  }
+  .btn {
+    display: block;
+    margin: 0 auto;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 14px;
+    max-width: 257px;
+    width: 100%;
+    border: 2px solid $mainColor;
+    background: $mainColor;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.35s;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 10px;
+    color: #252525;
+    transition: 0.3s;
+    &:hover {
+      background-color: #fff;
+    }
+  }
+}
+
+.seo-block {
+  .seo-block-info {
+    line-height: 1.6em;
+  }
+
+  .article h1,
+  .article h2,
+  .article h3,
+  .article h4,
+  .article h5,
+  .article h6 {
+    font-weight: bold;
+  }
+  .text > *,
+  .article > * {
+    margin-bottom: 20px;
+  }
+  .more-text {
+    cursor: pointer;
+    // .read-more {
+    // }
+  }
+}

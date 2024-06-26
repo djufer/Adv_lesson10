@@ -12,6 +12,9 @@ a:hover {
 }
 
 footer {
+  position: static;
+  bottom: 0;
+  border-top: 4px solid $mainColor;
   font-family: "RotondaC";
   font-size: 14px;
   box-sizing: border-box;

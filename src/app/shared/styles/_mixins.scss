@@ -1,69 +1,84 @@
+
+
 // голубий бердер блоку що при ховері рухається по периметру
-@mixin customBorder {
+//
+
+@mixin runBorder {
   position: relative;
-  .for-border {
-    display: block;
-    height: 100%;
-    border-radius: 10px;
-    &::before,
-    &::after {
-      content: "";
-      width: 50%;
-      height: 0;
-      position: absolute;
-      transition: all 0.1s linear;
-      background-color: transparent;
-      border-radius: 5px;
-    }
-    &::after {
-      right: 0;
-      top: 0;
-      border-right: 2px solid $mainColor;
-    }
-    &::before {
-      left: 0;
-      bottom: 0;
-      border-left: 2px solid $mainColor;
-    }
-  }
   &::before,
   &::after {
     content: "";
     width: 0;
-    height: 50%;
+    height: 0;
+    opacity: 0;
     position: absolute;
-    transition: all 0.1s linear;
     background-color: transparent;
-    border-radius: 5px;
+    border-radius: 7px;
+    z-index: -100;
+  }
+  &::before {
+    top: 0;
+    left: 0;
+    border-top: 2px solid $mainColor;
+    border-right: 2px solid $mainColor;
   }
   &::after {
-    left: 0;
-    top: 0;
-    border-top: 2px solid $mainColor;
-  }
-  &:hover::before {
-    right: 0;
     bottom: 0;
+    right: 0;
     border-bottom: 2px solid $mainColor;
+    border-left: 2px solid $mainColor;
   }
   &:hover::before,
   &:hover::after {
     width: 100%;
-  }
-  &:hover .for-border::before,
-  &:hover .for-border::after {
     height: 100%;
-  }
-  &:hover::after {
-    transition-delay: 0s;
-  }
-  &:hover .for-border::after {
-    transition-delay: 0.1s;
+    opacity: 1;
+    z-index: -1;
   }
   &:hover::before {
-    transition-delay: 0.2s;
+    transition: width 0.1s ease-in-out, height 0.1s ease-in-out 0.1s;
   }
-  &:hover .for-border::before {
-    transition-delay: 0.3s;
+  &:hover::after {
+    transition: width 0.1s ease-in-out 0.2s, height 0.1s ease-in-out 0.3s,
+      opacity 0.01s ease-in-out 0.2s;
   }
 }
+@mixin dynamicUnderline {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  color: $mainColor;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: $mainColor;
+    transition: width 0.3s ease-out;
+  }
+  &:hover::before {
+    width: 100%;
+    left: 0;
+  }
+}
+// Стрілочка біля посилання, яке розкриває більше текст
+@mixin openMoreTxtArrow {
+  display: inline-block;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 2px;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid $mainColor;
+    border-bottom: 2px solid $mainColor;
+    transform: rotate(-45deg);
+    transition: 0.35s;
+  }
+}
+
+// Стрілочка біля посилання, яке приховує додатковий текст

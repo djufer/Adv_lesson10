@@ -1,0 +1,32 @@
+Питянна на консультацію
+
+1. При додаванні чи видаленні категорій у адмін компоненті, потрілно щоб автоматично оновлювалась компонента хедера
+
+2. При ресеті форми в компоненті adminCategories (реактивні форми) потрібно, щоб поле iconPath завжди містило дефолтне значення...але ставало пусте
+
+[
+  {
+    "id": 4,
+    "date": "",
+    "name": "рол тижня",
+    "title": "50% знижка на 'Рол тижня'",
+    "description": "Щотижня діє знижка 50% на один з ролів нашого меню  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates tempore eaque fugit, culpa hic est totam quo nesciunt velit voluptatem optio aliquid animi vitae praesentium doloremque voluptatibus ab minus autem inventore, repudiandae enim sed minima. Doloremque modi dolore cupiditate? Incidunt, dolore praesentium. Odio eum ad impedit facilis atque magni totam?",
+    "img": "../../../assets/DataBase/promotions/2.webp"
+  },
+  {
+    "id": 6,
+    "date": "",
+    "name": "2 замість 1",
+    "title": "Купуй один рол, отримуй два",
+    "description": "Кожного понеділка можеш отримати два роли за ціною одного Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates tempore eaque fugit, culpa hic est totam quo nesciunt velit voluptatem optio aliquid animi vitae praesentium doloremque voluptatibus ab minus autem inventore, repudiandae enim sed minima. Doloremque modi dolore cupiditate? Incidunt, dolore praesentium. Odio eum ad impedit facilis atque magni totam?",
+    "img": "../../../assets/DataBase/promotions/4.webp"
+  },
+  {
+    "id": 12,
+    "date": "",
+    "name": "третя якась акція",
+    "title": "Безкоштовна доставкана замовлення більше 1000грн",
+    "description": "Кожного дня z ghb[jl;eя приходжу додому я думаю про те як мені зробити так щоб попрацювати додатково",
+    "img": "../../../assets/DataBase/promotions/samovyviz-102.webp"
+  }
+]

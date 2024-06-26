@@ -1,1 +1,128 @@
-<p>admin-categories works!</p>
+<div class="adm-category-cont container-fluid">
+  <button (click)="toggleOpenForm()" class="add-category-btn">
+    ДОДАТИ КАТЕГОРІЮ
+  </button>
+
+  <div class="add-block" *ngIf="isOpenForm">
+    <div class="form-block">
+      <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            formControlName="name"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="*Name"
+          />
+        </div>
+
+        <div
+          *ngIf="showNameError"
+          class="invalid-feedback err"
+          [style.display]="categoryForm.controls['name'].errors?.['required'] ? 'block' : 'none'"
+        >
+          Name is required
+        </div>
+        <div class="mb-3">
+          <label for="path"></label>
+          <input
+            formControlName="path"
+            type="text"
+            name="path"
+            id="path"
+            placeholder="*Path"
+          />
+        </div>
+        <div
+          *ngIf="showTitleError"
+          class="invalid-feedback err"
+          [style.display]="categoryForm.controls['path'].errors?.['required'] ? 'block' : 'none'"
+        >
+          Title is required
+        </div>
+
+        <!--------------------------------------------------------------------------------------------------->
+        <br />
+        <ng-container *ngIf="!isUploaded">
+          <div>
+            <input
+              class="form-control"
+              type="file"
+              id="formFile"
+              (change)="upload($event)"
+            />
+          </div>
+
+          <div class="progress mt-3" *ngIf="isUploading">
+            <div
+              class="progress-bar progress-bar-striped"
+              role="progressbar"
+              [style.width.%]="uploadPercent"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isUploaded">
+          <img [src]="valueByControl('imagePath')" alt="" />
+          <button
+            type="button"
+            class="btn btn-danger delete-btn"
+            (click)="deleteFormImage()"
+          >
+            delete
+          </button>
+        </ng-container>
+
+        <div>
+          <button
+            [class.disabled]="categoryForm.invalid"
+            type="submit"
+            class="submit-btn d-block"
+          >
+            {{ updateStatus ? "ОНОВИТИ" : "ЗБЕРЕГТИ" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="adding-block"></div>
+  <table>
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Name</th>
+        <th>Path</th>
+        <th>Картинка</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of adminCategories; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.path }}</td>
+        <td>
+          <img
+            class="table-icon"
+            [src]="category.imagePath"
+            [alt]="category.name"
+          />
+        </td>
+        <td>
+          <button (click)="editCategory(category)" type="button">
+            Редагувати
+          </button>
+          <button
+            (click)="removeCategory(category)"
+            [disabled]="updateStatus"
+            type="button"
+          >
+            Видалити
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

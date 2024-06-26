@@ -1,0 +1,67 @@
+<div
+  *ngIf="userLoginModalStatus"
+  class="user-login-modal-overlay"
+  (click)="closeModal($event)"
+>
+  <div class="container-modal">
+    <div class="user-login-modal text-center">
+      <div class="popup-title title h3">Вхід в кабінет</div>
+      <!-- <div class="popup-description">
+        Залиште номер телефону і наші менеджери зв’яжуться з вами
+      </div> -->
+      <div class="form popup-form">
+        <div class="wpcf7 js" id="wpcf7-f626-o1">
+          <div class="screen-reader-response">
+            <p role="status" aria-live="polite" aria-atomic="true"></p>
+            <ul></ul>
+          </div>
+          <form
+            action="/#wpcf7-f626-o1"
+            method="post"
+            class="wpcf7-form init"
+            aria-label="Contact form"
+            novalidate="novalidate"
+            data-status="init"
+          >
+            <p>
+              <span class="wpcf7-form-control-wrap" data-name="your-name"
+                ><input
+                  size="40"
+                  class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input"
+                  aria-required="true"
+                  aria-invalid="false"
+                  placeholder="*Ваш email"
+                  value=""
+                  type="text"
+                  name="your-name" /></span
+              ><br />
+              <span class="wpcf7-form-control-wrap"
+                ><input
+                  size="40"
+                  class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required input inputmask"
+                  aria-required="true"
+                  aria-invalid="false"
+                  placeholder="*Пароль"
+                  value=""
+                  type="text"
+                  name="your-phone" /></span
+              ><br />
+              <button class="btn btn-primary btn-block" type="submit">
+                увійти в кабінет
+              </button>
+            </p>
+            <div class="wpcf7-response-output" aria-hidden="true"></div>
+          </form>
+          <div class="d-flex justify-content-between">
+                    <a class="open-popup" data-rel="2">Забули пароль?</a>
+                    <a class="open-popup" data-rel="3">Зареєструватись</a>
+                </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-close close-popup" (click)="closeModal($event)">
+      <span></span>
+    </button>
+  </div>
+</div>
+

@@ -1,0 +1,101 @@
+@import "../../shared/styles/base";
+@import "../../shared/styles/custome";
+@import "../../shared/styles/mixins";
+@import "../../shared/styles/variables";
+
+.adm-orders-cont {
+  padding: 0 30px;
+}
+.add-order-btn {
+  background-color: $mainColor;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 40px;
+}
+.add-block {
+  width: 60%;
+  input {
+    border: 2px solid lightgray;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  input[type="text"] {
+    width: 45%;
+  }
+  input[type="file"] {
+    display: none; /* ховаємо саму кнопку вибору файлу */
+  }
+
+  .label-btn {
+    /* Стилізуємо кнопку, яка буде виглядати як ми хочемо */
+    background-color: $mainColor;
+    color: #000;
+    padding: 10px 15px;
+    margin: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($color: $mainColor, $amount: 10%);
+      box-shadow: 0 0 2px $mainColor;
+    }
+  }
+
+  .label-btn:hover {
+    background-color: #548ac4;
+  }
+  input[type="submit"] {
+    background-color: $mainColor;
+    border: none;
+    &:hover {
+      background-color: darken($color: $mainColor, $amount: 10%);
+      box-shadow: 0 0 2px $mainColor;
+    }
+  }
+}
+
+table {
+  font-size: 14px;
+  width: 100%;
+  border-collapse: collapse;
+  thead {
+    border-bottom: 4px solid $mainColor;
+    th {
+      padding: 10px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  }
+  .tbody {
+    .outer-table-row {
+      border-bottom: 2px solid lightgrey;
+      .outer-td {
+        min-width: 10px;
+        padding: 10px 5px;
+        text-align: center;
+      }
+      button {
+        height: 20px;
+        font-weight: bold;
+        color: $mainColor;
+        @include dynamicUnderline;
+        display: block;
+      }
+    }
+  }
+}
+.inner-table tr {
+    line-height: 1.4rem;
+    text-align: left;
+    .quantity, .amount{
+        white-space: nowrap;
+        padding-left: 6px;
+        vertical-align: bottom;
+    }
+}
+.outer-td tr{
+    padding-right: 40px;
+    border-bottom: 1px dashed lightgray;
+}

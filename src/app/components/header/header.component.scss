@@ -1,12 +1,12 @@
-@import "../../shared/styles/variables";
 @import "../../shared/styles/base";
+@import "../../shared/styles/variables";
 @import "../../shared/styles/mixins";
 * {
   font-family: "RotondaC";
 }
 // стиль рухомого бордера, який береться з міксина
 .run-border {
-  @include customBorder;
+  @include runBorder;
 }
 .bold {
   font-weight: bold;
@@ -34,7 +34,6 @@
   z-index: 100;
   .header-logo {
     height: 100%;
-    width: 140px;
     height: 100%;
     padding: 0 15px;
     background-color: $mainColor;
@@ -49,13 +48,19 @@
     margin: 0;
     padding: 0;
     margin-left: 15px;
-    width: 36 0px;
     height: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .products {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // margin: 0;
+      // padding: 0;
+    }
     .menu-item {
-      margin: 0 0;
+      margin: 0;
       padding: 0;
       list-style: none;
       height: 66px;
@@ -70,14 +75,15 @@
         width: 100%;
         height: 100%;
         text-decoration: none;
-        div {
+
+        img {
           display: block;
-          justify-content: center;
-          align-items: center;
-          height: 50%;
-          img {
-            display: block;
-          }
+          margin-bottom: 5px;
+          width: 50%;
+          height: auto;
+          max-width: 50px; /* Максимальна ширина зображення */
+          max-height: 50%; /* Максимальна висота зображення */
+          // object-fit: contain; /* Збереження співвідношення сторін */
         }
         .menu-item-name {
           color: black;
@@ -98,7 +104,7 @@
       justify-content: center;
       align-items: center;
 
-      @include customBorder;
+      @include runBorder;
       // =====
       .burger {
         display: block;
@@ -126,7 +132,7 @@
       }
       .dropdown-menu.active {
         opacity: 1;
-        height: 220px;
+        height: 260px;
         top: -24px;
         background-color: #fff;
       }
@@ -136,33 +142,34 @@
         justify-content: flex-end;
         opacity: 0;
         position: absolute;
-        top: 0px;
+        top: -100px;
         left: -26px;
         align-items: flex-start;
         border: 2px solid $mainColor;
         border-radius: 10px;
         padding: 0 20px 20px;
         height: 0px;
-        width: max-content;
         transition: all 0.3s ease;
+        white-space: nowrap;
         z-index: 10;
 
         .dropdown-item {
           height: 40px;
-          width: 90%;
           font-size: 16px;
           font-weight: bold;
           padding: 0 14px;
+          margin-bottom: 10px;
           display: flex;
           justify-content: flex-start;
           align-items: center;
           cursor: pointer;
+          background-color: transparent;
           border: 2px solid transparent;
           transition: all 0.3s ease;
+          border-radius: 10px;
         }
         .dropdown-item:hover {
           border: 2px solid $mainColor;
-          border-radius: 10px;
         }
       }
       // =====
@@ -190,6 +197,7 @@
     align-items: center;
     padding: 0 10px;
     transition: all 0.3s ease;
+    color: #252525;
     cursor: pointer;
     &:hover {
       background-color: #fff;
@@ -209,6 +217,7 @@
   .phone-block {
     margin: 0 26px;
     width: 180px;
+    color: #252525;
     .phone-num {
       text-align: center;
       transition: 0.5s;
@@ -222,14 +231,13 @@
       text-align: center;
     }
   }
-  .admin-block {
-    // width: 50px;
+  .user-block {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    .admin-btn {
-      // border: 1px solid red;
+    margin-right: 30px;
+    .user-btn {
       padding: 10px;
       border-radius: 5px;
     }
@@ -262,7 +270,6 @@
       .goods-quantity {
         position: absolute;
         min-width: 30%;
-        // width: max-content;
         height: max-content;
         padding: 3px;
         background-color: #fff;

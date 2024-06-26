@@ -1,0 +1,45 @@
+.swiper-container {
+  width: 100%;
+  overflow: hidden;
+}
+.swiper-wrapper {
+  padding: 5px 0;
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+.slide {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  .advantages-item {
+    max-width: 240px;
+    text-align: center;
+    .advantages-item-img {
+      width: 85px;
+      height: 85px;
+      border-radius: 10px;
+      background: #b5d8f7;
+      position: relative;
+      margin: 30px auto 20px;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+    .title {
+      text-align: center;
+    }
+    .text-cut-5 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.slide:not(:first-of-type) {
+  border-left: 1px solid lightgray;
+}

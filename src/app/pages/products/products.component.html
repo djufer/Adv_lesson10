@@ -1,0 +1,142 @@
+<div class="spacer-md"></div>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-12 text-center">
+      <div class="center-info">
+        <h3 class="h2 title text-cut-2">{{ currentCategoryPath }}</h3> <!--тут має бути категорія ... в розробці-->
+      </div>
+    </div>
+  </div>
+</div>
+<section>
+  <div class="container-fluid">
+    <div class="shop-wrapper">
+      <div class="row product-row">
+        <div
+          *ngFor="let product of currentProductsByCategory"
+          class="col-sm-6 col-lg-4 col-xl-3"
+        >
+          <div class="product-item run-border">
+            <div class="product-image-wrap">
+              <a class="product-image" href="#">
+                <img [src]="product.imagePath" alt="" />
+              </a>
+            </div>
+            <div class="product-title-wrap">
+              <div class="product-title">
+                <a href="">{{ product.name }}</a>
+              </div>
+            </div>
+            <div class="product-desc">
+              <p>{{ product.description }}</p>
+              <div class="product-weight">
+                <span> {{ product.weight }}</span>
+                г
+              </div>
+            </div>
+            <div class="product-controls">
+              <div class="product_price-wrap">
+                <div class="product_price">
+                  <b>{{ product.price }}</b>
+                  грн
+                </div>
+              </div>
+              <div class="thumb-input-number">
+                <button type="button" class="btn-minus">-</button>
+                <input value="1" readonly />
+                <button type="button" class="btn-plus">+</button>
+              </div>
+              <button class="btn-primary">ЗАМОВИТИ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="seo-block">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-xl-9 col-lg-12">
+        <div class="spacer-md"></div>
+        <div class="row seo-block-inner">
+          <div class="col-12 no-image align-self-center">
+            <div class="seo-block-info">
+              <div class="article">
+                <h1 class="h2">Безалкогольні напої до суші та ролів</h1>
+                <p>
+                  Смакувати улюбленими ролами ще приємніше, якщо обрати до них
+                  напої. Тепер вам не доведеться витрачати час і йти до
+                  супермаркету. Обрати безалкогольний напій можна в меню
+                  Monosushi. Просто додайте варіант, який вам сподобався, у
+                  кошик, та оформіть замовлення.
+                </p>
+                <h2>Які безалкогольні напої є в Monosushi?</h2>
+                <p>
+                  Смачні, свіжі, різноманітні! Наша команда — це справжні
+                  перфекціоністи. Тож ми подбали про те, щоб ви могли замовити
+                  лише добірну продукцію від надійних виробників.
+                </p>
+                <p>Смакувати суші приємніше з:</p>
+                <ul>
+                  <li>соком;</li>
+                  <li>фантою;</li>
+                  <li>кока-колою.</li>
+                </ul>
+
+                <p>
+                  Меню напоїв лише ростиме з часом, тож ви гарантовано зможете
+                  обрати варіант, який до душі саме вам. Смак суші буде лише
+                  яскравішим з вдало обраним напоєм.
+                </p>
+                <p>
+                  Замовити безалкогольні напої — так само просто, як і ваші
+                  улюблені страви. Додайте напій у кошик, залиште свої контактні
+                  дані, та дочекайтеся дзвінка менеджера. Ми передзвонимо вам за
+                  декілька хвилин й уточнимо всі деталі замовлення. Доставляємо
+                  напої та суші справді швидко. Всього 43 хвилини — 1 година, і
+                  замовлення буде біля ваших дверей!
+                </p>
+
+                <div class="more-text" [class.hide]="!readMoreStatus">
+                  <div class="article">
+                    <h3>Які безалкогольні напої до суші обирають японці?</h3>
+                    <p>
+                      Найчастіше, це — зелений або трав’яний чай. Але не
+                      пакетований: лише добірний листовий. У напій не додають
+                      цукор чи інші підсолоджувачі. Вибір такого напою
+                      продиктований не лише японськими традиціями, а й тим, що в
+                      зеленому чаї міститься багато ферментів, які покращують
+                      травлення.
+                    </p>
+                    <p>
+                      У світі ж до суші частіше замовляють соки, звичайну воду
+                      або ж біле вино.
+                    </p>
+                    <p>
+                      Обирайте напій, який вам до душі, та замовляйте з
+                      доставкою додому або в офіс.
+                      <a routerLink="/home" class="dynamicUnderline"
+                        >Monosushi</a
+                      >
+                      подбає про швидку доставку! — роли, які вам точно
+                      сподобаються!
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="read-more-btn dynamicUnderline"
+                  (click)="changeReadMoreStatus()"
+                >
+                  {{ readMoreStatus ? "Сховати" : "Дізнатись більше" }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer-xl"></div>
+</div>
+

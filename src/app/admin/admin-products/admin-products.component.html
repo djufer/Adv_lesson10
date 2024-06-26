@@ -1,1 +1,245 @@
-<p>admin-products works!</p>
+<div class="container-fluid m-3">
+  <p class="d-inline-flex gap-1 w-100">
+    <button
+      type="button"
+      class="open-close-form-btn"
+      (click)="isOpenForm = !isOpenForm"
+      [ngClass]="isOpenForm ? 'close-form-btn' : 'open-form-btn'"
+    >
+      {{ isOpenForm ? "Close" : "Open form" }}
+    </button>
+  </p>
+  <ng-container *ngIf="isOpenForm">
+    <div class="collapse" id="collapseExample" [ngClass]="{'show': isOpenForm}">
+    <div class="add-block">
+      <div class="form-block">
+        <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+          <div class="mb-3 row">
+            <div class="form-group col">
+              <label for="category" class="form-label">Category</label>
+              <select
+                formControlName="category"
+                class="form-select"
+                id="category"
+                #category
+              >
+                <option
+                  [ngValue]="category"
+                  *ngFor="let category of adminCategories"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group col">
+              <label for="subCategory" class="form-label">Sub category</label>
+              <input
+                name="subCategory"
+                formControlName="subCategory"
+                type="text"
+                class="form-control"
+                id="subCategory"
+              />
+            </div>
+            <div class="form-group col">
+              <label for="name" class="form-label">Name</label>
+              <input
+                name="name"
+                formControlName="name"
+                type="text"
+                class="form-control"
+                id="name"
+              />
+            </div>
+            
+            <div class="col">
+              <label for="path" class="form-label">Path</label>
+              <input
+                name="path"
+                formControlName="path"
+                type="text"
+                class="form-control"
+                id="path"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              name="description"
+              formControlName="description"
+              rows="3"
+              class="form-control"
+              id="description"
+            ></textarea>
+          </div>
+
+          <div class="mb-3 row">
+            <div class="col">
+              <label for="weight" class="form-label">Weight</label>
+              <input
+                name="weight"
+                formControlName="weight"
+                type="text"
+                class="form-control"
+                id="weight"
+              />
+            </div>
+            <div class="col">
+              <label for="price" class="form-label">Price</label>
+              <input
+                name="price"
+                formControlName="price"
+                type="number"
+                class="form-control"
+                id="price"
+              />
+            </div>
+            <div class="col">
+              <label for="proteins" class="form-label">Proteins</label>
+              <input
+                name="proteins"
+                formControlName="proteins"
+                type="number"
+                class="form-control"
+                id="proteins"
+              />
+            </div>
+            <div class="col">
+              <label for="carbohydrates" class="form-label"
+                >Carbohydrates</label
+              >
+              <input
+                name="carbohydrates"
+                formControlName="carbohydrates"
+                type="number"
+                class="form-control"
+                id="carbohydrates"
+              />
+            </div>
+            <div class="col">
+              <label for="fats" class="form-label">Fats</label>
+              <input
+                name="fats"
+                formControlName="fats"
+                type="number"
+                class="form-control"
+                id="fats"
+              />
+            </div>
+            <div class="col">
+              <label for="calories" class="form-label">Calories</label>
+              <input
+                name="calories"
+                formControlName="calories"
+                type="number"
+                class="form-control"
+                id="calories"
+              />
+            </div>
+          </div>
+
+          <!-- .......................... -->
+          <ng-container *ngIf="!isUploaded">
+            <div class="w-100">
+              <label for="formFile" class="form-label">Choose image</label>
+              <input
+                class="form-control mb-3"
+                type="file"
+                id="formFile"
+                (change)="upload($event)"
+              />
+            </div>
+            <div class="progress mb-2" *ngIf="isUploading">
+              <div
+                class="progress-bar progress-bar-striped"
+                [style.width.%]="uploadPercent"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isUploaded">
+            <div class="w-100 mb-2 d-flex flex-column">
+              <img [src]="valueByControl('imagePath')" alt="" class="mb-1 m-auto" width="200px"/>
+              <button
+                type="button"
+                class="btn btn-danger align-self-start"
+                (click)="deleteImage()"
+              >
+                delete image
+              </button>
+            </div>
+          </ng-container>
+
+          <!-- ............................ -->
+          <button type="submit" class="w-100">
+            {{ updateStatus ? "ОНОВИТИ" : "ЗБЕРЕГТИ" }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </ng-container>
+  
+  <!--  -->
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Category/sub</th>
+        <th>Name</th>
+        <th>Path</th>
+        <th>Description</th>
+        <th>Weight</th>
+        <th>Price</th>
+        <th>Proteins</th>
+        <th>Carbohydrates</th>
+        <th>Fat</th>
+        <th>Calories</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of adminProducts; let i = index">
+        <ng-container *ngIf="product">
+          <td>{{ product.id }}</td>
+        <td>{{ product.category.name }}<br>{{product.subCategory }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.path }}</td>
+        <td>
+          {{ product.description | slice : 0 : 30 }}
+          <span *ngIf="product.description.length > 30">...</span>
+        </td>
+        <td>{{ product.weight }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.proteins }}</td>
+        <td>{{ product.carbohydrates }}</td>
+        <td>{{ product.fats }}</td>
+        <td>{{ product.calories }}</td>
+
+        <td width="50%">
+          <img [src]="product.imagePath"  width="80px"/>
+        </td>
+        <td>
+          <button (click)="editProduct(product)" type="button">
+            Редагувати
+          </button>
+          <button
+            (click)="removeProduct(product)"
+            [disabled]="updateStatus"
+            [ngClass]="{ disabled: updateStatus }"
+          >
+            Видалити
+          </button>
+        </td>
+        </ng-container>
+        
+        
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -2,82 +2,52 @@
   <a href="#" class="header-logo">
     <img src="../../../assets/images/logo.svg" alt="logo" />
   </a>
-  <ul class="menu">
-    <li class="promotions run-border promotion menu-item">
-      <a href="#">
-        <div class="for-border">
-          <img
-            src="../../../assets/images/nav-img-gift.svg"
-            alt="nav-img-gift"
-          />
-        </div>
+  <div class="menu">
+    <div class="run-border menu-item promotion">
+      <a routerLink="/promotion" href="#">
+        <img src="../../../assets/images/nav-img-gift.svg" alt="nav-img-gift" />
         <span class="menu-item-name">Акції</span>
       </a>
-    </li>
-    <li class="promotions run-border promotion menu-item">
-      <a href="#">
-        <div class="for-border">
-          <img
-            src="../../../assets/images/nav-img-rolls.svg"
-            alt="nav-img-gift"
+    </div>
+    <ul class="products"  >
+     
+      <li class="run-border menu-item" *ngFor="let category of headerCategories">
+        <a [routerLink]="['/products', category.path]"> 
+          <img 
+            [src]="category.imagePath"
+             alt="nav-img-gift"
           />
-        </div>
-        <span class="menu-item-name">Роли</span>
-      </a>
-    </li>
-    <li class="promotions run-border promotion menu-item">
-      <a href="#">
-        <div class="for-border">
-          <img
-            src="../../../assets/images/nav-img-sets.svg"
-            alt="nav-img-gift"
-          />
-        </div>
-        <span class="menu-item-name">Сети</span>
-      </a>
-    </li>
-    <li class="promotions run-border promotion menu-item">
-      <a href="#">
-        <div class="for-border">
-          <img
-            src="../../../assets/images/nav-img-drinks.svg"
-            alt="nav-img-gift"
-          />
-        </div>
-        <span class="menu-item-name">Напої</span>
-      </a>
-    </li>
-    <li class="promotions run-border promotion menu-item">
-      <a href="#">
-        <div class="for-border">
-          <img
-            src="../../../assets/images/nav-img-sauces.svg"
-            alt="nav-img-gift"
-          />
-        </div>
-        <span class="menu-item-name">Соуси</span>
-      </a>
-    </li>
-  </ul>
+          <span class="menu-item-name">{{ category.path}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ============ -->
   <div class="burger-block">
     <div
       (click)="toggleBurger()"
       [ngClass]="{ 'open border-none': isOpenBurger }"
       class="burger-menu"
+      id="burger-menu"
     >
-      <span
-        class="for-border"
-        [ngClass]="{ 'border-none': isOpenBurger }"
-      ></span>
+      <span [ngClass]="{ 'border-none': isOpenBurger }"></span>
       <div class="burger"></div>
       <div [ngClass]="{ active: isOpenBurger }" class="dropdown-menu">
-        <div class="dropdown-item">Доставка та оплата</div>
-        <div class="dropdown-item">Про нас</div>
-        <div class="dropdown-item">Акції на суші</div>
+        <div class="dropdown-item">
+          <a routerLink="delivery-payment">Доставка та оплата</a>
+        </div>
+        <div class="dropdown-item">
+          <a routerLink="about">Про нас</a>
+        </div>
+        <div class="dropdown-item">
+          <a routerLink="promotion"></a>
+          Акції на суші
+        </div>
       </div>
     </div>
   </div>
-  <div class="call-back">
+  <div class="call-back" (click)="openCallBackModal()">
     <div class="call-back-img">
       <img src="../../../assets/images/phone.svg" alt="" />
     </div>
@@ -90,14 +60,19 @@
       <span class="bold">22:30</span>
     </div>
   </div>
-  <div class="admin-block">
-    <div class="admin-btn run-border">
-      <div class="for-border"></div>
+  <div class="user-block" (click)="openUserLoginModal()">
+    <a [routerLink]="[ 'admin']" routerLinkActive="active">
+      <div class="user-btn run-border">
       <img src="../../../assets/images/user.svg" alt="" />
-    </div>
+    </div>  
+    
+    </a>
+    
   </div>
-  <div (click)="openCloseCart()" class="basket-block"
-    [ngClass]="{active: isCartStatus}"
+  <div
+    (click)="openCloseCart()"
+    class="basket-block"
+    [ngClass]="{ active: isCartStatus }"
   >
     <div class="basket-img-block">
       <div class="goods-quantity">0</div>
@@ -111,8 +86,6 @@
 
     <!-- ============================ -->
   </div>
-
-  <!-- <app-cart-modal></app-cart-modal> -->
 </div>
 <div *ngIf="isCartStatus" class="cart-modal">
   <ng-container *ngIf="shoppingList.length; else emptyCartTemplate">

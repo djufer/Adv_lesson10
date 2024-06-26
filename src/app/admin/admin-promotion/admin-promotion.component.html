@@ -1,1 +1,134 @@
-<p>admin-promotion works!</p>
+<div class="adm-category-cont container-fluid">
+  <button (click)="toggleStatus()" class="add-category-btn">
+    ДОДАТИ АКЦІЮ
+  </button>
+
+  <div class="add-block" *ngIf="editStatus">
+    <div class="form-block">
+      <form [formGroup]="promotionForm" (ngSubmit)="addPromotion()">
+        <input
+          type="text"
+          name="name"
+          formControlName="name"
+          placeholder="*Назва"
+        />
+        <div
+          *ngIf="showNameError"
+          class="invalid-feedback err"
+          [style.display]="promotionForm.controls['name'].errors?.['required'] ? 'block' : 'none'"
+        >
+          Name is required
+        </div>
+        <input
+          type="text"
+          name="title"
+          formControlName="title"
+          placeholder="*Заголовок"
+        />
+        <div
+          *ngIf="showTitleError"
+          class="invalid-feedback err"
+          [style.display]="promotionForm.controls['title'].errors?.['required'] ? 'block' : 'none'"
+        >
+          title is required
+        </div>
+        <textarea
+          name="desc"
+          rows="4"
+          placeholder="*Опис"
+          formControlName="description"
+        ></textarea>
+        <div
+          *ngIf="showDescriptionError"
+          class="invalid-feedback err"
+          [style.display]="promotionForm.controls['description'].errors?.['required'] ? 'block' : 'none'"
+        >
+          description is required
+        </div>
+
+        <!-- ///////// -->
+        <ng-container *ngIf="!isUploaded">
+          <div class="mb-3">
+            <input
+              class="form-control mb-3"
+              type="file"
+              id="formFile"
+              (change)="upload($event)"
+            />
+          </div>
+          <div
+            *ngIf="showFileError"
+            class="invalid-feedback err"
+            [style.display]="promotionForm.controls['imagePath'].errors?.['required'] ? 'block' : 'none'"
+          >
+            file is required
+          </div>
+          <div class="progress w-100 mb-3" *ngIf="isUploading">
+            <div
+              class="progress-bar progress-bar-striped"
+              role="progressbar"
+              [style.width.%]="uploadPercent"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="isUploaded">
+          <div class="w-100 img-block">
+            <button
+              type="button"
+              class="del-uploading-img-btn btn btn-danger"
+              (click)="deleteImage()"
+            >
+              ВИДАЛИТИ КАРТИНКУ
+            </button>
+            <img
+              [src]="valueByControl('imagePath')"
+              alt=""
+              class="uploading-img"
+            />
+          </div>
+        </ng-container>
+
+        <button
+          type="submit"
+          class="submit-btn d-block w-100"
+          [class.disabled]="promotionForm.invalid"
+        >
+          {{ updateStatus ? "ОНОВИТИ" : "ДОДАТИ" }}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="adding-block"></div>
+  <table>
+    <thead>
+      <tr>
+        <th>дата</th>
+        <th>Назва</th>
+        <th>Title</th>
+        <th>Опис</th>
+        <th>Картинка</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let promotion of adminPromotions; let i = index">
+        <td>{{ promotion.date | date : "MM.yyyy" }}</td>
+        <td>{{ promotion.name }}</td>
+        <td>{{ promotion.title }}</td>
+        <td>{{ promotion.description | truncate : 60 : true : "..." }}</td>
+        <td><img [src]="promotion.imagePath" /></td>
+        <td>
+          <button (click)="editPromotion(promotion)">Редагувати</button>
+          <button
+            (click)="removePromotion(promotion)"
+            [disabled]="updateStatus"
+          >
+            Видалити
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

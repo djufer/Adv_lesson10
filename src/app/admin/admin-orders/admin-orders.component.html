@@ -1,1 +1,56 @@
-<p>admin-orders works!</p>
+<div class="adm-orders-cont container-fluid">
+  <button (click)="openAddBlock()" class="add-order-btn">
+    ДОДАТИ ЗАМОВЛЕННЯ
+  </button>
+
+  <div class="add-block" *ngIf="addBlockStatus">
+    <div class="form-block">
+      <form action="">
+        <input
+          type="text"
+          name="клієнт"
+          placeholder="Покупець"
+          [(ngModel)]="clientName"
+        />
+        <input
+          type="text"
+          name="shippingAddress"
+          placeholder="Адреса доставки"
+        />
+        <input type="text" name="amount" placeholder="Загальна сума" />
+       
+        <br />
+        <input (click)="addOrder()" type="submit" value="ЗБЕРЕГТИ" />
+      </form>
+    </div>
+  </div>
+  <div class="adding-block"></div>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Дата</th>
+        <th>Клієнт</th>
+        <th>Адреса доставки</th>
+        <th>Сума</th>
+        <th>Статус</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody class="tbody">
+      <tr class="outer-table-row" *ngFor="let order of adminOrders, let i = index">
+        <td class="outer-td">{{ order.id }}</td>
+        <td class="outer-td">{{ order.orderDate | date : "dd.MM.yy" }}</td>
+        <td class="outer-td">{{ order.clientName }}</td>
+        <td class="outer-td">{{ order.shippingAddress }}</td>
+        <td class="outer-td">{{ order.amount }} грн</td>
+        <td class="outer-td">{{ orderStatuses[order.status-1].title }}</td>
+        <td class="outer-td">
+          <button (click)="openDetailsModal(order)" >Деталі</button>
+          <button (click)="cancelOrder(order.id)">Відмінити</button>
+          <div class="modal-order-datail"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

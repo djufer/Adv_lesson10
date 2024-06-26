@@ -1,0 +1,136 @@
+// @import "../../shared/styles/base";
+@import "../../shared/styles/custome";
+@import "../../shared/styles/mixins";
+@import "../../shared/styles/variables";
+
+.adm-category-cont {
+  padding: 0 30px;
+}
+.add-category-btn {
+  background-color: $mainColor;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 40px;
+  &:hover {
+    box-shadow: 0 0 2px $mainColor;
+  }
+}
+.add-block {
+  width: 60%;
+  .form-block>form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    input,
+    textarea {
+      display: block;
+      border: 2px solid lightgray;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+      resize: none;
+      width: 100%;
+    }
+
+   
+    input[type="file"] {
+      margin-bottom: 0;
+    }
+    .err{   // блоки з помилками
+      position: relative;
+      top: -34px;
+    }
+
+    .label-btn {
+      background-color: $mainColor;
+      color: #000;
+      border-radius: 5px;
+      padding: 10px 15px;
+      line-height: 1rem;
+      margin-bottom: 30px;
+      cursor: pointer;
+      &:hover {
+        background-color: darken($color: $mainColor, $amount: 5%);
+        box-shadow: 0 0 2px $mainColor;
+      }
+    }
+    .img-block{
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .del-uploading-img-btn{
+      float: right;
+    }
+  
+    .uploading-img{
+      display: block;
+      width: 50%;
+    }
+   
+    .submit-btn {
+      // display: block;
+      color: #000;
+      background-color: $mainColor;
+      border: none;
+      margin-bottom: 30px;
+      padding: 10px;
+      border-radius: 5px;
+      &:hover {
+        background-color: darken($color: $mainColor, $amount: 5%);
+        box-shadow: 0 0 2px $mainColor;
+      }
+    }
+    .submit-btn.disabled {
+      background-color: #cccccc;
+      color: #666666;
+      cursor: auto;
+      box-shadow: none;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  thead {
+    border-bottom: 4px solid $mainColor;
+    th {
+      padding: 2% 1%;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 2px solid lightgrey;
+      td {
+        max-width: 200px;
+        padding: 10px 1%;
+
+        img {
+          display: block;
+          margin: 0 auto;
+          border-radius: 5px;
+          max-width: 80px;
+        }
+      }
+
+      button {
+        height: 20px;
+        font-weight: bold;
+        color: $mainColor;
+        @include dynamicUnderline;
+        display: block;
+        &:disabled {
+          opacity: 0.5;
+          cursor: auto;
+          &::after,
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

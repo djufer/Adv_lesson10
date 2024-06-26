@@ -1,13 +1,16 @@
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import "./app/shared/styles/base";
+@import "./app/shared/styles/custome";
+@import 'ngx-toastr/toastr';
+
 @font-face {
   font-family: "RotondaC";
-  src: url("./assets/fonts/RotondaC/RotondaC.ttf");
-  src: url("./assets/fonts/RotondaC/RotondaC.woff");
-  font-family: "RotondaC-bold";
-  src: url('./assets/fonts/RotondaC/RotondaC-Bold.ttf');
-  src: url('./assets/fonts/RotondaC/RotondaC-Bold.woff');
+  src: url("./assets/fonts/RotondaC/RotondaC.ttf") format("truetype"),
+    url("./assets/fonts/RotondaC/RotondaC.woff") format("woff");
 }
+
+@font-face {
+  font-family: "RotondaC-bold";
+  src: url("./assets/fonts/RotondaC/RotondaC-Bold.ttf") format("truetype"),
+    url("./assets/fonts/RotondaC/RotondaC-Bold.woff") format("woff");
+}
+
