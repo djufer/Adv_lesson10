@@ -2,7 +2,6 @@
   <button (click)="toggleOpenForm()" class="add-category-btn">
     ДОДАТИ КАТЕГОРІЮ
   </button>
-
   <div class="add-block" *ngIf="isOpenForm">
     <div class="form-block">
       <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
