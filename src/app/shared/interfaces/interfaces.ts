@@ -33,6 +33,7 @@ export interface ProductRequest {
   carbohydrates: number;
   fats: number;
   calories: number;
+  count: number
 }
 export interface ProductResponse extends ProductRequest{
   id: number

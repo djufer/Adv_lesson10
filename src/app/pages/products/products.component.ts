@@ -5,7 +5,8 @@ import {
   CategoryResponse,
   ProductResponse,
 } from './../../shared/interfaces/interfaces';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -14,45 +15,37 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductsComponent {
   public readMoreStatus = false;
-  public userProducts: ProductResponse[] = [];
-  public userCategories: CategoryResponse[] = [];
-  public currentCategoryPath!: string;
+
+  
 
   public currentProductsByCategory: ProductResponse[] = [];
+
+  private eventSubscription!: Subscription;
+
   constructor(
     private productsService: ProductsService,
-    private categoryService: CategoryService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.eventSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.getProductsByCategory();
+      }
+    });
+  }
   changeReadMoreStatus(): void {
     this.readMoreStatus = !this.readMoreStatus;
   }
 
-  ngOnInit(): void {
-    this.getCategories();
-    this.route.params.subscribe((params) => {
-      this.currentCategoryPath = params['category'];
-      this.getProductsByCategory();
-    });
-  }
+  ngOnInit(): void { }
+  
   getProductsByCategory(): void {
-    this.productsService
-      .getAllByCategory(this.currentCategoryPath)
-      .subscribe((data) => {
-        this.currentProductsByCategory = data;
-        console.log(data);
-        
-      });
-  }
-
-  getProducts(): void {
-    this.productsService.getAll().subscribe((data) => {
-      this.userProducts = data;
+    const categoryName = this.route.snapshot.paramMap.get('category') as string;
+    this.productsService.getAllByCategory(categoryName).subscribe((data) => {
+      this.currentProductsByCategory = data;
     });
   }
-  getCategories() {
-    this.categoryService.getAll().subscribe((data) => {
-      this.userCategories = data;
-    });
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
   }
 }

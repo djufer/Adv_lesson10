@@ -1,52 +1,32 @@
-<div class="spacer-md"></div>
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-xl-10 col-12 text-center">
-      <div class="center-info">
-        <h3 class="h2 title text-cut-2">{{ currentCategoryPath }}</h3> <!--тут має бути категорія ... в розробці-->
-      </div>
-    </div>
-  </div>
-</div>
+
 <section>
   <div class="container-fluid">
     <div class="shop-wrapper">
       <div class="row product-row">
-        <div
-          *ngFor="let product of currentProductsByCategory"
-          class="col-sm-6 col-lg-4 col-xl-3"
-        >
+        <div *ngFor="let product of currentProductsByCategory" class="col-4">
           <div class="product-item run-border">
-            <div class="product-image-wrap">
-              <a class="product-image" href="#">
-                <img [src]="product.imagePath" alt="" />
+            <div class="product-image-wrap mb-2">
+              <a class="product-image">
+                <img [src]="product.imagePath" [alt]="product.name" />
               </a>
             </div>
-            <div class="product-title-wrap">
-              <div class="product-title">
-                <a href="">{{ product.name }}</a>
-              </div>
+            <h3 class="text-center">
+              <a>{{ product.name }}</a>
+            </h3>
+
+            <div class="text-center" style="min-height: 80px">
+              {{ product.description }}
             </div>
-            <div class="product-desc">
-              <p>{{ product.description }}</p>
-              <div class="product-weight">
-                <span> {{ product.weight }}</span>
-                г
+            <div class="product-weight">{{ product.weight }}</div>
+
+            <div class="d-flex justify-content-between align-items-cente">
+              <h5 class="product_price text-danger">{{ product.price }}грн</h5>
+              <div class="d-flex">
+                <button type="button" class="btn btn-outline-danger">-</button>
+                <input [value]="1" style="width: 30px" class="form-control" />
+                <button type="button" class="btn btn-outline-danger">+</button>
               </div>
-            </div>
-            <div class="product-controls">
-              <div class="product_price-wrap">
-                <div class="product_price">
-                  <b>{{ product.price }}</b>
-                  грн
-                </div>
-              </div>
-              <div class="thumb-input-number">
-                <button type="button" class="btn-minus">-</button>
-                <input value="1" readonly />
-                <button type="button" class="btn-plus">+</button>
-              </div>
-              <button class="btn-primary">ЗАМОВИТИ</button>
+              <button class="btn btn-outline-danger">ЗАМОВИТИ</button>
             </div>
           </div>
         </div>
@@ -139,4 +119,3 @@
   </div>
   <div class="spacer-xl"></div>
 </div>
-

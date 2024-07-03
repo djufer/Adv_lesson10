@@ -58,6 +58,7 @@ export class AdminProductsComponent {
       fats: [null, Validators.required],
       calories: [null, Validators.required],
       imagePath: [null, Validators.required],
+      count: 1
     });
   }
 

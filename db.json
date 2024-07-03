@@ -1,28 +1,28 @@
 {
   "categories": [
     {
-      "name": "Роли",
-      "path": "rolls",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Frolls.svg?alt=media&token=1219f22f-1837-4263-ad0f-a65f4abe5b4c",
-      "id": 16
+      "name": "Піца",
+      "path": "pizza",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Ficon-for-pizza.jpg?alt=media&token=7006a350-4be5-47cb-82db-54a1004d89db",
+      "id": 1
     },
     {
-      "name": "Сети",
-      "path": "sets",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fsets.svg?alt=media&token=00c63a8a-c77a-469a-8898-b4283c8ddc56",
-      "id": 18
+      "name": "Салати",
+      "path": "salads",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Ficon-salade.png?alt=media&token=d6883f3c-be8e-455a-9b17-a416044d03f3",
+      "id": 2
     },
     {
-      "name": "Соуси",
-      "path": "sauces",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fsauces.svg?alt=media&token=2ae9c6c5-91ba-41b6-8177-cad8ed9f0db2",
-      "id": 19
+      "name": "Десерти",
+      "path": "desserts",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdesserts.png?alt=media&token=b6e78fbb-5801-4c64-82f9-5e1c6657ccec",
+      "id": 3
     },
     {
       "name": "Напої",
       "path": "drinks",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdrinks.svg?alt=media&token=72e5d35a-b45b-4a17-81da-ed97a48aef25",
-      "id": 20
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdrinks-icon.png?alt=media&token=e2ec9414-0342-4237-86f7-2a6577d4c983",
+      "id": 4
     }
   ],
   "promotions": [
@@ -46,79 +46,86 @@
   "products": [
     {
       "category": {
-        "name": "Роли",
-        "path": "rolls",
-        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Frolls.svg?alt=media&token=1219f22f-1837-4263-ad0f-a65f4abe5b4c",
-        "id": 16
+        "name": "Піца",
+        "path": "pizza",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Ficon-for-pizza.jpg?alt=media&token=7006a350-4be5-47cb-82db-54a1004d89db",
+        "id": 1
       },
-      "name": "ролл",
-      "path": "ориор",
-      "description": "ориорио",
-      "weight": "ирои",
-      "price": 345,
-      "proteins": 543,
-      "carbohydrates": 34,
-      "fats": 534,
-      "calories": 53453,
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fimgonline-com-ua-compressed-ryna9n84oqh1-scaled-697x379.jpg?alt=media&token=1769ad48-e8c4-4545-be0e-ac95c5c12cf9",
+      "subCategory": null,
+      "name": "Анджеліна",
+      "path": "angelina",
+      "description": "соус кисло-солодкий, сир моцарела, курка, баварські ковбаски, корнішон, цибуля",
+      "weight": "460 г",
+      "price": 290,
+      "proteins": 14.2,
+      "carbohydrates": 32.2,
+      "fats": 7.8,
+      "calories": 261,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fdzhavelinajavelina-1.webp?alt=media&token=379e1783-1dc3-4dd3-a9d1-8f20600aea7f",
+      "count": 1,
       "id": 1
+    },
+    {
+      "category": {
+        "name": "Салати",
+        "path": "salads",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Ficon-salade.png?alt=media&token=d6883f3c-be8e-455a-9b17-a416044d03f3",
+        "id": 2
+      },
+      "subCategory": null,
+      "name": "Цезаріо з куркою",
+      "path": "salat-czezario",
+      "description": "Салат айсберг, помідори, куряче м`ясо, сир пармезан, перепелині яйця, духмяні сухарики та фірмова заправка - соус «Цезар».",
+      "weight": "275 г",
+      "price": 260,
+      "proteins": 11.8,
+      "carbohydrates": 9.8,
+      "fats": 22.5,
+      "calories": 291,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fczezarnovyj.webp?alt=media&token=4f2567ba-a901-4804-965f-d8f4862bf55e",
+      "count": 1,
+      "id": 2
+    },
+    {
+      "category": {
+        "name": "Десерти",
+        "path": "desserts",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdesserts.png?alt=media&token=b6e78fbb-5801-4c64-82f9-5e1c6657ccec",
+        "id": 3
+      },
+      "subCategory": null,
+      "name": "Сіннабон шоколадний",
+      "path": "sinnabon-shokoladnyj",
+      "description": "Борошно пшеничне, какао порошок, молоко, цукор, дріжджі, яйце куряче, масло вершкове, сіль морська, кориця мелена, олія соняшникова, крем-сир, шоколад чорний, шоколад молочний.",
+      "weight": "125 г",
+      "price": 130,
+      "proteins": 6.7,
+      "carbohydrates": 63.8,
+      "fats": 8.4,
+      "calories": 373,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fsinn-choc.webp?alt=media&token=8f649416-0215-4ae8-b890-e3320dc607a6",
+      "count": null,
+      "id": 3
     },
     {
       "category": {
         "name": "Напої",
         "path": "drinks",
-        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdrinks.svg?alt=media&token=72e5d35a-b45b-4a17-81da-ed97a48aef25",
-        "id": 20
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdrinks-icon.png?alt=media&token=e2ec9414-0342-4237-86f7-2a6577d4c983",
+        "id": 4
       },
-      "name": "напій",
-      "path": "иориориои",
-      "description": "иироиори",
-      "weight": "иирои",
-      "price": 456,
-      "proteins": 456,
-      "carbohydrates": 45,
-      "fats": 6456,
-      "calories": 45,
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fden-nar-scaled-697x379.jpg?alt=media&token=db616c43-e1b9-4765-93c0-dfbba2223b40",
-      "id": 2
-    },
-    {
-      "category": {
-        "name": "Роли",
-        "path": "rolls",
-        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Frolls.svg?alt=media&token=1219f22f-1837-4263-ad0f-a65f4abe5b4c",
-        "id": 16
-      },
-      "name": "роли2",
-      "path": "ориориори",
-      "description": "ориори",
-      "weight": "ориори",
-      "price": 456,
-      "proteins": 45646,
-      "carbohydrates": 546,
-      "fats": 546,
-      "calories": 546,
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fden-nar-scaled-697x379.jpg?alt=media&token=c22cad65-e65c-4838-9626-2505319493c8",
-      "id": 3
-    },
-    {
-      "category": {
-        "name": "Роли",
-        "path": "rolls",
-        "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Frolls.svg?alt=media&token=1219f22f-1837-4263-ad0f-a65f4abe5b4c",
-        "id": 16
-      },
-      "subCategory": "підкатегорія ролів",
-      "name": "рол3",
-      "path": "roll3",
-      "description": "jhbhbjh",
-      "weight": "bjbh",
-      "price": 456,
-      "proteins": 64,
-      "carbohydrates": 564,
-      "fats": 564,
-      "calories": 65,
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fimgonline-com-ua-compressed-ryna9n84oqh1-scaled-697x379.jpg?alt=media&token=4569900b-97d4-4bec-a54d-976da3e5d944",
+      "subCategory": null,
+      "name": "Яблучний сік освітлений",
+      "path": "apple-juice",
+      "description": "Яблучний сік освітлений, ТМ “RICH”",
+      "weight": "1 л",
+      "price": 120,
+      "proteins": 0,
+      "carbohydrates": 0,
+      "fats": 0,
+      "calories": 0,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Frich_apple.webp?alt=media&token=adbd1ef5-6597-44bb-a6f3-ac292ab1f4fa",
+      "count": null,
       "id": 4
     }
   ],

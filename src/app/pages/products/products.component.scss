@@ -56,11 +56,6 @@ section {
         transition: 0.35s;
         margin-left: -1px;
         padding: 17px 0;
-        a {
-          line-height: 20px;
-
-          display: block;
-        }
       }
     }
   }
@@ -74,112 +69,19 @@ section {
         margin: 0 10px;
         padding: 10px;
         .product-image-wrap {
-          height: 240px;
-          a {
-            position: relative;
-            display: block;
-            height: 100%;
-            img {
-              width: 100%;
-              position: absolute;
-              top: 25%;
-              transition: 0.35s;
-              overflow: hidden;
-            }
-          }
-        }
-        .product-title-wrap {
-          display: flex;
-          justify-content: space-between;
-          margin: 10px 0;
-          .product-title {
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 1.5em;
-            margin: auto;
-          }
-        }
-        .product-desc {
-          display: flex;
-          justify-content: space-between;
-
-          .product-weight {
-            padding-left: 15px;
-            min-width: 60px;
-            font-weight: 700;
-            margin-bottom: 25px;
-          }
-        }
-        .product-controls {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: 10px;
-
-          .thumb-input-number {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #dcdcdc;
-            border-radius: 10px;
-            color: #252525;
-            font-size: 16px;
-            line-height: 16px;
-            margin-right: auto;
-            margin-left: auto;
-            cursor: pointer;
-            button {
-              width: 28px;
-              height: 36px;
-              margin: 2px;
-              font-size: 30px;
-              background: none;
-              transition: 0.35s;
-              font-size: 24px;
-              line-height: 24px;
-              color: #5a5a5a;
-              background-color: #fff;
-              border-radius: 10px;
-              padding-bottom: 2px;
-              margin: 4px;
-              transition: all 0.5s;
-              cursor: pointer;
-              &:hover {
-                background-color: $mainColor;
-              }
-            }
-
-            input {
-              width: 30px;
-              height: 44px;
-              font-weight: 600;
-              text-align: center;
-            }
-          }
-          .btn-primary {
-            height: 44px;
-            // ------------------------
-            margin-left: 5px;
-            padding: 14px 10px;
-            font-size: 12px;
-            line-height: 12px;
-            font-weight: bold;
-            // ------------------------
-
-            padding: 0 10px;
-            border-radius: 10px;
-            border: 2px solid $mainColor;
-            background-color: $mainColor;
-            &:hover {
-              background-color: #fff;
-              transition: all 0.5s;
-            }
+          height: 354px;
+          img {
+            width: 100%;
+            top: 25%;
+            transition: 0.35s;
+            overflow: hidden;
           }
         }
       }
     }
   }
 }
+
 .seo-block {
   font-size: 18px;
   .text > *,
