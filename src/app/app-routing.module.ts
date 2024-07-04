@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { PromotionComponent } from './pages/promotion/promotion.component';
 import { PromotionInfoComponent } from './pages/promotion-info/promotion-info.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { ProductInfoComponent } from './pages/product-info/product-info.component';
 
 
 import { AdminComponent } from './admin/admin.component';
@@ -14,6 +15,7 @@ import { AdminPromotionComponent } from './admin/admin-promotion/admin-promotion
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { productInfoResolver } from './shared/services/product/product-info.resolver';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,6 +23,13 @@ const routes: Routes = [
   { path: 'promotion', component: PromotionComponent },
   { path: 'promotion/:id', component: PromotionInfoComponent },
   { path: 'products/:category', component: ProductsComponent },
+  {
+    path: 'products/:category/:id',
+    component: ProductInfoComponent,
+    resolve: {
+      productInfo: productInfoResolver
+    },
+  },
   { path: 'delivery-payment', component: DeliveryPaymentComponent },
   { path: 'about', component: AboutComponent },
   {

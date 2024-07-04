@@ -48,21 +48,21 @@ import { ProductsComponent } from './pages/products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AboutComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
     PromotionComponent,
     PromotionInfoComponent,
     ProductsComponent,
+    ProductInfoComponent,
     DeliveryPaymentComponent,
-    AboutComponent,
     CallBackModalComponent,
     CartModalComponent,
     CarruselComponent,
     CarrouselAboutComponent,
     UserLoginModalComponent,
     DetailOrderComponent,
-    ProductInfoComponent,
     TruncatePipe,
 
     AdminComponent,

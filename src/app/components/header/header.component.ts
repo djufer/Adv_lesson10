@@ -1,8 +1,9 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, numberAttribute } from '@angular/core';
 import { OverlayService } from 'src/app/shared/services/overlay/overlay.service';
 import { ModalsService } from 'src/app/shared/services/modals/modals.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
-import { CategoryResponse } from '../../shared/interfaces/interfaces';
+import { CategoryResponse, ProductResponse } from '../../shared/interfaces/interfaces';
+import { OrderService } from 'src/app/shared/services/order/order.service';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +17,15 @@ export class HeaderComponent {
   public shoppingList = [];
   public isOpenAboutModal!: boolean;
   public headerCategories: CategoryResponse[] = [];
-  
+
+  private basket: ProductResponse[] = [];
+  public total = 0;
 
   constructor(
     private overlayService: OverlayService,
     private modalsService: ModalsService,
-    private categoryService: CategoryService
-    
+    private categoryService: CategoryService,
+    private orderService: OrderService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +33,8 @@ export class HeaderComponent {
       this.isCartStatus = status;
     });
     this.getCategories();
+    this.loadBasket();
+    this.updateBasket();
   }
 
   getCategories() {
@@ -72,5 +77,24 @@ export class HeaderComponent {
         this.openCloseCart();
       }
     }
+  }
+
+  loadBasket(): void {
+    if (localStorage.length > 0 && localStorage.getItem('basket')) {
+      this.basket = JSON.parse(localStorage.getItem('basket') as string);
+    }
+    this.getTotalPrice();
+  }
+  getTotalPrice(): void {
+    this.total = this.basket.reduce(
+      (total: number, prod: ProductResponse) => total + prod.count * prod.price,
+      0
+    );
+  }
+
+  updateBasket(): void{
+    this.orderService.changeBasket.subscribe(() => {
+      this.loadBasket();
+    });
   }
 }

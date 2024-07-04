@@ -1,7 +1,7 @@
 * {
   font-family: "RotondaC";
 }
-@import "../../shared/styles/base";
+// @import "../../shared/styles/base";
 @import "../../shared/styles/custome";
 @import "../../shared/styles/variables";
 @import "../../shared/styles/mixins";
@@ -61,21 +61,16 @@ section {
   }
   .shop-wrapper {
     margin: 0 30px;
-    .product-row {
-      box-sizing: border-box;
-      border-radius: 30px;
-      padding: 1%;
       .product-item {
         margin: 0 10px;
         padding: 10px;
         .product-image-wrap {
-          height: 354px;
+          // height: 354px;
           img {
             width: 100%;
             top: 25%;
             transition: 0.35s;
             overflow: hidden;
-          }
         }
       }
     }

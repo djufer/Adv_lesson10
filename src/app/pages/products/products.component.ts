@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { ProductsService } from '../../shared/services/product/product.service';
-import { CategoryService } from '../../shared/services/category/category.service';
 import {
-  CategoryResponse,
   ProductResponse,
 } from './../../shared/interfaces/interfaces';
-import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,8 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class ProductsComponent {
   public readMoreStatus = false;
-
-  
 
   public currentProductsByCategory: ProductResponse[] = [];
 
@@ -37,8 +33,8 @@ export class ProductsComponent {
     this.readMoreStatus = !this.readMoreStatus;
   }
 
-  ngOnInit(): void { }
-  
+  ngOnInit(): void {}
+
   getProductsByCategory(): void {
     const categoryName = this.route.snapshot.paramMap.get('category') as string;
     this.productsService.getAllByCategory(categoryName).subscribe((data) => {
@@ -47,5 +43,9 @@ export class ProductsComponent {
   }
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
+  }
+  ggg(p: ProductResponse): void{
+    console.log(p);
+    
   }
 }

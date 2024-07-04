@@ -94,8 +94,8 @@
         "id": 3
       },
       "subCategory": null,
-      "name": "Сіннабон шоколадний",
-      "path": "sinnabon-shokoladnyj",
+      "name": " Сіннабон шоколадний",
+      "path": "desserts",
       "description": "Борошно пшеничне, какао порошок, молоко, цукор, дріжджі, яйце куряче, масло вершкове, сіль морська, кориця мелена, олія соняшникова, крем-сир, шоколад чорний, шоколад молочний.",
       "weight": "125 г",
       "price": 130,
@@ -103,9 +103,9 @@
       "carbohydrates": 63.8,
       "fats": 8.4,
       "calories": 373,
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fsinn-choc.webp?alt=media&token=8f649416-0215-4ae8-b890-e3320dc607a6",
-      "count": null,
-      "id": 3
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Fsinn-choc.webp?alt=media&token=8058d513-2860-42cd-86dc-d476db41219e",
+      "count": 1,
+      "id": 5
     },
     {
       "category": {
@@ -124,9 +124,9 @@
       "carbohydrates": 0,
       "fats": 0,
       "calories": 0,
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Frich_apple.webp?alt=media&token=adbd1ef5-6597-44bb-a6f3-ac292ab1f4fa",
-      "count": null,
-      "id": 4
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Frich_apple.webp?alt=media&token=eb52782a-9225-45aa-aef2-73492e1fc163",
+      "count": 1,
+      "id": 6
     }
   ],
   "orders": []
