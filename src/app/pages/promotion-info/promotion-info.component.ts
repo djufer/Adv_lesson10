@@ -10,20 +10,21 @@ import { PromotionResponse } from '../../shared/interfaces/interfaces';
 })
 export class PromotionInfoComponent {
 
-  public promotion!: PromotionResponse | undefined;
+  public currentPromotion!: PromotionResponse;
 
-  constructor(private promotionService: PromotionService,
+  constructor(
     private activatedRoute: ActivatedRoute
   ) { }
   ngOnInit(): void {
-    this.getOnePromotion();
+    this.currentPromotion = this.activatedRoute.snapshot.data['promotionInfo'];
+    // this.getOnePromotion();
    }
   
-  getOnePromotion(): void{
-    let DISCOUNT_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.promotionService.getOne(DISCOUNT_ID).subscribe((data) => {
-      this.promotion = data;
-    });
-  }
+  // getOnePromotion(): void{
+  //   let DISCOUNT_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+  //   this.promotionService.getOne(DISCOUNT_ID).subscribe((data) => {
+  //     this.currentPromotion = data;
+  //   });
+  // }
 }
 

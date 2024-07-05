@@ -16,18 +16,25 @@ import { AdminCategoriesComponent } from './admin/admin-categories/admin-categor
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { productInfoResolver } from './shared/services/product/product-info.resolver';
+import { promotionInfoResolver } from './shared/services/promotion/promotion-info.resolver';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'promotion', component: PromotionComponent },
-  { path: 'promotion/:id', component: PromotionInfoComponent },
+  {
+    path: 'promotion/:id',
+    component: PromotionInfoComponent,
+    resolve: {
+      promotionInfo: promotionInfoResolver,
+    },
+  },
   { path: 'products/:category', component: ProductsComponent },
   {
     path: 'products/:category/:id',
     component: ProductInfoComponent,
     resolve: {
-      productInfo: productInfoResolver
+      productInfo: productInfoResolver,
     },
   },
   { path: 'delivery-payment', component: DeliveryPaymentComponent },

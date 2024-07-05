@@ -44,8 +44,4 @@ export class ProductsComponent {
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
-  ggg(p: ProductResponse): void{
-    console.log(p);
-    
-  }
 }

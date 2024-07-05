@@ -10,9 +10,10 @@
       grabbed: isGrabbed
     }"
   >
-    <div *ngFor="let promotion of carouselPromotions" class="item" >
-      <a [routerLink]="[ '/promotion', promotion.id ]"><img [src]="promotion.imagePath"></a> 
-      <!-- тут є проблемка, бо через події миші mousedown, mouseup, grab - не працює клік... -->
+    <div *ngFor="let promotion of carouselPromotions" class="item">
+      <a class="d-block h-100 ggg" [routerLink]="['/promotion', promotion.id]">
+        <img [src]="promotion.imagePath" />
+      </a>
     </div>
   </div>
 </div>
@@ -24,4 +25,3 @@
     [class.inactiveindicator]="i !== selectedIndex"
   ></li>
 </ul>
-
