@@ -61,3 +61,8 @@ export interface OrderStatus {
   title: string;
   description: string;
 }
+
+export interface Breadcrumb {
+  label: string;
+  url: string;
+}

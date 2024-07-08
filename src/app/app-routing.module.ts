@@ -9,7 +9,6 @@ import { PromotionInfoComponent } from './pages/promotion-info/promotion-info.co
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductInfoComponent } from './pages/product-info/product-info.component';
 
-
 import { AdminComponent } from './admin/admin.component';
 import { AdminPromotionComponent } from './admin/admin-promotion/admin-promotion.component';
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
@@ -19,36 +18,81 @@ import { productInfoResolver } from './shared/services/product/product-info.reso
 import { promotionInfoResolver } from './shared/services/promotion/promotion-info.resolver';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'promotion', component: PromotionComponent },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+    data: { breadcrumb: 'Home' },
+  },
+  { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  {
+    path: 'promotion',
+    component: PromotionComponent,
+    data: { breadcrumb: 'Promotion' },
+  },
   {
     path: 'promotion/:id',
     component: PromotionInfoComponent,
     resolve: {
       promotionInfo: promotionInfoResolver,
     },
+    data: { breadcrumb: 'Promotion Info' },
   },
-  { path: 'products/:category', component: ProductsComponent },
+  {
+    path: 'products/:category',
+    component: ProductsComponent,
+    data: { breadcrumb: 'Products' },
+  },
   {
     path: 'products/:category/:id',
     component: ProductInfoComponent,
     resolve: {
       productInfo: productInfoResolver,
     },
+    data: { breadcrumb: 'Product Info' },
   },
-  { path: 'delivery-payment', component: DeliveryPaymentComponent },
-  { path: 'about', component: AboutComponent },
+  {
+    path: 'delivery-payment',
+    component: DeliveryPaymentComponent,
+    data: { breadcrumb: 'Delivery' },
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: { breadcrumb: 'About' },
+  },
   {
     path: 'admin',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'actions', pathMatch: 'full' },
-      { path: 'actions', component: AdminPromotionComponent },
-      { path: 'categories', component: AdminCategoriesComponent },
-      { path: 'products', component: AdminProductsComponent },
-      { path: 'orders', component: AdminOrdersComponent },
+      {
+        path: '',
+        redirectTo: 'actions',
+        pathMatch: 'full',
+        data: { breadcrumb: 'Actions' },
+      },
+      {
+        path: 'actions',
+        component: AdminPromotionComponent,
+        data: { breadcrumb: 'Actions' },
+      },
+      {
+        path: 'categories',
+        component: AdminCategoriesComponent,
+        data: { breadcrumb: 'categories' },
+      },
+      {
+        path: 'products',
+        component: AdminProductsComponent,
+        data: { breadcrumb: 'products' },
+      },
+      {
+        path: 'orders',
+        component: AdminOrdersComponent,
+        data: { breadcrumb: 'orders' },
+      },
     ],
+    data: { breadcrumb: 'admin' },
   },
 ];
 
@@ -56,4 +100,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {  }
+export class AppRoutingModule {}

@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
-                              //  питання чи треба тут їх імпортувати?
-import { OverlayService } from './shared/services/overlay/overlay.service';
-import { ModalsService } from './shared/services/modals/modals.service';
-import { PromotionService } from './shared/services/promotion/promotion.service';
-import { ProductsService } from './shared/services/product/product.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -36,14 +32,14 @@ import { UserLoginModalComponent } from './modals/user-login-modal/user-login-mo
 import { DetailOrderComponent } from './modals/detail-order/detail-order.component';
 import { ProductInfoComponent } from './pages/product-info/product-info.component';
 
-import { AngularFireStorageModule } from '@angular/fire/compat/storage'; 
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app'; 
-import { provideStorage, getStorage } from '@angular/fire/storage'; 
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
 import { ProductsComponent } from './pages/products/products.component';
-
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +60,7 @@ import { ProductsComponent } from './pages/products/products.component';
     UserLoginModalComponent,
     DetailOrderComponent,
     TruncatePipe,
+    BreadcrumbsComponent,
 
     AdminComponent,
     AdminPromotionComponent,
@@ -75,6 +72,7 @@ import { ProductsComponent } from './pages/products/products.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    RouterModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -83,7 +81,7 @@ import { ProductsComponent } from './pages/products/products.component';
     AngularFireStorageModule,
     ToastrModule.forRoot(),
   ],
-  providers: [OverlayService, ModalsService, PromotionService, ProductsService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

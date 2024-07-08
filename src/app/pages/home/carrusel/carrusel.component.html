@@ -11,7 +11,7 @@
     }"
   >
     <div *ngFor="let promotion of carouselPromotions" class="item">
-      <a class="d-block h-100 ggg" [routerLink]="['/promotion', promotion.id]">
+      <a class="d-block h-100" [routerLink]="['/promotion', promotion.id]">
         <img [src]="promotion.imagePath" />
       </a>
     </div>
