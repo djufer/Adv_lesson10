@@ -2,38 +2,56 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Breadcrumb } from '../../interfaces/interfaces';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BreadcrumbService {
-  public myBreadcrumbs: Array<Breadcrumb> = [];
+  private breadcrumbSubject = new BehaviorSubject<Array<Breadcrumb>>([]);
+  public breadcrumbs$ = this.breadcrumbSubject.asObservable();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
-        this.myBreadcrumbs = this.createBreadcrumbs(this.activatedRoute.root);
+        const breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root);
+        this.breadcrumbSubject.next(breadcrumbs);
       });
   }
+
   private createBreadcrumbs(
     route: ActivatedRoute,
     url: string = '',
-    breadcrumbs: Array<Breadcrumb> = []
   ): Array<Breadcrumb> {
     const children: ActivatedRoute[] = route.children;
+    
+    let breadcrumbs: Array<Breadcrumb> = [];
 
     if (children.length === 0) {
-      console.log(children.length);
       return breadcrumbs;
-      
     }
 
-    for (const child of children) {
+    for (let child of children) {
       const routeURL = child.snapshot.url
         .map((segment) => segment.path)
         .join('/');
-      const breadcrumbLabel = child.snapshot.data['breadcrumb'];
+
+      let breadcrumbLabel = child.snapshot.data['breadcrumb'];
+
+    
+      const routeParams = child.snapshot.params;
+      
+      
+      if (routeParams && Object.keys(routeParams).length > 0) {
+        console.log(Object.keys(routeParams));
+        
+
+
+        breadcrumbLabel = `${breadcrumbLabel} / ${
+          routeParams['id'] || routeParams['category']
+        }`;
+      }
 
       const breadcrumb: Breadcrumb = {
         label: breadcrumbLabel,
@@ -41,7 +59,9 @@ export class BreadcrumbService {
       };
       breadcrumbs.push(breadcrumb);
 
-      this.createBreadcrumbs(child, breadcrumb.url, breadcrumbs);
+      breadcrumbs = breadcrumbs.concat(
+        this.createBreadcrumbs(child, breadcrumb.url)
+      );
     }
     return breadcrumbs;
   }

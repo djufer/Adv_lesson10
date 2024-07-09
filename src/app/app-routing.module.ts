@@ -69,7 +69,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'actions',
         pathMatch: 'full',
-        data: { breadcrumb: 'Actions' },
       },
       {
         path: 'actions',
@@ -79,20 +78,20 @@ const routes: Routes = [
       {
         path: 'categories',
         component: AdminCategoriesComponent,
-        data: { breadcrumb: 'categories' },
+        data: { breadcrumb: 'Categories' },
       },
       {
         path: 'products',
         component: AdminProductsComponent,
-        data: { breadcrumb: 'products' },
+        data: { breadcrumb: 'Products' },
       },
       {
         path: 'orders',
         component: AdminOrdersComponent,
-        data: { breadcrumb: 'orders' },
+        data: { breadcrumb: 'Orders' },
       },
     ],
-    data: { breadcrumb: 'admin' },
+    data: { breadcrumb: 'Admin' },
   },
 ];
 

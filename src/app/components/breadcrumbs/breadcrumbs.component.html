@@ -1,4 +1,4 @@
-<nav>
+<nav class="m-3">
   <ng-container *ngFor="let breadcrumb of breadcrumbs; let last = last">
     <ng-container *ngIf="!last; else lastBreadcrumb">
       <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> /
@@ -8,4 +8,3 @@
     </ng-template>
   </ng-container>
 </nav>
-<p>jhgjhgjhgjgjhgjhgjhg</p>

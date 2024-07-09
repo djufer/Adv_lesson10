@@ -12,6 +12,9 @@ export class BreadcrumbsComponent {
 
   constructor(private breadcrumbService: BreadcrumbService) {}
   ngOnInit(): void {
-    this.breadcrumbs = this.breadcrumbService.myBreadcrumbs;
+     this.breadcrumbService.breadcrumbs$.subscribe((breadcrumbs) => {
+       this.breadcrumbs = breadcrumbs;
+     });
+    
   }
 }
