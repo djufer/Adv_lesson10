@@ -25,34 +25,23 @@ export class BreadcrumbService {
     url: string = '',
   ): Array<Breadcrumb> {
     const children: ActivatedRoute[] = route.children;
-    
     let breadcrumbs: Array<Breadcrumb> = [];
-
     if (children.length === 0) {
       return breadcrumbs;
     }
-
     for (let child of children) {
       const routeURL = child.snapshot.url
         .map((segment) => segment.path)
         .join('/');
-
       let breadcrumbLabel = child.snapshot.data['breadcrumb'];
 
-    
       const routeParams = child.snapshot.params;
       
-      
       if (routeParams && Object.keys(routeParams).length > 0) {
-        console.log(Object.keys(routeParams));
-        
-
-
         breadcrumbLabel = `${breadcrumbLabel} / ${
           routeParams['id'] || routeParams['category']
         }`;
       }
-
       const breadcrumb: Breadcrumb = {
         label: breadcrumbLabel,
         url: `${url}/${routeURL}`,
