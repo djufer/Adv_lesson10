@@ -14,11 +14,13 @@ export class HeaderComponent {
   // анімація для бургера
   public isOpenBurger = false;
   public isCartStatus!: boolean;
-  public shoppingList = [];
+  public shoppingListHeade = [];
   public isOpenAboutModal!: boolean;
   public headerCategories: CategoryResponse[] = [];
 
+  public totalCount: number = 0;
   private basket: ProductResponse[] = [];
+  // total price
   public total = 0;
 
   constructor(
@@ -29,9 +31,9 @@ export class HeaderComponent {
   ) {}
 
   ngOnInit(): void {
-    this.modalsService.getcartModalStatus().subscribe((status) => {
-      this.isCartStatus = status;
-    });
+    this.modalsService.getCartModalStatus().subscribe((status => {
+      this.isCartStatus = status
+    }));
     this.getCategories();
     this.loadBasket();
     this.updateBasket();
@@ -47,8 +49,17 @@ export class HeaderComponent {
     this.isOpenBurger = !this.isOpenBurger;
   }
   openCloseCart() {
-    this.overlayService.changeOverlayStatus();
-    this.isCartStatus = !this.isCartStatus;
+    if (this.isCartStatus) {
+      this.overlayService.closeOverlay();
+      this.modalsService.closeCartModal()
+    } else {
+      this.overlayService.openOverlay();
+      this.modalsService.openCartModal();
+    }
+  }
+  openCart() {
+    this.overlayService.openOverlay();
+    this.modalsService.openCartModal();
   }
   openCallBackModal() {
     this.modalsService.openCallBackModal();
@@ -82,8 +93,13 @@ export class HeaderComponent {
   loadBasket(): void {
     if (localStorage.length > 0 && localStorage.getItem('basket')) {
       this.basket = JSON.parse(localStorage.getItem('basket') as string);
+      this.totalCount = this.basket.length
+      this.getTotalPrice();
     }
-    this.getTotalPrice();
+    else {
+      this.total = 0;
+      this.totalCount = 0
+    }
   }
   getTotalPrice(): void {
     this.total = this.basket.reduce(

@@ -12,12 +12,18 @@ export class ModalsService {
 
   constructor(private overlayService: OverlayService) {}
 
-  getcartModalStatus(): Observable<boolean> {
+  getCartModalStatus(): Observable<boolean> {
     return this.cartModalStatus;
+  }
+  closeCartModal(): void{
+    this.$cartModalStatusSource.next(false);
+  }
+  openCartModal() {
+    this.$cartModalStatusSource.next(true);
   }
 
   closeAllModals(): void {
-    this.overlayService.changeOverlayStatus();
+    this.overlayService.closeOverlay();
     this.$cartModalStatusSource.next(false);
     this.$callBackModalStatusSource.next(false);
   }

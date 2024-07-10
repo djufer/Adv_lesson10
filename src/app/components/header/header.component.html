@@ -76,38 +76,17 @@
     [ngClass]="{ active: isCartStatus }"
   >
     <div class="basket-img-block">
-      <div class="goods-quantity">0</div>
+      <div class="goods-quantity">{{totalCount}}</div>
       <img src="../../../assets/images/basket.svg" alt="" />
     </div>
     <div class="basket-sum-block">
       <span class="sum bold">{{ total}}</span>
       <span>грн</span>
     </div>
-    <!-- модалка -->
-
-    <!-- ============================ -->
+    
   </div>
 </div>
 <div *ngIf="isCartStatus" class="cart-modal">
-  <ng-container *ngIf="shoppingList.length; else emptyCartTemplate">
-  </ng-container>
-
-  <ng-template #emptyCartTemplate>
-    <div class="empty-cart-container">
-      <img
-        src="../../../assets/images/cart-empty-img.svg"
-        alt="cart-empty-img"
-        width="80px"
-      />
-      <p class="">Кошик порожній</p>
-      <button class="empty-cart-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</button>
-    </div>
-  </ng-template>
-
-  <div class="basket-list"></div>
-  <div class="cart-footer">
-    <div class="sum-block">Сума: <span class="sum bold"></span></div>
-
-    <button type="button" class="checkout-btn bold">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
-  </div>
+  <app-cart-modal></app-cart-modal>
+  
 </div>

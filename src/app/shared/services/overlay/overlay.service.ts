@@ -12,8 +12,13 @@ export class OverlayService {
     return this.overlayStatus;
   }
 
-  changeOverlayStatus(): void {
-    const currentStatus = this.$overlayStatusSource.getValue();
-    this.$overlayStatusSource.next(!currentStatus);
+ 
+  openOverlay(): void{
+    this.$overlayStatusSource.next(true);
+     this.getOverlayStatus()
+  }
+  closeOverlay(): void{
+    this.$overlayStatusSource.next(false);
+    this.getOverlayStatus();
   }
 }

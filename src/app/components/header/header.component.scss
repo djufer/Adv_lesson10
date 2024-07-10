@@ -309,48 +309,5 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .empty-cart-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    img {
-      z-index: 99;
-    }
-    p {
-      font-weight: bold;
-      font-size: 20px;
-    }
-    .empty-cart-btn {
-      width: 200px;
-      height: 50px;
-      border-radius: 10px;
-      border: none;
-      font-weight: bold;
-      background-color: $mainColor;
-    }
-  }
-  .cart-footer {
-    box-sizing: border-box;
-    height: 100px;
-    width: 100%;
-    background-color: $mainColor;
-    border-radius: 0 0 10px 10px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    .sum-block {
-      width: 100px;
-    }
-    .checkout-btn {
-      display: block;
-      padding: 15px;
-      padding-bottom: 14px;
-      border: none;
-      border-radius: 10px;
-    }
-  }
+ 
 }

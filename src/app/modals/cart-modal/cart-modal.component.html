@@ -1,1 +1,40 @@
-<p>cart-modal works!</p>
+<ng-container *ngIf="basket.length; else emptyCartTemplate">
+  <table class="w-100">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>name</th>
+        <th>image</th>
+        <th>price</th>
+        <th>count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of basket; index as i">
+        <td>{{ i+1 }}</td>
+        <td>{{ product.name }}</td>
+        <td><img [src]="product.imagePath" [alt]="product.name"></td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.count }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-template #emptyCartTemplate>
+  <div class="empty-cart-container">
+    <img
+      src="../../../assets/images/cart-empty-img.svg"
+      alt="cart-empty-img"
+      width="80px"
+    />
+    <p class="">Кошик порожній</p>
+    <button class="empty-cart-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</button>
+  </div>
+</ng-template>
+<div class="cart-footer">
+  <button (click)="confirmOrder()" type="button" class="btn btn-sucsesss checkout-btn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+  <div class="sum-block">
+    Сума: <span class="sum bold">{{ total }}</span>
+  </div>
+</div>
