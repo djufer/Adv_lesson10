@@ -13,7 +13,7 @@
       <tr *ngFor="let product of basket; index as i">
         <td>{{ i+1 }}</td>
         <td>{{ product.name }}</td>
-        <td><img [src]="product.imagePath" [alt]="product.name"></td>
+        <td><img  [src]="product.imagePath" [alt]="product.name"></td>
         <td>{{ product.price }}</td>
         <td>{{ product.count }}</td>
       </tr>

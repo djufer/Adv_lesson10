@@ -107,7 +107,6 @@ export class HeaderComponent {
       0
     );
   }
-
   updateBasket(): void{
     this.orderService.changeBasket.subscribe(() => {
       this.loadBasket();
