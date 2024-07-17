@@ -4,6 +4,8 @@ import { ModalsService } from 'src/app/shared/services/modals/modals.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { CategoryResponse, ProductResponse } from '../../shared/interfaces/interfaces';
 import { OrderService } from 'src/app/shared/services/order/order.service';
+import { ROLE } from 'src/app/shared/constants/role.constant';
+import { AccountService } from 'src/app/shared/services/account/account.service';
 
 @Component({
   selector: 'app-header',
@@ -23,20 +25,26 @@ export class HeaderComponent {
   // total price
   public total = 0;
 
+  public isLogin = false;
+  public loginUrl = '';
+  public loginPage = '';
   constructor(
     private overlayService: OverlayService,
     private modalsService: ModalsService,
     private categoryService: CategoryService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
-    this.modalsService.getCartModalStatus().subscribe((status => {
-      this.isCartStatus = status
-    }));
+    this.modalsService.getCartModalStatus().subscribe((status) => {
+      this.isCartStatus = status;
+    });
     this.getCategories();
     this.loadBasket();
     this.updateBasket();
+    this.checkUserLogin();
+    this.checkUpdatesUserLogin();
   }
 
   getCategories() {
@@ -51,7 +59,7 @@ export class HeaderComponent {
   openCloseCart() {
     if (this.isCartStatus) {
       this.overlayService.closeOverlay();
-      this.modalsService.closeCartModal()
+      this.modalsService.closeCartModal();
     } else {
       this.overlayService.openOverlay();
       this.modalsService.openCartModal();
@@ -64,9 +72,7 @@ export class HeaderComponent {
   openCallBackModal() {
     this.modalsService.openCallBackModal();
   }
-  openUserLoginModal() {
-    // this.modalsService.openUserLoginModal();  // поки що закоментовую а пізніше зробюлю логінування через модалку
-  }
+ 
   // ==========================
   // ---Закриття дропдаун і модалки корзини кліком по вікні документа
   @HostListener('document:click', ['$event'])
@@ -93,12 +99,11 @@ export class HeaderComponent {
   loadBasket(): void {
     if (localStorage.length > 0 && localStorage.getItem('basket')) {
       this.basket = JSON.parse(localStorage.getItem('basket') as string);
-      this.totalCount = this.basket.length
+      this.totalCount = this.basket.length;
       this.getTotalPrice();
-    }
-    else {
+    } else {
       this.total = 0;
-      this.totalCount = 0
+      this.totalCount = 0;
     }
   }
   getTotalPrice(): void {
@@ -107,9 +112,33 @@ export class HeaderComponent {
       0
     );
   }
-  updateBasket(): void{
+  updateBasket(): void {
     this.orderService.changeBasket.subscribe(() => {
       this.loadBasket();
     });
+  }
+
+  checkUserLogin(): void {
+    const currentUser = JSON.parse(
+      localStorage.getItem('currentUser') as string
+    );
+    if (currentUser && currentUser.role === ROLE.ADMIN) {
+      this.isLogin = true;
+      this.loginUrl = 'admin';
+      this.loginPage = 'Admin';
+    } else if (currentUser && currentUser.role === ROLE.USER) {
+      this.isLogin = true;
+      this.loginUrl = 'cabinet';
+      this.loginPage = 'Cabinet';
+    } else {
+      this.isLogin = false;
+      this.loginUrl = '';
+      this.loginPage = '';
+    }
+  }
+  checkUpdatesUserLogin(): void {
+    this.accountService.isUserLogin$.subscribe(() => {   
+      this.checkUserLogin();
+    })
   }
 }

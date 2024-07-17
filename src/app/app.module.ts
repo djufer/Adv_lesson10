@@ -40,6 +40,8 @@ import { environment } from '../environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { ProductsComponent } from './pages/products/products.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { AuthorizationComponent } from './pages/authorization/authorization.component';
+import { CabinetComponent } from './pages/cabinet/cabinet.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     AdminCategoriesComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
+    AuthorizationComponent,
+    CabinetComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,14 +8,20 @@ import { PromotionComponent } from './pages/promotion/promotion.component';
 import { PromotionInfoComponent } from './pages/promotion-info/promotion-info.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductInfoComponent } from './pages/product-info/product-info.component';
+import { AuthorizationComponent } from './pages/authorization/authorization.component';
+
+
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminPromotionComponent } from './admin/admin-promotion/admin-promotion.component';
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+
 import { productInfoResolver } from './shared/services/product/product-info.resolver';
 import { promotionInfoResolver } from './shared/services/promotion/promotion-info.resolver';
+import { authAdminGuard, authUserGuard } from './shared/guards/auth/auth.guard';
+import { CabinetComponent } from './pages/cabinet/cabinet.component';
 
 const routes: Routes = [
   {
@@ -62,8 +68,20 @@ const routes: Routes = [
     data: { breadcrumb: 'About' },
   },
   {
+    path: 'auth',
+    component: AuthorizationComponent,
+    data: { breadcrumb: 'auth' },
+  },
+  {
+    path: 'cabinet',
+    component: CabinetComponent,
+    canActivate: [authUserGuard],
+    data: { breadcrumb: 'cabinet' },
+  },
+  {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [authAdminGuard],
     children: [
       {
         path: '',

@@ -1,0 +1,12 @@
+// @import "../../shared/styles/base";
+@import "../../shared/styles/custome";
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+
+input{
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 2px solid lightgray;
+    border-radius: 3px;
+}

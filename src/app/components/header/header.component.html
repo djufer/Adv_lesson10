@@ -61,14 +61,20 @@
       <span class="bold">22:30</span>
     </div>
   </div>
-  <div class="user-block" (click)="openUserLoginModal()">
-    <a [routerLink]="[ 'admin']" routerLinkActive="active">
+  <div class="user-block" *ngIf="!isLogin">
+    <a [routerLink]="[ 'auth']" routerLinkActive="active">
       <div class="user-btn run-border">
-      <img src="../../../assets/images/user.svg" alt="" />
+        Login
     </div>  
-    
     </a>
-    
+  </div>
+  <div class="user-block" *ngIf="isLogin">
+    <a [routerLink]="[ '/'+loginUrl]" routerLinkActive="active">
+      <div class="user-btn run-border">
+        {{ loginPage }}
+      <!-- <img src="../../../assets/images/user.svg" alt="" /> -->
+    </div>  
+    </a>
   </div>
   <div
     (click)="openCloseCart()"
@@ -88,5 +94,4 @@
 </div>
 <div *ngIf="isCartStatus" class="cart-modal">
   <app-cart-modal></app-cart-modal>
-  
 </div>
