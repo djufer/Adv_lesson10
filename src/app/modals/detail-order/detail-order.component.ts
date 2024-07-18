@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { OrderResponse, ProductRequest } from 'src/app/shared/interfaces/interfaces';
-import { OrdersService } from "../../shared/services/orders/orders.service"
-import { ProductsService } from "../../shared/services/product/product.service"
+import {
+  OrderResponse,
+  ProductRequest,
+} from 'src/app/shared/interfaces/interfaces';
+import { OrdersService } from '../../shared/services/orders/orders.service';
+import { ProductsService } from '../../shared/services/product/product.service';
 import { OrderStatus } from 'src/app/shared/interfaces/interfaces';
 import { ModalsService } from 'src/app/shared/services/modals/modals.service';
 
@@ -85,13 +88,11 @@ export class DetailOrderComponent {
       this.datailOrdersProducts = data;
     });
   }
-  getOrders(): void{
-    this.ordersService.getOrders().subscribe(data => {
+  getOrders(): void {
+    this.ordersService.getOrders().subscribe((data) => {
       this.datailOrders = data;
-    })
+    });
   }
-
-
 
   closeModal(): void {
     this.modalsService.closeDetailOrderModal();

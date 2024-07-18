@@ -19,4 +19,6 @@ export class AccountService {
   login(credential: ILogin): Observable<any>{
     return this.http.get(`${this.api.auth}?email=${credential.email}&password=${credential.password}`)
   }
+
+  
 }

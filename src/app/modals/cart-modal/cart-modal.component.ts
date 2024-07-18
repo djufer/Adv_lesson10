@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { OrderResponse, ProductResponse } from 'src/app/shared/interfaces/interfaces';
-import { OrderService } from 'src/app/shared/services/order/order.service';
+import {
+  OrderResponse,
+  ProductResponse,
+} from 'src/app/shared/interfaces/interfaces';
+import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 import { ProductsService } from 'src/app/shared/services/product/product.service';
 import { OverlayService } from 'src/app/shared/services/overlay/overlay.service';
 import { ModalsService } from 'src/app/shared/services/modals/modals.service';
@@ -21,7 +24,7 @@ export class CartModalComponent {
 
   constructor(
     private productService: ProductsService,
-    private orderService: OrderService,
+    private ordersService: OrdersService,
     private overlayService: OverlayService,
     private modalsService: ModalsService
   ) {}
@@ -54,7 +57,7 @@ export class CartModalComponent {
   }
 
   updateBasket(): void {
-    this.orderService.changeBasket.subscribe(() => {
+    this.ordersService.changeBasket.subscribe(() => {
       this.loadBasket();
     });
   }
@@ -70,9 +73,8 @@ export class CartModalComponent {
     this.clearBasket();
   }
 
-  clearBasket(): void{
+  clearBasket(): void {
     localStorage.removeItem('basket');
-    this.orderService.changeBasket.next(true);
-    
+    this.ordersService.changeBasket.next(true);
   }
 }

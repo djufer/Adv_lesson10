@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { OrdersService } from '../../shared/services/orders/orders.service';
 import { ProductsService } from '../../shared/services/product/product.service';
-import { OrderRequest, OrderResponse } from 'src/app/shared/interfaces/interfaces';
+import {
+  OrderRequest,
+  OrderResponse,
+} from 'src/app/shared/interfaces/interfaces';
 import { OrderStatus } from 'src/app/shared/interfaces/interfaces';
 import { ProductResponse } from 'src/app/shared/interfaces/interfaces';
 import { ModalsService } from 'src/app/shared/services/modals/modals.service';
-
 
 @Component({
   selector: 'app-admin-orders',
@@ -72,19 +74,19 @@ export class AdminOrdersComponent {
   ];
 
   ngOnInit(): void {
-    this.getOrders()
+    this.getOrders();
     this.getProducts();
   }
 
-  getProducts(): void{
-    this.productService.getAll().subscribe(data => {
+  getProducts(): void {
+    this.productService.getAll().subscribe((data) => {
       this.adminProducts = data;
-    })
+    });
   }
-  getOrders(): void{
+  getOrders(): void {
     this.ordersService.getOrders().subscribe((data) => {
-      this.adminOrders = data;      
-    })
+      this.adminOrders = data;
+    });
   }
 
   constructor(
@@ -110,9 +112,9 @@ export class AdminOrdersComponent {
       shippingAddress: 'вул.Стуса 12',
       orderDate: new Date(),
     };
-    this.ordersService.addOrder(newOrder).subscribe(data => {
+    this.ordersService.addOrder(newOrder).subscribe((data) => {
       this.getOrders();
-    })
+    });
   }
   openDetailsModal(order: OrderRequest): void {
     // передаємо дані через сервіс
@@ -125,8 +127,7 @@ export class AdminOrdersComponent {
     this.ordersService.changeOrderStatus(id).subscribe((data) => {
       // this.getOrders();
       console.log(data);
-      
-    })
+    });
     this.getOrders();
     // console.log(this.adminOrders[index].status);
   }

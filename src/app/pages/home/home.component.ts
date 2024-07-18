@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ProductResponse } from 'src/app/shared/interfaces/interfaces';
-import { ProductsService } from '../../shared/services/product/product.service'
+import { ProductsService } from '../../shared/services/product/product.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { OrderService } from 'src/app/shared/services/order/order.service';
+import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,7 @@ export class HomeComponent {
 
   constructor(
     private productsService: ProductsService,
-    private orderService: OrderService,
+    private ordersService: OrdersService,
     private router: Router
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
@@ -36,7 +36,6 @@ export class HomeComponent {
 
   productCount(product: ProductResponse, value: boolean): void {
     if (value) {
-      
       ++product.count;
     } else if (!value && product.count > 1) {
       --product.count;
@@ -58,6 +57,6 @@ export class HomeComponent {
     }
     localStorage.setItem('basket', JSON.stringify(basket));
     product.count = 1;
-    this.orderService.changeBasket.next(true);
+    this.ordersService.changeBasket.next(true);
   }
 }

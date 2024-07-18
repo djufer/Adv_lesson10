@@ -4,7 +4,7 @@ import { ROLE } from '../../constants/role.constant';
 
 export const authAdminGuard: CanActivateFn = (route, state) => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser') as string);
-  if (currentUser && (currentUser.role === ROLE.ADMIN) || currentUser.role === ROLE.USER) {
+  if (currentUser && currentUser.role === ROLE.ADMIN) {
     return true;
   }
   inject(Router).navigate(['']);

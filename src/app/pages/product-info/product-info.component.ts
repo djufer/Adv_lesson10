@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductResponse } from '../../shared/interfaces/interfaces';
 import { ActivatedRoute } from '@angular/router';
-import { OrderService } from 'src/app/shared/services/order/order.service';
+import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 
 @Component({
   selector: 'app-product-info',
@@ -13,7 +13,7 @@ export class ProductInfoComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private orderService: OrderService
+    private ordersService: OrdersService
   ) {}
   ngOnInit(): void {
     this.currentProduct = this.activatedRoute.snapshot.data['productInfo'];
@@ -42,6 +42,6 @@ export class ProductInfoComponent {
     }
     localStorage.setItem('basket', JSON.stringify(basket));
     product.count = 1;
-    this.orderService.changeBasket.next(true);
+    this.ordersService.changeBasket.next(true);
   }
 }

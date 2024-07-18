@@ -35,6 +35,8 @@ import { ProductInfoComponent } from './pages/product-info/product-info.componen
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
@@ -82,6 +84,8 @@ import { CabinetComponent } from './pages/cabinet/cabinet.component';
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
+    provideFirestore(()=> getFirestore()),
+    provideAuth(()=> getAuth()),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
   ],

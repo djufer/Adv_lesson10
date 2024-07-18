@@ -19,6 +19,8 @@ app/
         call-back-modal.component
         cart-modal.component
     shared/
+        guards/
+            auth
         styles/
             _variables.scss
             _mixins.scss
@@ -27,8 +29,19 @@ app/
         pipes/
         directives/
         services/
+            account/
+                account.service
+            breadcrumb/
+                breadcrumb.service
+            category
+                category.service
+            image/
+                image.service
+            modals/
+                modals.service
+            order/
+                order.service
             discount.service
-            categories.service
     admin/
         admin.component/
             admin-promotion.component

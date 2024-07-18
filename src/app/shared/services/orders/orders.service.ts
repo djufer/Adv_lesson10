@@ -3,7 +3,7 @@ import { OrderRequest, OrderResponse } from '../../interfaces/interfaces';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,7 @@ export class OrdersService {
   };
 
   public currentOrder!: OrderResponse;
+  public changeBasket = new Subject<boolean>;
 
   // public orders: OrderResponse[] = [
   //   {
@@ -41,9 +42,7 @@ export class OrdersService {
 
   constructor(private http: HttpClient) {}
 
-  // getOrders(): Order[] {
-  //   return this.orders;
-  // }
+ 
   getOrders(): Observable<OrderResponse[]> {
     return this.http.get<OrderResponse[]>(this.api.orders);
   }

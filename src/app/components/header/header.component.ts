@@ -3,7 +3,7 @@ import { OverlayService } from 'src/app/shared/services/overlay/overlay.service'
 import { ModalsService } from 'src/app/shared/services/modals/modals.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { CategoryResponse, ProductResponse } from '../../shared/interfaces/interfaces';
-import { OrderService } from 'src/app/shared/services/order/order.service';
+import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 
@@ -32,7 +32,7 @@ export class HeaderComponent {
     private overlayService: OverlayService,
     private modalsService: ModalsService,
     private categoryService: CategoryService,
-    private orderService: OrderService,
+    private ordersService: OrdersService,
     private accountService: AccountService
   ) {}
 
@@ -113,7 +113,7 @@ export class HeaderComponent {
     );
   }
   updateBasket(): void {
-    this.orderService.changeBasket.subscribe(() => {
+    this.ordersService.changeBasket.subscribe(() => {
       this.loadBasket();
     });
   }
