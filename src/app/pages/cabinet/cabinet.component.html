@@ -1,34 +1,56 @@
-
 <div class="title">
-    <h3>Особистий кабінет</h3>
+  <h3>Особистий кабінет</h3>
 </div>
 <div class="container mt-5">
   <ul class="list-group">
-    <li *ngFor="let item of dropdownItems">
+    <li>
       <div class="dropdown p-3">
         <button
           class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
-          (click)="changDropdown(item.name)"
-          type="button"
-          [attr.aria-expanded]="item.isOpen"
-          [value]="item.name"
-          id="dropdownMenuButton1"
+          [routerLink]="['order-history']"
         >
-          {{ item.name }}
+          Історія замовлень
         </button>
-        <div *ngIf="item.isOpen" style="border: 2px solid;">
-            opened something
-        </div>
+      </div>
+    </li>
+    <li>
+      <div class="dropdown p-3">
+        <button
+          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
+          [routerLink]="['personal-data']"
+        >
+          Персональні дані
+        </button>
+      </div>
+    </li>
+    <li>
+      <div class="dropdown p-3">
+        <button
+          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
+          [routerLink]="['delivery-addresses']"
+        >
+          Адреси доставки
+        </button>
+      </div>
+    </li>
+    <li>
+      <div class="dropdown p-3">
+        <button
+          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
+          [routerLink]="['notifications']"
+        >
+          Повідомлення
+        </button>
       </div>
     </li>
   </ul>
+  <router-outlet></router-outlet>
   <div class="d-flex justify-content-between align-items-center mt-3">
     <div class="col-3">
-        <button (click)="logout()" class="btn btn-success">Вихід</button>
+      <button (click)="logout()" class="btn btn-success">Вихід</button>
     </div>
     <div>
-        <button class="btn btn-danger"> Видалити обліковий запис</button> 
+      <button class="btn btn-danger"> Видалити обліковий запис</button> 
     </div>
+  </div>
 </div>
-</div>
-
