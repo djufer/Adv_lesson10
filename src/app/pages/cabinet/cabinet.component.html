@@ -10,9 +10,9 @@
           class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
           (click)="changDropdown(item.name)"
           type="button"
+          [attr.aria-expanded]="item.isOpen"
           [value]="item.name"
           id="dropdownMenuButton1"
-          data-toggle="dropdown"
         >
           {{ item.name }}
         </button>

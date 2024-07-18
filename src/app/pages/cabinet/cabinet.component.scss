@@ -1,15 +1,18 @@
-.title{
-    background-color: lightgray;
-    padding: 8px;
-    h3{
-        width: fit-content;
-        margin: 0 auto;
-        font-weight: 900;
-    }
+.title {
+  background-color: lightgray;
+  padding: 8px;
+  h3 {
+    width: fit-content;
+    margin: 0 auto;
+    font-weight: 900;
+  }
 }
-li{
-    border-bottom: 1px solid lightgray;
+li {
+  border-bottom: 1px solid lightgray;
 }
-li:first-of-type{
-        border-top: 1px solid lightgrey;
-    }
+li:first-of-type {
+  border-top: 1px solid lightgrey;
+}
+button.dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}

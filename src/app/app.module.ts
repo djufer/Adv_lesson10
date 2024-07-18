@@ -43,7 +43,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProductsComponent } from './pages/products/products.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { AuthorizationComponent } from './pages/authorization/authorization.component';
+
 import { CabinetComponent } from './pages/cabinet/cabinet.component';
+import { OrderHistoryComponent } from './pages/cabinet/order-history/order-history.component';
+import { PersonalDataComponent } from './pages/cabinet/personal-data/personal-data.component';
+import { DeliveryAddressesComponent } from './pages/cabinet/delivery-addresses/delivery-addresses.component';
+import { NotificationsComponent } from './pages/cabinet/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +78,10 @@ import { CabinetComponent } from './pages/cabinet/cabinet.component';
     AdminOrdersComponent,
     AuthorizationComponent,
     CabinetComponent,
+    OrderHistoryComponent,
+    PersonalDataComponent,
+    DeliveryAddressesComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

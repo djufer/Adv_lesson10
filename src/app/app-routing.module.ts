@@ -21,7 +21,12 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { productInfoResolver } from './shared/services/product/product-info.resolver';
 import { promotionInfoResolver } from './shared/services/promotion/promotion-info.resolver';
 import { authAdminGuard, authUserGuard } from './shared/guards/auth/auth.guard';
+
 import { CabinetComponent } from './pages/cabinet/cabinet.component';
+import { OrderHistoryComponent } from './pages/cabinet/order-history/order-history.component';
+import { PersonalDataComponent } from './pages/cabinet/personal-data/personal-data.component';
+import { DeliveryAddressesComponent } from './pages/cabinet/delivery-addresses/delivery-addresses.component';
+import { NotificationsComponent } from './pages/cabinet/notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -77,6 +82,12 @@ const routes: Routes = [
     component: CabinetComponent,
     canActivate: [authUserGuard],
     data: { breadcrumb: 'cabinet' },
+    children: [
+      { path: 'order-history', component: OrderHistoryComponent },
+      { path: 'personal-data', component: PersonalDataComponent },
+      { path: 'delivery-addresses', component: DeliveryAddressesComponent },
+      { path: 'notifications', component: NotificationsComponent },
+    ],
   },
   {
     path: 'admin',
