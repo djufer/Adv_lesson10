@@ -1,6 +1,7 @@
+@use "@angular/material" as mat;
 @import "./app/shared/styles/base";
 @import "./app/shared/styles/custome";
-@import 'ngx-toastr/toastr';
+@import "ngx-toastr/toastr";
 
 @font-face {
   font-family: "RotondaC";
@@ -14,3 +15,10 @@
     url("./assets/fonts/RotondaC/RotondaC-Bold.woff") format("woff");
 }
 
+.dialog-back {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.auth-dialog {
+  width: 500px;
+  min-height: 300px;
+}

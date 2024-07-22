@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { docData, doc, Firestore } from '@angular/fire/firestore';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { docData, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ROLE } from 'src/app/shared/constants/role.constant';
+import { AccountService } from 'src/app/shared/services/account/account.service';
 
 @Component({
   selector: 'app-authorization',
@@ -14,13 +16,17 @@ import { ROLE } from 'src/app/shared/constants/role.constant';
 export class AuthorizationComponent implements OnInit, OnDestroy {
   public authForm!: FormGroup;
 
+  public isLogin = true;
+
   public loginSubscription!: Subscription;
 
   constructor(
     private fb: FormBuilder,
+    private accountService: AccountService,
     private router: Router,
     private auth: Auth,
-    private afs: Firestore
+    private afs: Firestore,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -42,10 +48,10 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
     const { email, password } = this.authForm.value;
     this.login(email, password)
       .then(() => {
-        console.log('login done');
+        this.toastr.success('User successfully login');
       })
       .catch((e) => {
-        console.log('login error', e);
+        this.toastr.error(e.message);
       });
   }
 
@@ -67,10 +73,42 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
         } else if (user && user['role'] === ROLE.ADMIN) {
           this.router.navigate(['/admin']);
         }
+        this.accountService.isUserLogin$.next(true);
       },
       error: (e) => {
         console.log('error', e);
       },
     });
+  }
+
+  registerUser(): void{
+    const { email, password } = this.authForm.value;
+    this.emailSignUp(email, password).then(() => {
+      this.toastr.success('User successfully created');
+      this.isLogin = !this.isLogin;
+      this.authForm.reset()
+      })
+      .catch((e) => {
+        this.toastr.error(e.message);
+      });
+  }
+
+  async emailSignUp(email: string, password: string): Promise<any>{
+     const credential = await createUserWithEmailAndPassword(
+       this.auth,
+       email,
+       password
+    );
+    const user = {
+      email: credential.user.email,
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      address: '',
+      orders: [],
+      role: 'USER' 
+    }
+    setDoc(doc(this.afs, 'users', credential.user.uid), user);
+    
   }
 }

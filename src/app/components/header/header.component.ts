@@ -6,6 +6,8 @@ import { CategoryResponse, ProductResponse } from '../../shared/interfaces/inter
 import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -33,7 +35,8 @@ export class HeaderComponent {
     private modalsService: ModalsService,
     private categoryService: CategoryService,
     private ordersService: OrdersService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +75,7 @@ export class HeaderComponent {
   openCallBackModal() {
     this.modalsService.openCallBackModal();
   }
- 
+
   // ==========================
   // ---Закриття дропдаун і модалки корзини кліком по вікні документа
   @HostListener('document:click', ['$event'])
@@ -137,8 +140,17 @@ export class HeaderComponent {
     }
   }
   checkUpdatesUserLogin(): void {
-    this.accountService.isUserLogin$.subscribe(() => {   
+    this.accountService.isUserLogin$.subscribe(() => {
       this.checkUserLogin();
-    })
+    });
+  }
+
+  openLoginDialog(): void {
+    this.dialog.open(AuthDialogComponent, {
+      height: '300px',
+      width: '900px',
+      backdropClass: 'dialog-back',
+      panelClass: 'auth-dialog'
+    });
   }
 }

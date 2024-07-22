@@ -61,12 +61,19 @@
       <span class="bold">22:30</span>
     </div>
   </div>
-  <div class="user-block" *ngIf="!isLogin">
+  <!-- <div class="user-block" *ngIf="!isLogin">
     <a [routerLink]="[ 'auth']" routerLinkActive="active">
       <div class="user-btn run-border">
         Login
     </div>  
     </a>
+  </div> -->
+  <div class="user-block">
+    <button mat-button (click)="openLoginDialog()">
+      <div class="user-btn run-border">
+        Login
+    </div>  
+    </button>
   </div>
   <div class="user-block" *ngIf="isLogin">
     <a [routerLink]="[ '/'+loginUrl]" routerLinkActive="active">

@@ -50,6 +50,9 @@ import { PersonalDataComponent } from './pages/cabinet/personal-data/personal-da
 import { DeliveryAddressesComponent } from './pages/cabinet/delivery-addresses/delivery-addresses.component';
 import { NotificationsComponent } from './pages/cabinet/notifications/notifications.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +85,7 @@ import { NotificationsComponent } from './pages/cabinet/notifications/notificati
     PersonalDataComponent,
     DeliveryAddressesComponent,
     NotificationsComponent,
+    AuthDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,10 +97,11 @@ import { NotificationsComponent } from './pages/cabinet/notifications/notificati
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
-    provideFirestore(()=> getFirestore()),
-    provideAuth(()=> getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
