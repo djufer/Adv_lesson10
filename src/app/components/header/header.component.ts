@@ -2,12 +2,16 @@ import { Component, HostListener, numberAttribute } from '@angular/core';
 import { OverlayService } from 'src/app/shared/services/overlay/overlay.service';
 import { ModalsService } from 'src/app/shared/services/modals/modals.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
-import { CategoryResponse, ProductResponse } from '../../shared/interfaces/interfaces';
+import {
+  CategoryResponse,
+  ProductResponse,
+} from '../../shared/interfaces/interfaces';
 import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -36,6 +40,7 @@ export class HeaderComponent {
     private categoryService: CategoryService,
     private ordersService: OrdersService,
     private accountService: AccountService,
+    private router: Router,
     public dialog: MatDialog
   ) {}
 
@@ -132,7 +137,13 @@ export class HeaderComponent {
     } else if (currentUser && currentUser.role === ROLE.USER) {
       this.isLogin = true;
       this.loginUrl = 'cabinet';
-      this.loginPage = 'Cabinet';
+      if (this.loginPage !== '') {
+        this.loginPage =
+          currentUser.firstName.charAt(0).toUpperCase() +
+          currentUser.firstName.slice(1);
+      } else {
+        this.loginPage = 'user';
+      }
     } else {
       this.isLogin = false;
       this.loginUrl = '';
@@ -146,11 +157,20 @@ export class HeaderComponent {
   }
 
   openLoginDialog(): void {
-    this.dialog.open(AuthDialogComponent, {
-      height: '300px',
-      width: '900px',
-      backdropClass: 'dialog-back',
-      panelClass: 'auth-dialog'
-    });
+    if (this.isLogin) {
+      this.router.navigate(['/cabinet']);
+    }
+    else {
+      this.dialog
+        .open(AuthDialogComponent, {
+          width: '500px',
+          autoFocus: false,
+        })
+        .afterClosed()
+        .subscribe((result) => {
+          console.log(result);
+        });
+    }
+
   }
 }

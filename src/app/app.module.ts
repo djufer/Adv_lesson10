@@ -50,8 +50,12 @@ import { PersonalDataComponent } from './pages/cabinet/personal-data/personal-da
 import { DeliveryAddressesComponent } from './pages/cabinet/delivery-addresses/delivery-addresses.component';
 import { NotificationsComponent } from './pages/cabinet/notifications/notifications.component';
 
-import { MatDialogModule } from '@angular/material/dialog';
 import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
+import { SharedModule } from '../app/shared/shared.module';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -101,7 +105,7 @@ import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.compon
     provideAuth(() => getAuth()),
     AngularFireStorageModule,
     ToastrModule.forRoot(),
-    MatDialogModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],

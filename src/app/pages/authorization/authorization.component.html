@@ -1,6 +1,6 @@
 
 <div class="title-container">
-  <h3 class="title text-center">{{ isLogin ? 'Login' : 'Register' }}</h3>
+  <h3 class="title text-center">Admin Login</h3>
 </div>
 <div class="row">
   <div class="col-3 m-auto border-1">
@@ -28,26 +28,15 @@
       <div>
         <button
         (click)="loginUser()"
-          *ngIf="isLogin"
           [class.disabled]="authForm.invalid"
           type="submit"
           class="btn btn-success w-100"
         >
           Login
         </button>
-        <button
-        (click)="registerUser()"
-          *ngIf="!isLogin"
-          [class.disabled]="authForm.invalid"
-          type="submit"
-          class="btn btn-success w-100"
-        >
-          Register
-        </button>
+        
       </div>
-        <p (click)="isLogin=!isLogin" class="mt-2 link-success text-center" style="cursor: pointer;">
-          {{ isLogin ? "Don't have account?" : "Have an account?"}}  
-        </p>
+       
     </form>
   </div>
 </div>

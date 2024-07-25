@@ -8,7 +8,6 @@ import { AccountService } from 'src/app/shared/services/account/account.service'
   styleUrls: ['./cabinet.component.scss'],
 })
 export class CabinetComponent {
-
   constructor(private router: Router, private accountService: AccountService) {}
 
   // логіка для відкриття і закриття пунктів дропдауна  ____
@@ -49,5 +48,15 @@ export class CabinetComponent {
     this.router.navigate(['/']);
     localStorage.removeItem('currentUser');
     this.accountService.isUserLogin$.next(true);
+  }
+
+  async deleteAccount(): Promise<void> {
+    try {
+      await this.accountService.deleteAccount();
+      localStorage.removeItem('currentUser');
+      this.logout();
+    } catch (error) {
+      console.error('Error during account deletion:', error);
+    }
   }
 }

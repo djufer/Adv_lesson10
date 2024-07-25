@@ -9,20 +9,18 @@
         <span class="menu-item-name">Акції</span>
       </a>
     </div>
-    <ul class="products"  >
-     
-      <li class="run-border menu-item" *ngFor="let category of headerCategories">
-        <a [routerLink]="['/products', category.path]"> 
-          <img 
-            [src]="category.imagePath"
-             alt="nav-img-gift"
-          />
-          <span class="menu-item-name">{{ category.path}}</span>
+    <ul class="products">
+      <li
+        class="run-border menu-item"
+        *ngFor="let category of headerCategories"
+      >
+        <a [routerLink]="['/products', category.path]">
+          <img [src]="category.imagePath" alt="nav-img-gift" />
+          <span class="menu-item-name">{{ category.path }}</span>
         </a>
       </li>
     </ul>
   </div>
-
 
   <!-- ============ -->
   <div class="burger-block">
@@ -61,42 +59,33 @@
       <span class="bold">22:30</span>
     </div>
   </div>
-  <!-- <div class="user-block" *ngIf="!isLogin">
-    <a [routerLink]="[ 'auth']" routerLinkActive="active">
-      <div class="user-btn run-border">
-        Login
-    </div>  
-    </a>
-  </div> -->
+
   <div class="user-block">
-    <button mat-button (click)="openLoginDialog()">
-      <div class="user-btn run-border">
-        Login
-    </div>  
+    <button (click)="openLoginDialog()">
+      <div class="user-btn run-border w-100">
+        {{ isLogin ? loginPage : '' }}
+        
+        <div *ngIf="!isLogin">
+          <img  src="../../../assets/images/user.svg" alt="" />
+        </div>
+      </div>
     </button>
   </div>
-  <div class="user-block" *ngIf="isLogin">
-    <a [routerLink]="[ '/'+loginUrl]" routerLinkActive="active">
-      <div class="user-btn run-border">
-        {{ loginPage }}
-      <!-- <img src="../../../assets/images/user.svg" alt="" /> -->
-    </div>  
-    </a>
-  </div>
+  
+
   <div
     (click)="openCloseCart()"
     class="basket-block"
     [ngClass]="{ active: isCartStatus }"
   >
     <div class="basket-img-block">
-      <div class="goods-quantity">{{totalCount}}</div>
+      <div class="goods-quantity">{{ totalCount }}</div>
       <img src="../../../assets/images/basket.svg" alt="" />
     </div>
     <div class="basket-sum-block">
-      <span class="sum bold">{{ total}}</span>
+      <span class="sum bold">{{ total }}</span>
       <span>грн</span>
     </div>
-    
   </div>
 </div>
 <div *ngIf="isCartStatus" class="cart-modal">

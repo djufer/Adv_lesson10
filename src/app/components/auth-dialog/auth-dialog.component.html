@@ -1,1 +1,144 @@
-<p>auth-dialog works!</p>
+<!-- <div class="container p-4">
+    <h3 class="title text-center"> {{ isLogin ? "Login" : "Register" }}</h3>
+  <form [formGroup]="authForm">
+    <div class="mb-3">
+      <label for="email" class="form-label">email</label>
+      <input
+        formControlName="email"
+        type="text"
+        name="email"
+        id="email"
+        placeholder="*email"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">password</label>
+      <input
+        formControlName="password"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="*Password"
+      />
+    </div>
+    <div>
+      <button
+        (click)="loginUser()"
+        *ngIf="isLogin"
+        [class.disabled]="authForm.invalid"
+        type="submit"
+        class="btn btn-success w-100"
+      >
+        Login
+      </button>
+      <button
+        (click)="registerUser()"
+        *ngIf="!isLogin"
+        [class.disabled]="authForm.invalid"
+        type="submit"
+        class="btn btn-success w-100"
+      >
+        Register
+      </button>
+    </div>
+    <p
+      (click)="isLogin = !isLogin"
+      class="mt-2 link-success text-center"
+      style="cursor: pointer"
+    >
+      {{ isLogin ? "Don't have account?" : "Have an account?" }}
+    </p>
+  </form>
+</div> -->
+
+<div class="p-4">
+  <h3 class="title text-center">{{ isLogin ? "Login" : "Register" }}</h3>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group" *ngIf="!isLogin">
+          <mat-form-field color="primary">
+            <mat-label>First name</mat-label>
+            <input matInput type="text" formControlName="firstName" />
+            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+              First name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group" *ngIf="!isLogin">
+          <mat-form-field color="primary">
+            <mat-label>Last name</mat-label>
+            <input matInput type="text" formControlName="lastName" />
+            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+              Last name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-6"></div>
+    </div>
+    <div class="form-group" *ngIf="!isLogin">
+      <mat-form-field color="primary">
+        <mat-label>Phone number</mat-label>
+        <input matInput type="text" formControlName="phoneNumber" />
+        <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+          Phone number is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field color="primary">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div [ngClass]="{ 'col-12': isLogin, 'col-6': !isLogin }">
+        <div class="form-group">
+          <mat-form-field color="primary">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+              Password is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group" *ngIf="!isLogin">
+          <mat-form-field color="primary">
+            <mat-label>Repeat password</mat-label>
+            <input matInput type="password" formControlName="repeatPassword" />
+            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+              Repeat password is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <button mat-raised-button type="submit" mat-dialog-close *ngIf="isLogin">
+      Login
+    </button>
+    <button mat-raised-button type="submit" mat-dialog-close *ngIf="!isLogin">
+      Register
+    </button>
+  </form>
+  <p class="mt-2 text-center">
+    <span *ngIf="isLogin" (click)="changeIsLoginStatus()" class="dialog-link"
+      >Зареєструватись</span
+    >
+    <span *ngIf="!isLogin"
+      >Ви вже зареєстровані?
+      <span class="dialog-link" (click)="changeIsLoginStatus()"
+        >Увійти</span
+      ></span
+    >
+  </p>
+</div>
