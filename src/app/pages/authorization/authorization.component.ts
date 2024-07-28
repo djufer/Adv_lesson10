@@ -80,33 +80,4 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
       },
     });
   }
-
-  // registerUser(): void{
-  //   const { email, password } = this.authForm.value;
-  //   this.emailSignUp(email, password).then(() => {
-  //     this.toastr.success('User successfully created');
-  //     this.authForm.reset()
-  //     })
-  //     .catch((e) => {
-  //       this.toastr.error(e.message);
-  //     });
-  // }
-
-  // async emailSignUp(email: string, password: string): Promise<any>{
-  //    const credential = await createUserWithEmailAndPassword(
-  //      this.auth,
-  //      email,
-  //      password
-  //   );
-  //   const user = {
-  //     email: credential.user.email,
-  //     firstName: '',
-  //     lastName: '',
-  //     phoneNumber: '',
-  //     address: '',
-  //     orders: [],
-  //     role: 'USER' 
-  //   }
-  //   setDoc(doc(this.afs, 'users', credential.user.uid), user);
-  // }
 }

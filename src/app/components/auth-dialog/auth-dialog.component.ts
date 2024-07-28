@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MatDialogRef } from '@angular/material/dialog';
+
 import { Router } from '@angular/router';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from 'firebase/auth';
+} from '@angular/fire/auth';
 import { docData, doc, Firestore, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { ROLE } from 'src/app/shared/constants/role.constant';
@@ -68,14 +70,14 @@ export class AuthDialogComponent {
   }
 
   onSubmit(): void {
-    if (this.authForm.valid) {
-      if (this.isLogin) {
-        this.loginUser();
-      } else {
-        this.registerUser();
-      }
-    } else {
+    if (this.authForm.invalid) {
       this.displayValidationErrors();
+      return;
+    }
+    if (this.isLogin) {
+      this.loginUser();
+    } else {
+      this.registerUser();
     }
   }
   displayValidationErrors(): void {
@@ -108,14 +110,16 @@ export class AuthDialogComponent {
     );
     docData(doc(this.afs, 'users', credential.user.uid)).subscribe({
       next: (user) => {
-        const currentUser = { ...user, uid: credential.user.uid };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        if (user && user['role'] === ROLE.USER) {
-          this.router.navigate(['/cabinet']);
-        } else if (user && user['role'] === ROLE.ADMIN) {
-          this.router.navigate(['/admin']);
+        if (this.auth.currentUser) {
+          const currentUser = { ...user, uid: credential.user.uid };
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+          if (user && user['role'] === ROLE.USER) {
+            this.router.navigate(['/cabinet']);
+          } else if (user && user['role'] === ROLE.ADMIN) {
+            this.router.navigate(['/admin']);
+          }
+          this.accountService.isUserLogin$.next(true);
         }
-        this.accountService.isUserLogin$.next(true);
       },
       error: (e) => {
         console.log('error', e);
@@ -126,6 +130,7 @@ export class AuthDialogComponent {
   registerUser(): void {
     const { email, password } = this.authForm.value;
     if (this.authForm.valid) {
+      alert('URAAAAAAA');
       this.emailSignUp(email, password)
         .then(() => {
           this.toastr.success('User successfully created');
@@ -154,10 +159,11 @@ export class AuthDialogComponent {
       orders: [],
       role: 'USER',
     };
-    
+
     setDoc(doc(this.afs, 'users', credential.user.uid), user);
   }
 
- 
-
+  closeDialog(): void{
+    this.dialogRef.close(); 
+  }
 }

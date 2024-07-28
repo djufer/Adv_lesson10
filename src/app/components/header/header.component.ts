@@ -159,18 +159,11 @@ export class HeaderComponent {
   openLoginDialog(): void {
     if (this.isLogin) {
       this.router.navigate(['/cabinet']);
+    } else {
+      this.dialog.open(AuthDialogComponent, {
+        width: '500px',
+        autoFocus: false,
+      });
     }
-    else {
-      this.dialog
-        .open(AuthDialogComponent, {
-          width: '500px',
-          autoFocus: false,
-        })
-        .afterClosed()
-        .subscribe((result) => {
-          console.log(result);
-        });
-    }
-
   }
 }

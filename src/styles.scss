@@ -1,7 +1,10 @@
-@use "@angular/material" as mat;
-@import "./app/shared/styles/base";
-@import "./app/shared/styles/custome";
-@import "ngx-toastr/toastr";
+
+@use '../src/app/shared/styles/_custom-theme' as *;
+
+
+
+@use "./app/shared/styles/base";
+@use "ngx-toastr/toastr";
 
 @font-face {
   font-family: "RotondaC";
@@ -15,6 +18,12 @@
     url("./assets/fonts/RotondaC/RotondaC-Bold.woff") format("woff");
 }
 
+
+// фон модалки angular material
 .dialog-back {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+
+
+

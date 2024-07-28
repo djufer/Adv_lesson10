@@ -53,7 +53,7 @@ export class CabinetComponent {
   async deleteAccount(): Promise<void> {
     try {
       await this.accountService.deleteAccount();
-      localStorage.removeItem('currentUser');
+      // localStorage.removeItem('currentUser');
       this.logout();
     } catch (error) {
       console.error('Error during account deletion:', error);
