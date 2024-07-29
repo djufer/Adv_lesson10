@@ -1,7 +1,4 @@
-
-@use '../src/app/shared/styles/_custom-theme' as *;
-
-
+@use '@angular/material' as mat;
 
 @use "./app/shared/styles/base";
 @use "ngx-toastr/toastr";
@@ -23,6 +20,8 @@
 .dialog-back {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+
 
 
 

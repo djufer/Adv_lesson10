@@ -1,54 +1,60 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
-// Визначення кастомної tertiary палітри
-$tertiary-palette: (
-  50: #04515b,
-  100: #043036,
-  200: #084d56,
-  300: #4dd0e1,
-  400: #26c6da,
-  500: #00bcd4,
-  600: #00acc1,
-  700: #0097a7,
-  800: #00838f,
-  900: #006064,
-  A100: #052525,
-  A200: #18ffff,
-  A400: #00e5ff,
-  A700: #00b8d4,
+@include mat.core();
+
+// -------
+$my-palette: mat.define-palette((
+  50: #DAE9F6,
+  100: #B5D8F7,
+  200: #8AC3F4,
+  300: #6AB3F4,
+  400: #5EA3EF,
+  500: #5D96EA,
+  600: #5988D9,
+  700: #5576C5,
+  800: #4C64AE,
+  900: #42468B,
+  A100: #8EC9FB,
+  A200: #69B2FA,
+  A400: #629EF6,
+  A700: #667DDA,
   contrast: (
-    50: black,
-    100: black,
-    200: black,
-    300: black,
-    400: black,
-    500: rgb(96, 29, 29),
-    600: rgb(120, 24, 24),
-    700: rgb(89, 16, 16),
-    800: rgb(85, 10, 10),
-    900: rgb(67, 9, 9),
-    A100: black,
-    A200: black,
-    A400: black,
-    A700: rgb(106, 16, 16),
+    50: #000000, 
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff, 
+    600: #ffffff, 
+    700: #ffffff, 
+    800: #ffffff, 
+    900: #ffffff, 
+    A100: #000000,
+    A200: #ffffff, 
+    A400: #ffffff, 
+    A700: #ffffff, 
+  ),
+));
+
+
+//  той самий колір з мого проекту
+$mailColor: mat.get-color-from-palette($my-palette, 100);
+
+$pp: mat.define-palette(mat.$indigo-palette);
+$primary: mat.get-color-from-palette($pp);
+$ap: mat.define-palette(mat.$pink-palette);
+$accent: mat.get-color-from-palette($ap);
+$wp: mat.define-palette(mat.$red-palette);
+$warn: mat.get-color-from-palette($wp);
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $pp,
+      accent: $ap,
+      warn: $wp,
+    ),
+    typography: mat.define-typography-config(),
   )
 );
 
-// Використання кастомної tertiary палітри для створення tertiary палітри
-$tertiary: mat.define-palette($tertiary-palette);
-
-$primary: mat.define-palette(mat.$indigo-palette);
-$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$warn: mat.define-palette(mat.$red-palette);
-
-$app-theme: mat.define-light-theme((
-  
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn,
-    tertiary: $tertiary
-  )
-));
-
-@include mat.all-component-themes($app-theme);

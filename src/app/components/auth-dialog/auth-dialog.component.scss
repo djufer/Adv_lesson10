@@ -1,6 +1,10 @@
+@use '@angular/material' as mat;
+
 @import "../../shared/styles/custome";
 @import "../../shared/styles/variables";
 @import "../../shared/styles/mixins";
+
+// @use '../src/app/shared/styles/_custom-theme' as theme;
 
 form {
   width: 100%;
@@ -10,12 +14,12 @@ form {
     width: 100%;
   }
 }
-.dialog-link{
-    cursor: pointer;
-    font-weight: bold;
-    &:hover {
-        text-decoration: underline;
-    }
+.dialog-link {
+  cursor: pointer;
+  font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .close-button {
   position: absolute;
@@ -31,7 +35,8 @@ form {
   color: var(--lighter-color);
   cursor: default;
 }
+// ------ test---------
 
-// --------
+
 
 
