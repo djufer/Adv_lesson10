@@ -19,6 +19,7 @@ form {
   font-weight: bold;
   &:hover {
     text-decoration: underline;
+    cursor: default;
   }
 }
 .close-button {
@@ -36,6 +37,18 @@ form {
   cursor: default;
 }
 // ------ test---------
+
+.btn-submit{
+  padding: 12px;
+  background-color: $mainColor;
+  border-radius: 4px;
+  font-weight: bold;
+  &:hover{
+    cursor: default;
+    background-color: darken($mainColor, 5%); 
+  }
+}
+
 
 
 

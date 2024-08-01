@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { ILogin } from '../../interfaces/interfaces';
+import { ILogin, PersonalData } from '../../interfaces/interfaces';
 import { Observable, Subject } from 'rxjs';
 import { deleteDoc, doc } from 'firebase/firestore';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -18,7 +18,6 @@ export class AccountService {
   private api = {
     auth: `${this.url}/auth`,
   };
- 
 
   constructor(
     private http: HttpClient,
@@ -58,6 +57,36 @@ export class AccountService {
       } catch (error) {
         console.error('Error deleting user account:', error);
         this.toastr.error('Не вдалося видалити обліковий запис');
+      }
+    } else {
+      this.toastr.error('Користувач не авторизований');
+    }
+  }
+  async updatePersonalData(personal: PersonalData): Promise<void> {
+    const user = this.auth.currentUser;
+
+    if (user) {
+      const userUid = user.uid;
+      const userDocRef = doc(this.afs, 'users', userUid);
+      try {
+        await updateDoc(userDocRef, {
+          'personalData.firstName': personal.firstName,
+          'personalData.lastName': personal.lastName,
+          'personalData.phoneNumber': personal.phoneNumber,
+          'personalData.email': personal.email,
+        });
+          
+         const updatedUserDoc = await getDoc(userDocRef);
+         const updatedUserData = updatedUserDoc.data();
+
+         if (updatedUserData) {
+           localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
+         }
+
+        this.toastr.success('Особисті дані успішно оновлено');
+      } catch (error) {
+        console.error('Error updating personal data:', error);
+        this.toastr.error('Не вдалося оновити особисті дані');
       }
     } else {
       this.toastr.error('Користувач не авторизований');

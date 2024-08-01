@@ -1,1 +1,23 @@
-<p>order-history works!</p>
+<h3 class="title">Історія покупок</h3>
+
+<div *ngIf="ordersByUser; else noPurchases" class="container">
+  <div class="purchase-item" *ngFor="let purchase of ordersByUser">
+    <div class="purchase-details">
+      <p>
+        <strong>Дата:</strong> {{ purchase.orderDate | date : "shortDate" }}
+      </p>
+      <p>
+        <strong>Продукт:</strong>
+
+        {{ purchase.products }}
+      </p>
+      <p><strong>Кількість:</strong> {{ purchase.products.length }}</p>
+      <p><strong>Загальна ціна:</strong> {{ purchase.amount | currency }}</p>
+      <p><strong>Статус:</strong> {{ purchase.status }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPurchases>
+  <p>У вас немає покупок.</p>
+</ng-template>

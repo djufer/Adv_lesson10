@@ -1,1 +1,64 @@
-<p>personal-data works!</p>
+<h3 class="title">Особисті дані</h3>
+<div *ngIf="!isEditing" class="pers-data">
+    <p>Ім'я: <b>{{ currentUser.personalData.firstName }}</b></p>
+    <p>Прізвище: <b>{{ currentUser.personalData.lastName }}</b></p>
+    <p>Номер телефону: <b>{{ currentUser.personalData.phoneNumber }}</b></p>
+    <p>Email: <b>{{ currentUser.personalData.email }}</b></p>
+    <button class="btn" (click)="changeIsEditingStatus()" (click)="setFormData()">Редагувати дані</button>
+</div>
+<div *ngIf="isEditing" class="form-container">
+  <form [formGroup]="persDataForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ім'я</mat-label>
+          <input matInput id="firstName" formControlName="firstName" />
+          <mat-error
+            *ngIf="persDataForm.get('firstName')?.hasError('required')"
+          >
+            Ім'я є обов'язковим.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Прізвище</mat-label>
+          <input matInput id="lastName" formControlName="lastName" />
+          <mat-error *ngIf="persDataForm.get('lastName')?.hasError('required')">
+            Прізвище є обов'язковим.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Номер телефону</mat-label>
+          <input matInput id="phoneNumber" formControlName="phoneNumber" />
+          <mat-error
+            *ngIf="persDataForm.get('phoneNumber')?.hasError('required')"
+          >
+            Номер телефону є обов'язковим.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-12 mb-3">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" formControlName="email" type="email" />
+          <mat-error *ngIf="persDataForm.get('email')?.hasError('required')">
+            Email є обов'язковим.
+          </mat-error>
+          <mat-error *ngIf="persDataForm.get('email')?.hasError('email')">
+            Неправильний формат email.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit">
+      Зберегти особисті дані
+    </button>
+  </form>
+</div>

@@ -130,19 +130,20 @@ export class HeaderComponent {
     const currentUser = JSON.parse(
       localStorage.getItem('currentUser') as string
     );
-    if (currentUser && currentUser.role === ROLE.ADMIN) {
+    
+    if (currentUser && currentUser.personalData.role === ROLE.ADMIN) {
       this.isLogin = true;
       this.loginUrl = 'admin';
       this.loginPage = 'Admin';
-    } else if (currentUser && currentUser.role === ROLE.USER) {
+    } else if (currentUser && currentUser.personalData.role === ROLE.USER) {
       this.isLogin = true;
       this.loginUrl = 'cabinet';
       if (this.loginPage !== '') {
         this.loginPage =
-          currentUser.firstName.charAt(0).toUpperCase() +
-          currentUser.firstName.slice(1);
+          currentUser.personalData.firstName.charAt(0).toUpperCase() +
+          currentUser.personalData.firstName.slice(1);
       } else {
-        this.loginPage = 'user';
+        this.loginPage = currentUser.personalData.firstName;
       }
     } else {
       this.isLogin = false;

@@ -17,28 +17,7 @@ export class OrdersService {
   public currentOrder!: OrderResponse;
   public changeBasket = new Subject<boolean>;
 
-  // public orders: OrderResponse[] = [
-  //   {
-  //     id: 346,
-  //     clientName: 'Василь',
-  //     products: [],
-  //     totalPrice: 235,
-  //     status: 4,
-  //     amount: 170,
-  //     shippingAddress: 'вул.Стуса 12',
-  //     orderDate: new Date(),
-  //   },
-  //   {
-  //     id: 345,
-  //     clientName: 'Петро',
-  //     products: [],
-  //     totalPrice: 235,
-  //     status: 2,
-  //     amount: 170,
-  //     shippingAddress: 'вул.Стуса 12',
-  //     orderDate: new Date(),
-  //   },
-  // ];
+  
 
   constructor(private http: HttpClient) {}
 

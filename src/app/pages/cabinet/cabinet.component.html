@@ -1,56 +1,35 @@
-<div class="title">
-  <h3>Особистий кабінет</h3>
-</div>
-<div class="container mt-5">
-  <ul class="list-group">
-    <li>
-      <div class="dropdown p-3">
-        <button
-          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
-          [routerLink]="['order-history']"
-        >
-          Історія замовлень
-        </button>
-      </div>
-    </li>
-    <li>
-      <div class="dropdown p-3">
-        <button
-          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
-          [routerLink]="['personal-data']"
-        >
-          Персональні дані
-        </button>
-      </div>
-    </li>
-    <li>
-      <div class="dropdown p-3">
-        <button
-          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
-          [routerLink]="['delivery-addresses']"
-        >
-          Адреси доставки
-        </button>
-      </div>
-    </li>
-    <li>
-      <div class="dropdown p-3">
-        <button
-          class="dropdown-toggle w-100 d-flex justify-content-between align-items-center"
-          [routerLink]="['notifications']"
-        >
-          Повідомлення
-        </button>
-      </div>
-    </li>
-  </ul>
-  <router-outlet></router-outlet>
-  <div class="d-flex justify-content-between align-items-center mt-3">
-    <div class="col-3">
-      <button (click)="logout()" class="btn btn-success">Вихід</button>
+<div class="container">
+  <div class="row">
+    <!-- панель навігації -->
+    <div class="col-3 nav-bar d-flex flex-column">
+      <ul>
+        <li class="nav-bar-item">
+          <a [routerLink]="['personal-data']" routerLinkActive="active"
+            >Персональні дані</a
+          >
+        </li>
+        <li class="nav-bar-item">
+          <a [routerLink]="['order-history']" routerLinkActive="active"
+            >Історія покупок</a
+          >
+        </li>
+        <li class="nav-bar-item">
+          <a [routerLink]="['notifications']" routerLinkActive="active"
+            >Повідомлення</a
+          >
+        </li>
+        <li class="nav-bar-item">
+          <a [routerLink]="['delivery-addresses']" routerLinkActive="active"
+            >Адреси доставок</a
+          >
+        </li>
+      </ul>
+      <button class="exit-btn" (click)="logout()">ВИХІД</button>
     </div>
-    <div>
-      <button (click)="deleteAccount()" class="btn btn-danger"> Видалити обліковий запис</button> 
+
+    <!-- блок де вставлятимуться дочірні компонетнти адмін-->
+    <div class="col-9">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

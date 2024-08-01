@@ -10,8 +10,6 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductInfoComponent } from './pages/product-info/product-info.component';
 import { AuthorizationComponent } from './pages/authorization/authorization.component';
 
-
-
 import { AdminComponent } from './admin/admin.component';
 import { AdminPromotionComponent } from './admin/admin-promotion/admin-promotion.component';
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
@@ -83,8 +81,13 @@ const routes: Routes = [
     canActivate: [authUserGuard],
     data: { breadcrumb: 'cabinet' },
     children: [
-      { path: 'order-history', component: OrderHistoryComponent },
+      {
+        path: '',
+        redirectTo: 'personal-data',
+        pathMatch: 'full',
+      },
       { path: 'personal-data', component: PersonalDataComponent },
+      { path: 'order-history', component: OrderHistoryComponent },
       { path: 'delivery-addresses', component: DeliveryAddressesComponent },
       { path: 'notifications', component: NotificationsComponent },
     ],

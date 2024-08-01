@@ -2,12 +2,12 @@
   <h3 class="title text-center">
     {{ isLogin ? "Вхід в кабінет" : "Зареєструватись" }}
   </h3>
-  <div class="w-100 zz"></div>
+  <div class="w-100"></div>
   <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-6">
         <div class="form-group" *ngIf="!isLogin">
-          <mat-form-field  appearance="outline">
+          <mat-form-field appearance="outline">
             <mat-label>Ваше ім'я</mat-label>
             <input matInput type="text" formControlName="firstName" />
             <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
@@ -39,9 +39,14 @@
       </mat-form-field>
     </div>
     <div class="form-group">
-      <mat-form-field  appearance="outline">
-        <mat-label >Ваш email</mat-label>
-        <input matInput type="email" formControlName="email" />
+      <mat-form-field appearance="outline">
+        <mat-label>Ваш email</mat-label>
+        <input
+          class="custom-form-field"
+          matInput
+          type="email"
+          formControlName="email"
+        />
         <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
           Неправильне введення
         </mat-error>
@@ -62,19 +67,21 @@
       </div>
       <div class="col-6">
         <div class="form-group" *ngIf="!isLogin">
-          <mat-label>Повторіть пароль</mat-label>
-          <input matInput type="password" formControlName="repeatPassword" />
-          <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
-            Неправильне введення
-          </mat-error>
+          <mat-form-field appearance="outline">
+            <mat-label>Повторіть пароль</mat-label>
+            <input matInput type="password" formControlName="repeatPassword" />
+            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+              Неправильне введення
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
     </div>
 
-    <button mat-raised-button type="submit" mat-dialog-close *ngIf="isLogin">
+    <button color="secondary" type="submit" mat-dialog-close class="btn-submit" *ngIf="isLogin">
       УВІЙТИ В КАБІНЕТ
     </button>
-    <button mat-raised-button type="submit" mat-dialog-close *ngIf="!isLogin">
+    <button color="secondary" type="submit" mat-dialog-close class="btn-submit" *ngIf="!isLogin">
       ЗАРЕЄСТРУВАТИСЬ
     </button>
   </form>

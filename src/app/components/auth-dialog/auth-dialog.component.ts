@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Auth, deleteUser } from '@angular/fire/auth';
+import { Auth} from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
@@ -89,9 +89,6 @@ export class AuthDialogComponent {
   }
 
   loginUser(): void {
-    // this.dialogRef.close({
-    //   formData: this.authForm.value,
-    // });
     const { email, password } = this.authForm.value;
     this.login(email, password)
       .then(() => {
@@ -113,9 +110,9 @@ export class AuthDialogComponent {
         if (this.auth.currentUser) {
           const currentUser = { ...user, uid: credential.user.uid };
           localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          if (user && user['role'] === ROLE.USER) {
+          if (user && user['personalData'].role === ROLE.USER) {
             this.router.navigate(['/cabinet']);
-          } else if (user && user['role'] === ROLE.ADMIN) {
+          } else if (user && user['personalData'].role === ROLE.ADMIN) {
             this.router.navigate(['/admin']);
           }
           this.accountService.isUserLogin$.next(true);
@@ -130,7 +127,6 @@ export class AuthDialogComponent {
   registerUser(): void {
     const { email, password } = this.authForm.value;
     if (this.authForm.valid) {
-      alert('URAAAAAAA');
       this.emailSignUp(email, password)
         .then(() => {
           this.toastr.success('User successfully created');
@@ -152,13 +148,26 @@ export class AuthDialogComponent {
       password
     );
     const user = {
-      email: credential.user.email,
-      firstName: this.authForm.value.firstName,
-      lastName: this.authForm.value.lastName,
-      phoneNumber: this.authForm.value.phoneNumber,
-      orders: [],
-      role: 'USER',
+      personalData: {
+        email: credential.user.email,
+        firstName: this.authForm.value.firstName,
+        lastName: this.authForm.value.lastName,
+        phoneNumber: this.authForm.value.phoneNumber,
+        role: 'USER',
+      },
+      purchaseHistory: [],
+      notifications: [],
+      deliveryAddresses: []
     };
+
+    // const user = {
+    //   email: credential.user.email,
+    //   firstName: this.authForm.value.firstName,
+    //   lastName: this.authForm.value.lastName,
+    //   phoneNumber: this.authForm.value.phoneNumber,
+    //   orders: [],
+    //   role: 'USER',
+    // };
 
     setDoc(doc(this.afs, 'users', credential.user.uid), user);
   }

@@ -38,7 +38,7 @@ $my-palette: mat.define-palette((
 
 
 //  той самий колір з мого проекту
-$mailColor: mat.get-color-from-palette($my-palette, 100);
+// $mailColor: mat.get-color-from-palette($my-palette, 100);   це працювало але поки закоментував
 
 $pp: mat.define-palette(mat.$indigo-palette);
 $primary: mat.get-color-from-palette($pp);
@@ -47,14 +47,18 @@ $accent: mat.get-color-from-palette($ap);
 $wp: mat.define-palette(mat.$red-palette);
 $warn: mat.get-color-from-palette($wp);
 
+$mp: mat.define-palette(mat.$my-palette);
+$m: mat.get-color-from-palette($mp, 100);
+
 $theme: mat.define-light-theme(
   (
     color: (
-      primary: $pp,
+      primary: $p,
       accent: $ap,
-      warn: $wp,
-    ),
-    typography: mat.define-typography-config(),
+      warn: $wp
+    )
   )
 );
+
+
 

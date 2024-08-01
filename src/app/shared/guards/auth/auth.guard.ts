@@ -4,7 +4,7 @@ import { ROLE } from '../../constants/role.constant';
 
 export const authAdminGuard: CanActivateFn = (route, state) => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser') as string);
-  if (currentUser && currentUser.role === ROLE.ADMIN) {
+  if (currentUser && currentUser.personalData.role === ROLE.ADMIN) {
     return true;
   }
   inject(Router).navigate(['']);
@@ -12,7 +12,7 @@ export const authAdminGuard: CanActivateFn = (route, state) => {
 };
 export const authUserGuard: CanActivateFn = (route, state) => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser') as string);
-  if (currentUser && currentUser.role === ROLE.USER) {
+  if (currentUser && currentUser.personalData.role === ROLE.USER) {
     return true;
   }
   inject(Router).navigate(['']);

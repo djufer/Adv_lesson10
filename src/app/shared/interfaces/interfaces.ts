@@ -38,9 +38,7 @@ export interface ProductRequest {
 export interface ProductResponse extends ProductRequest{
   id: number
 }
-
-
-
+// ------------------------------------------------------------
 export interface OrderRequest {
   clientName: string;
   products: ProductResponse[];
@@ -53,21 +51,53 @@ export interface OrderRequest {
 export interface OrderResponse extends OrderRequest {
   id: number;
 }
-
-
+// ------------------------------------------------------------
 export interface OrderStatus {
   id: number;
   name: string;
   title: string;
   description: string;
 }
-
+// ----------------------------------------------------------
 export interface Breadcrumb {
   label: string;
   url: string;
 }
-
+// ----------------------------------------------------------
 export interface ILogin{
   email: string,
   password: string
+}
+// -----------------------------------------------------------
+// інтерфейси по USER PROFILE
+
+export interface UserProfile {
+  personalData: PersonalData;
+  ordersHistory: OrderRequest[];
+  notifications: UserNotification[];
+  deliveryAddresses: DeliveryAddress[];
+}
+export interface PersonalData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string;
+  role: string
+}
+
+export interface UserNotification {
+  id: string;
+  title: string;
+  message: string;
+  date: Date;
+  read: boolean;
+}
+
+export interface DeliveryAddress {
+  id: string;
+  street: string;
+  houseNumber: string;
+  apartmentNumber?: string; 
+  city: string;
+  postalCode: string;
 }

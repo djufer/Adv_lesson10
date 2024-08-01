@@ -7,7 +7,7 @@ app/
             carrusel.component
         promotion.component
         promotion-info.component
-        products                 - над цією я працюю
+        products                
         product-category/     цю і всі дочірні планую пізніше видалити
             rolls.component
             sets.component
@@ -15,6 +15,11 @@ app/
             sauces.component
         delivery-payment.component
         about.component
+        cabinet/
+            personal-data
+            delivery-addresses
+            notifications
+            order-history
     modals/
         call-back-modal.component
         cart-modal.component

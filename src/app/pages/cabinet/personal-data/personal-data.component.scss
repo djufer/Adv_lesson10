@@ -1,0 +1,21 @@
+@import '../../../shared/styles/variables';
+
+.title{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.full-width {
+  width: 100%;
+}
+ 
+button{
+  background-color: $mainColor;
+  border: none;
+  color: black;
+  &:hover{
+    color: black;
+      background-color: darken($mainColor, 5%);
+  }
+}
