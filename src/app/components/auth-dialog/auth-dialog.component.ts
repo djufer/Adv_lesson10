@@ -14,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 
+import { take } from 'rxjs/operators';
+
 @Component({
   selector: 'app-auth-dialog',
   templateUrl: './auth-dialog.component.html',
@@ -90,38 +92,45 @@ export class AuthDialogComponent {
 
   loginUser(): void {
     const { email, password } = this.authForm.value;
-    this.login(email, password)
-      .then(() => {
-        this.toastr.success('User successfully login');
-      })
-      .catch((e) => {
-        this.toastr.error(e.message);
-      });
-  }
-
-  async login(email: string, password: string): Promise<void> {
-    const credential = await signInWithEmailAndPassword(
-      this.auth,
-      email,
-      password
-    );
-    docData(doc(this.afs, 'users', credential.user.uid)).subscribe({
-      next: (user) => {
-        if (this.auth.currentUser) {
-          const currentUser = { ...user, uid: credential.user.uid };
-          localStorage.setItem('currentUser', JSON.stringify(currentUser));
-          if (user && user['personalData'].role === ROLE.USER) {
-            this.router.navigate(['/cabinet']);
-          } else if (user && user['personalData'].role === ROLE.ADMIN) {
-            this.router.navigate(['/admin']);
-          }
-          this.accountService.isUserLogin$.next(true);
-        }
-      },
-      error: (e) => {
-        console.log('error', e);
-      },
+    this.login(email, password).catch((e) => {
+      this.toastr.error(e.message);
     });
+  }
+  // логінування тільки для юзерів! НЕ для адмінів.
+  async login(email: string, password: string): Promise<void> {
+    try {
+      const credential = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
+      docData(doc(this.afs, 'users', credential.user.uid))
+        .pipe(take(1)) // Підписка буде оброблена лише один раз
+        .subscribe({
+        next: (user) => {
+          if (this.auth.currentUser) {
+            const currentUser = { ...user, uid: credential.user.uid };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            if (user && user['personalData'].role === ROLE.USER) {
+              this.router.navigate(['/cabinet']);
+              this.accountService.isUserLogin$.next(true);
+              this.toastr.success('User successfully logged in');
+              //-----------------------
+            } else if (user && user['personalData'].role === ROLE.ADMIN) {
+              this.toastr.error('You are not a User');
+              localStorage.removeItem('currentUser');
+              this.accountService.isUserLogin$.next(false);
+            }
+          }
+        },
+        error: (e) => {
+          console.log('error', e);
+          this.toastr.error('Error occurred while logging in.');
+        },
+      });
+    } catch (e: any) {
+      this.toastr.error(e.message);
+    }
   }
 
   registerUser(): void {
@@ -129,8 +138,14 @@ export class AuthDialogComponent {
     if (this.authForm.valid) {
       this.emailSignUp(email, password)
         .then(() => {
-          this.toastr.success('User successfully created');
           this.isLogin = !this.isLogin;
+          //
+          this.login(email, password).catch((e) => {
+            this.toastr.error(e.message);
+          });
+
+          this.router.navigate(['/cabinet'])
+          //
           this.authForm.reset();
         })
         .catch((e) => {
@@ -159,20 +174,10 @@ export class AuthDialogComponent {
       notifications: [],
       deliveryAddresses: []
     };
-
-    // const user = {
-    //   email: credential.user.email,
-    //   firstName: this.authForm.value.firstName,
-    //   lastName: this.authForm.value.lastName,
-    //   phoneNumber: this.authForm.value.phoneNumber,
-    //   orders: [],
-    //   role: 'USER',
-    // };
-
     setDoc(doc(this.afs, 'users', credential.user.uid), user);
   }
 
   closeDialog(): void{
-    this.dialogRef.close(); 
+    this.dialogRef.close();
   }
 }

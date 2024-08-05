@@ -1,13 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router'; 
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { TruncatePipe } from './shared/pipes/truncate.pipe';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -19,12 +15,6 @@ import { DeliveryPaymentComponent } from './pages/delivery-payment/delivery-paym
 import { AboutComponent } from './pages/about/about.component';
 import { CallBackModalComponent } from './modals/call-back-modal/call-back-modal.component';
 import { CartModalComponent } from './modals/cart-modal/cart-modal.component';
-
-import { AdminComponent } from './admin/admin.component';
-import { AdminPromotionComponent } from './admin/admin-promotion/admin-promotion.component';
-import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 
 import { CarruselComponent } from './pages/home/carrusel/carrusel.component';
 import { CarrouselAboutComponent } from './pages/about/carrousel-about/carrousel-about.component';
@@ -51,7 +41,7 @@ import { DeliveryAddressesComponent } from './pages/cabinet/delivery-addresses/d
 import { NotificationsComponent } from './pages/cabinet/notifications/notifications.component';
 
 import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
-import { SharedModule } from '../app/shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -75,14 +65,9 @@ import { SharedModule } from '../app/shared/shared.module';
     CarrouselAboutComponent,
     UserLoginModalComponent,
     DetailOrderComponent,
-    TruncatePipe,
     BreadcrumbsComponent,
 
-    AdminComponent,
-    AdminPromotionComponent,
-    AdminCategoriesComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
+
     AuthorizationComponent,
     CabinetComponent,
     OrderHistoryComponent,
@@ -96,9 +81,6 @@ import { SharedModule } from '../app/shared/shared.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),

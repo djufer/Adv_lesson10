@@ -130,7 +130,7 @@ export class HeaderComponent {
     const currentUser = JSON.parse(
       localStorage.getItem('currentUser') as string
     );
-    
+
     if (currentUser && currentUser.personalData.role === ROLE.ADMIN) {
       this.isLogin = true;
       this.loginUrl = 'admin';
@@ -159,8 +159,15 @@ export class HeaderComponent {
 
   openLoginDialog(): void {
     if (this.isLogin) {
-      this.router.navigate(['/cabinet']);
-    } else {
+      if(this.loginUrl === 'admin'){
+        this.router.navigate(['/admin']);
+      }else {
+        this.router.navigate(['/cabinet']);
+      }
+
+    }
+
+    else {
       this.dialog.open(AuthDialogComponent, {
         width: '500px',
         autoFocus: false,

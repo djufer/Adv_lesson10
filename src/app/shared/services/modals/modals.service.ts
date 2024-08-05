@@ -41,7 +41,9 @@ export class ModalsService {
     this.$callBackModalStatusSource.next(false);
   }
   // модалка call-back FIN
+
   // ---------------------
+
   // модалка user-login START
   private $userLoginModalStatusSource = new BehaviorSubject<boolean>(false);
   public userLoginModalStatus = this.$userLoginModalStatusSource.asObservable();

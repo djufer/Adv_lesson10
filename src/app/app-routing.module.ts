@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
 import { AboutComponent } from './pages/about/about.component';
 import { DeliveryPaymentComponent } from './pages/delivery-payment/delivery-payment.component';
@@ -55,37 +55,14 @@ const routes: Routes = [
   {
     path: 'products/:category/:id',
     component: ProductInfoComponent,
-    resolve: {
-      productInfo: productInfoResolver,
-    },
-    data: { breadcrumb: 'Product Info' },
-  },
-  {
-    path: 'delivery-payment',
-    component: DeliveryPaymentComponent,
-    data: { breadcrumb: 'Delivery' },
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-    data: { breadcrumb: 'About' },
-  },
-  {
-    path: 'auth',
-    component: AuthorizationComponent,
-    data: { breadcrumb: 'auth' },
-  },
-  {
-    path: 'cabinet',
-    component: CabinetComponent,
-    canActivate: [authUserGuard],
-    data: { breadcrumb: 'cabinet' },
+    resolve: { productInfo: productInfoResolver },
+    data: { breadcrumb: 'Product Info' } },
+  { path: 'delivery-payment', component: DeliveryPaymentComponent, data: { breadcrumb: 'Delivery' } },
+  { path: 'about', component: AboutComponent, data: { breadcrumb: 'About' } },
+  { path: 'auth', component: AuthorizationComponent, data: { breadcrumb: 'auth' } },
+  { path: 'cabinet', component: CabinetComponent, canActivate: [authUserGuard], data: { breadcrumb: 'cabinet' },
     children: [
-      {
-        path: '',
-        redirectTo: 'personal-data',
-        pathMatch: 'full',
-      },
+      { path: '', redirectTo: 'personal-data', pathMatch: 'full' },
       { path: 'personal-data', component: PersonalDataComponent },
       { path: 'order-history', component: OrderHistoryComponent },
       { path: 'delivery-addresses', component: DeliveryAddressesComponent },
@@ -94,41 +71,16 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent,
     canActivate: [authAdminGuard],
-    children: [
-      {
-        path: '',
-        redirectTo: 'actions',
-        pathMatch: 'full',
-      },
-      {
-        path: 'actions',
-        component: AdminPromotionComponent,
-        data: { breadcrumb: 'Actions' },
-      },
-      {
-        path: 'categories',
-        component: AdminCategoriesComponent,
-        data: { breadcrumb: 'Categories' },
-      },
-      {
-        path: 'products',
-        component: AdminProductsComponent,
-        data: { breadcrumb: 'Products' },
-      },
-      {
-        path: 'orders',
-        component: AdminOrdersComponent,
-        data: { breadcrumb: 'Orders' },
-      },
-    ],
     data: { breadcrumb: 'Admin' },
-  },
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

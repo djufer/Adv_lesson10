@@ -1,4 +1,4 @@
-<div class="header">
+  <div class="header">
   <a href="#" class="header-logo">
     <img src="../../../assets/images/logo.svg" alt="logo" />
   </a>
@@ -64,14 +64,14 @@
     <button (click)="openLoginDialog()">
       <div class="user-btn run-border w-100">
         {{ isLogin ? loginPage : '' }}
-        
+
         <div *ngIf="!isLogin">
           <img  src="../../../assets/images/user.svg" alt="" />
         </div>
       </div>
     </button>
   </div>
-  
+
 
   <div
     (click)="openCloseCart()"

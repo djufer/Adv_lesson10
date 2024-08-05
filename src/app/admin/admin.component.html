@@ -3,7 +3,7 @@
   <!-- панель навігації -->
   <div class="nav-bar col-2 d-flex flex-column">
     <ul>
-        
+
       <li class="nav-bar-item" >
         <a [routerLink]="[ 'actions']" routerLinkActive="active">Акції</a>
       </li>
@@ -14,7 +14,7 @@
         <a [routerLink]="[ 'products']" routerLinkActive="active">Товари</a>
       </li>
       <li class="nav-bar-item">
-        <a [routerLink]="[ 'orders']">Замовлення</a>
+        <a [routerLink]="[ 'orders']" routerLinkActive="active">Замовлення</a>
       </li>
     </ul>
     <button class="exit-btn" (click)="logout()">ВИХІД</button>

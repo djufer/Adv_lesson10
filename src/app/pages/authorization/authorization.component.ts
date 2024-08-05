@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { docData, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { docData, doc, Firestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
+import firebase from "firebase/compat";
+import UserCredential = firebase.auth.UserCredential;
 
 @Component({
   selector: 'app-authorization',
@@ -16,7 +18,7 @@ import { AccountService } from 'src/app/shared/services/account/account.service'
 export class AuthorizationComponent implements OnInit, OnDestroy {
   public authForm!: FormGroup;
 
-  
+
 
   public loginSubscription!: Subscription;
 
@@ -55,25 +57,26 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
       });
   }
 
-  async login(email: string, password: string): Promise<void> {
+  async login(email: string, password: string): Promise<void > {
     const credential = await signInWithEmailAndPassword(
       this.auth,
       email,
       password
     );
-    console.log(credential.user.uid);
     this.loginSubscription = docData(
       doc(this.afs, 'users', credential.user.uid)
     ).subscribe({
       next: (user) => {
         const currentUser = { ...user, uid: credential.user.uid };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        if (user && user['role'] === ROLE.USER) {
-          this.router.navigate(['/cabinet']);
-        } else if (user && user['role'] === ROLE.ADMIN) {
+        if (user && user['personalData']['role'] === ROLE.ADMIN) {
           this.router.navigate(['/admin']);
+          this.accountService.isUserLogin$.next(true);
+        } else {
+          this.toastr.error('You do not have administrative rights.');
+          localStorage.removeItem('currentUser');
+          this.accountService.isUserLogin$.next(false);
         }
-        this.accountService.isUserLogin$.next(true);
       },
       error: (e) => {
         console.log('error', e);
