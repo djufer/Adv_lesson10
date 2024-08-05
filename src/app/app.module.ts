@@ -32,7 +32,6 @@ import { environment } from '../environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { ProductsComponent } from './pages/products/products.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { AuthorizationComponent } from './pages/authorization/authorization.component';
 
 import { CabinetComponent } from './pages/cabinet/cabinet.component';
 import { OrderHistoryComponent } from './pages/cabinet/order-history/order-history.component';
@@ -68,7 +67,6 @@ import { SharedModule } from './shared/shared.module';
     BreadcrumbsComponent,
 
 
-    AuthorizationComponent,
     CabinetComponent,
     OrderHistoryComponent,
     PersonalDataComponent,
