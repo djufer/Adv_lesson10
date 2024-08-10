@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Auth} from '@angular/fire/auth';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -9,7 +9,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { docData, doc, Firestore, setDoc, deleteDoc } from '@angular/fire/firestore';
+import { docData, doc, Firestore, setDoc } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
@@ -21,8 +21,9 @@ import { take } from 'rxjs/operators';
   templateUrl: './auth-dialog.component.html',
   styleUrls: ['./auth-dialog.component.scss'],
 })
-export class AuthDialogComponent {
+export class AuthDialogComponent implements OnInit{
   public authForm!: FormGroup;
+  public checkPassword = false;
   public isLogin = true;
 
   constructor(
@@ -52,46 +53,29 @@ export class AuthDialogComponent {
         email: [null, [Validators.required, Validators.email]],
         password: [null, [Validators.required]],
         repeatPassword: [null, this.isLogin ? [] : [Validators.required]],
-      },
-      {
-        validators: this.isLogin ? [] : [this.passwordMatchValidator],
       }
     );
-
-    this.authForm.updateValueAndValidity();
   }
   // перевірка чи збігаються пароль і повторний пароль
-  passwordMatchValidator(
-    formGroup: FormGroup
-  ): { [key: string]: boolean } | null {
-    const password = formGroup.get('password');
-    const repeatPassword = formGroup.get('repeatPassword');
-    return password && repeatPassword && password.value === repeatPassword.value
-      ? null
-      : { mismatch: true };
-  }
+
 
   onSubmit(): void {
     if (this.authForm.invalid) {
-      this.displayValidationErrors();
+      console.log('invalid')
       return;
     }
     if (this.isLogin) {
+
       this.loginUser();
     } else {
       this.registerUser();
     }
   }
-  displayValidationErrors(): void {
-    for (const key of Object.keys(this.authForm.controls)) {
-      const control = this.authForm.get(key);
-      control?.markAsTouched();
-      control?.updateValueAndValidity();
-    }
-  }
+
 
   loginUser(): void {
     const { email, password } = this.authForm.value;
+    console.log('Calling login with:', email, password);
     this.login(email, password).catch((e) => {
       this.toastr.error(e.message);
     });
@@ -139,14 +123,14 @@ export class AuthDialogComponent {
       this.emailSignUp(email, password)
         .then(() => {
           this.isLogin = !this.isLogin;
-          //
-          this.login(email, password).catch((e) => {
-            this.toastr.error(e.message);
-          });
-
-          this.router.navigate(['/cabinet'])
-          //
-          this.authForm.reset();
+          this.login(email, password)
+            .catch((e) => {
+              this.toastr.error(e.message);
+            })
+            .finally(() => {
+              this.router.navigate(['/cabinet']);
+              this.authForm.reset();
+            });
         })
         .catch((e) => {
           this.toastr.error(e.message);
@@ -174,10 +158,31 @@ export class AuthDialogComponent {
       notifications: [],
       deliveryAddresses: []
     };
-    setDoc(doc(this.afs, 'users', credential.user.uid), user);
+    await setDoc(doc(this.afs, 'users', credential.user.uid), user);
   }
 
   closeDialog(): void{
     this.dialogRef.close();
+  }
+
+  checkConfirmedPassword(): void{
+    this.checkPassword = this.password.value === this.confirmed.value;
+    if(this.password.value !== this.confirmed.value ){
+      this.authForm.controls['repeatPassword'].setErrors({
+        matchError: `Password confirmation doesn't match`
+      })
+    }
+  }
+
+  get password(): AbstractControl{
+      return  this.authForm.controls['password']
+  }
+
+  get confirmed(): AbstractControl{
+     return  this.authForm.controls['repeatPassword']
+  }
+
+  checkVisibilityError(control: string, name: string): boolean | null{
+    return this.authForm.controls[control].errors?.[name];
   }
 }

@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  PersonalData,
-  UserProfile,
-} from '../../../shared/interfaces/interfaces';
+import { UserProfile } from '../../../shared/interfaces/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,9 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PersonalDataComponent {
   public isEditing = false;
-
   public currentUser!: UserProfile;
-
   public persDataForm!: FormGroup;
 
   constructor(
@@ -34,6 +29,7 @@ export class PersonalDataComponent {
     this.currentUser = JSON.parse(
       localStorage.getItem('currentUser') as string
     );
+    console.log(this.currentUser)
   }
   setFormData(): void{
     this.persDataForm.patchValue({

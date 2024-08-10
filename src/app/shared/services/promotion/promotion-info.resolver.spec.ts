@@ -2,9 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { ResolveFn } from '@angular/router';
 
 import { promotionInfoResolver } from './promotion-info.resolver';
+import {PromotionResponse} from "../../interfaces/interfaces";
 
 describe('promotionInfoResolver', () => {
-  const executeResolver: ResolveFn<boolean> = (...resolverParameters) => 
+  const executeResolver: ResolveFn<PromotionResponse> = (...resolverParameters) =>
       TestBed.runInInjectionContext(() => promotionInfoResolver(...resolverParameters));
 
   beforeEach(() => {

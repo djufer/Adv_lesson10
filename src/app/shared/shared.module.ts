@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-    declarations: [TruncatePipe],
+    declarations: [TruncatePipe  ],
     imports: [...MATERIAL,
       FormsModule,
       ReactiveFormsModule,

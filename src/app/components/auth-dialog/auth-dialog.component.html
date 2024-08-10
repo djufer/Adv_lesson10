@@ -21,7 +21,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Ваше прізвище</mat-label>
             <input matInput type="text" formControlName="lastName" />
-            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+            <mat-error *ngIf="authForm.get('lastName')?.hasError('required')">
               Неправильне введення
             </mat-error>
           </mat-form-field>
@@ -33,7 +33,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Phone number</mat-label>
         <input matInput type="text" formControlName="phoneNumber" />
-        <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+        <mat-error *ngIf="authForm.get('phoneNumber')?.hasError('required')">
           Неправильне введення
         </mat-error>
       </mat-form-field>
@@ -47,7 +47,7 @@
           type="email"
           formControlName="email"
         />
-        <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+        <mat-error *ngIf="authForm.get('email')?.hasError('required')">
           Неправильне введення
         </mat-error>
       </mat-form-field>
@@ -58,8 +58,8 @@
         <div class="form-group">
           <mat-form-field appearance="outline">
             <mat-label>*Пароль</mat-label>
-            <input matInput type="password" formControlName="password" />
-            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+            <input matInput (input)="checkConfirmedPassword()" type="password" formControlName="password" />
+            <mat-error *ngIf="authForm.get('repeatPassword')?.hasError('required')">'requir
               Неправильне введення
             </mat-error>
           </mat-form-field>
@@ -69,8 +69,8 @@
         <div class="form-group" *ngIf="!isLogin">
           <mat-form-field appearance="outline">
             <mat-label>Повторіть пароль</mat-label>
-            <input matInput type="password" formControlName="repeatPassword" />
-            <mat-error *ngIf="authForm.get('firstName')?.hasError('required')">
+            <input matInput (input)="checkConfirmedPassword()" type="password" formControlName="repeatPassword" />
+            <mat-error *ngIf="checkVisibilityError('repeatPassword', 'required')">
               Неправильне введення
             </mat-error>
           </mat-form-field>

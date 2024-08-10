@@ -1,23 +1,15 @@
 import { NgModule } from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { AboutComponent } from './pages/about/about.component';
 import { DeliveryPaymentComponent } from './pages/delivery-payment/delivery-payment.component';
 import { HomeComponent } from './pages/home/home.component';
-import { PromotionComponent } from './pages/promotion/promotion.component';
-import { PromotionInfoComponent } from './pages/promotion-info/promotion-info.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductInfoComponent } from './pages/product-info/product-info.component';
 
 import { productInfoResolver } from './shared/services/product/product-info.resolver';
-import { promotionInfoResolver } from './shared/services/promotion/promotion-info.resolver';
-import { authAdminGuard, authUserGuard } from './shared/guards/auth/auth.guard';
+import { authAdminGuard } from './shared/guards/auth/authAdmin.guard';
 
-import { CabinetComponent } from './pages/cabinet/cabinet.component';
-import { OrderHistoryComponent } from './pages/cabinet/order-history/order-history.component';
-import { PersonalDataComponent } from './pages/cabinet/personal-data/personal-data.component';
-import { DeliveryAddressesComponent } from './pages/cabinet/delivery-addresses/delivery-addresses.component';
-import { NotificationsComponent } from './pages/cabinet/notifications/notifications.component';
+
 
 const routes: Routes = [
   {
@@ -29,17 +21,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { breadcrumb: 'Home' } },
   {
     path: 'promotion',
-    component: PromotionComponent,
+    loadChildren: () => import('./pages/promotion/promotion.module').then(m=> m.PromotionModule),
     data: { breadcrumb: 'Promotion' },
   },
-  {
-    path: 'promotion/:id',
-    component: PromotionInfoComponent,
-    resolve: {
-      promotionInfo: promotionInfoResolver,
-    },
-    data: { breadcrumb: 'Promotion Info' },
-  },
+
   {
     path: 'products/:category',
     component: ProductsComponent,
@@ -51,19 +36,16 @@ const routes: Routes = [
     resolve: { productInfo: productInfoResolver },
     data: { breadcrumb: 'Product Info' } },
   { path: 'delivery-payment', component: DeliveryPaymentComponent, data: { breadcrumb: 'Delivery' } },
-  { path: 'about', component: AboutComponent, data: { breadcrumb: 'About' } },
-  {
-    path: 'auth',
+  { path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then(m=> m.AboutModule),
+     data: { breadcrumb: 'About' } },
+  { path: 'auth',
     loadChildren: () => import('./pages/authorization/authorization.module').then(m=> m.AuthorizationModule),
     data: { breadcrumb: 'auth' } },
-  { path: 'cabinet', component: CabinetComponent, canActivate: [authUserGuard], data: { breadcrumb: 'cabinet' },
-    children: [
-      { path: '', redirectTo: 'personal-data', pathMatch: 'full' },
-      { path: 'personal-data', component: PersonalDataComponent },
-      { path: 'order-history', component: OrderHistoryComponent },
-      { path: 'delivery-addresses', component: DeliveryAddressesComponent },
-      { path: 'notifications', component: NotificationsComponent },
-    ],
+  { path: 'cabinet',
+    loadChildren: () => import('./pages/cabinet/cabinet.module').then(m=> m.CabinetModule),
+   data: { breadcrumb: 'cabinet' },
+
   },
   {
     path: 'admin',

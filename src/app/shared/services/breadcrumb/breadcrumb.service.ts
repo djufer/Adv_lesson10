@@ -36,7 +36,7 @@ export class BreadcrumbService {
       let breadcrumbLabel = child.snapshot.data['breadcrumb'];
 
       const routeParams = child.snapshot.params;
-      
+
       if (routeParams && Object.keys(routeParams).length > 0) {
         breadcrumbLabel = `${breadcrumbLabel} / ${
           routeParams['id'] || routeParams['category']
