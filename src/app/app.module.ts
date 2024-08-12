@@ -9,16 +9,11 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
-import { DeliveryPaymentComponent } from './pages/delivery-payment/delivery-payment.component';
-
 import { CallBackModalComponent } from './modals/call-back-modal/call-back-modal.component';
 import { CartModalComponent } from './modals/cart-modal/cart-modal.component';
-
 import { CarruselComponent } from './pages/home/carrusel/carrusel.component';
-
 import { UserLoginModalComponent } from './modals/user-login-modal/user-login-modal.component';
 import { DetailOrderComponent } from './modals/detail-order/detail-order.component';
-import { ProductInfoComponent } from './pages/product-info/product-info.component';
 
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -28,10 +23,9 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
-import { ProductsComponent } from './pages/products/products.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
-import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
+// import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -40,17 +34,13 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ProductsComponent,
-    ProductInfoComponent,
-    DeliveryPaymentComponent,
     CallBackModalComponent,
     CartModalComponent,
     CarruselComponent,
     UserLoginModalComponent,
     DetailOrderComponent,
     BreadcrumbsComponent,
-
-    AuthDialogComponent,
+    // AuthDialogComponent,
   ],
   imports: [
     BrowserModule,

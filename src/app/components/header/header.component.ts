@@ -22,8 +22,6 @@ export class HeaderComponent {
   // анімація для бургера
   public isOpenBurger = false;
   public isCartStatus!: boolean;
-  public shoppingListHeade = [];
-  public isOpenAboutModal!: boolean;
   public headerCategories: CategoryResponse[] = [];
 
   public totalCount: number = 0;
@@ -127,23 +125,19 @@ export class HeaderComponent {
   }
 
   checkUserLogin(): void {
-    const currentUser = JSON.parse(
-      localStorage.getItem('currentUser') as string
-    );
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') as string);
 
-    if (currentUser && currentUser.personalData.role === ROLE.ADMIN) {
-      this.isLogin = true;
-      this.loginUrl = 'admin';
-      this.loginPage = 'Admin';
-    } else if (currentUser && currentUser.personalData.role === ROLE.USER) {
-      this.isLogin = true;
-      this.loginUrl = 'cabinet';
-      if (this.loginPage !== '') {
+    if (currentUser && currentUser.personalData && currentUser.personalData.role) {
+      if (currentUser.personalData.role === ROLE.ADMIN) {
+        this.isLogin = true;
+        this.loginUrl = 'admin';
+        this.loginPage = 'Admin';
+      } else if (currentUser.personalData.role === ROLE.USER) {
+        this.isLogin = true;
+        this.loginUrl = 'cabinet';
         this.loginPage =
           currentUser.personalData.firstName.charAt(0).toUpperCase() +
           currentUser.personalData.firstName.slice(1);
-      } else {
-        this.loginPage = currentUser.personalData.firstName;
       }
     } else {
       this.isLogin = false;
@@ -151,6 +145,7 @@ export class HeaderComponent {
       this.loginPage = '';
     }
   }
+
   checkUpdatesUserLogin(): void {
     this.accountService.isUserLogin$.subscribe(() => {
       this.checkUserLogin();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductResponse } from '../../shared/interfaces/interfaces';
+import { ProductResponse } from '../../../shared/interfaces/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from 'src/app/shared/services/orders/orders.service';
 

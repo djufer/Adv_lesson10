@@ -1,12 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-import { DeliveryPaymentComponent } from './pages/delivery-payment/delivery-payment.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ProductsComponent } from './pages/products/products.component';
-import { ProductInfoComponent } from './pages/product-info/product-info.component';
-
-import { productInfoResolver } from './shared/services/product/product-info.resolver';
 import { authAdminGuard } from './shared/guards/auth/authAdmin.guard';
 
 
@@ -27,21 +21,22 @@ const routes: Routes = [
 
   {
     path: 'products/:category',
-    component: ProductsComponent,
+    loadChildren: () => import('./pages/products/products.module').then(m=> m.ProductsModule)                     ,
     data: { breadcrumb: 'Products' },
   },
-  {
-    path: 'products/:category/:id',
-    component: ProductInfoComponent,
-    resolve: { productInfo: productInfoResolver },
-    data: { breadcrumb: 'Product Info' } },
-  { path: 'delivery-payment', component: DeliveryPaymentComponent, data: { breadcrumb: 'Delivery' } },
+  { path: 'delivery-payment',
+    loadChildren: () => import('./pages/delivery-payment/delivery-payment.module').then(m=> m.DeliveryPaymentModule)                     ,
+   data: { breadcrumb: 'Delivery' } },
   { path: 'about',
     loadChildren: () => import('./pages/about/about.module').then(m=> m.AboutModule),
      data: { breadcrumb: 'About' } },
   { path: 'auth',
     loadChildren: () => import('./pages/authorization/authorization.module').then(m=> m.AuthorizationModule),
     data: { breadcrumb: 'auth' } },
+  {
+    path: 'auth-dialog',
+    loadChildren: () => import('./components/auth-dialog/auth-dialog.module').then(m=> m.AuthDialogModule)
+  },
   { path: 'cabinet',
     loadChildren: () => import('./pages/cabinet/cabinet.module').then(m=> m.CabinetModule),
    data: { breadcrumb: 'cabinet' },
