@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 import {
-  UserProfile, 
+  UserProfile,
   PersonalData,
   UserNotification,
   DeliveryAddress,
@@ -19,7 +19,7 @@ export class CabinetComponent {
   constructor(private router: Router, private accountService: AccountService) {}
 
   // логіка для відкриття і закриття пунктів дропдауна  ____
-  
+
 
   // ___
 
@@ -34,12 +34,16 @@ export class CabinetComponent {
   }
 
   async deleteAccount(): Promise<void> {
-    try {
-      await this.accountService.deleteAccount();
-      // localStorage.removeItem('currentUser');
-      this.logout();
-    } catch (error) {
-      console.error('Error during account deletion:', error);
+    const confirmation = window.confirm('Ви впевнені, що хочете видалити обліковий запис? Це дію не можна скасувати.');
+    if (confirmation) {
+      try {
+        await this.accountService.deleteAccount();
+        this.logout();
+      } catch (error) {
+        console.error('Error during account deletion:', error);
+      }
+    } else {
+      console.log('Видалення облікового запису скасовано.');
     }
   }
 }

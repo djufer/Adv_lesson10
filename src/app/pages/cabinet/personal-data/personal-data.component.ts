@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserProfile } from '../../../shared/interfaces/interfaces';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,25 +20,35 @@ export class PersonalDataComponent {
     private toastr: ToastrService
   ) {}
   ngOnInit(): void {
-    this.getCurrentUser();
     this.initForm();
+    this.getCurrentUser();
     this.setFormData();
   }
 
   getCurrentUser(): void {
-    this.currentUser = JSON.parse(
-      localStorage.getItem('currentUser') as string
-    );
-    console.log(this.currentUser)
+    const user = localStorage.getItem('currentUser');
+    if (user) {
+      this.currentUser = JSON.parse(user);
+      if (this.currentUser && this.currentUser.personalData) {
+        this.setFormData();
+      } else {
+        console.error('personalData is missing');
+      }
+    } else {
+      console.error('currentUser is missing in localStorage');
+    }
   }
-  setFormData(): void{
-    this.persDataForm.patchValue({
-      firstName: this.currentUser.personalData.firstName,
-      lastName: this.currentUser.personalData.lastName,
-      phoneNumber: this.currentUser.personalData.phoneNumber,
-      email: this.currentUser.personalData.email,
-    });
-
+  setFormData(): void {
+    if (this.persDataForm && this.currentUser && this.currentUser.personalData) {
+      this.persDataForm.patchValue({
+        firstName: this.currentUser.personalData.firstName,
+        lastName: this.currentUser.personalData.lastName,
+        phoneNumber: this.currentUser.personalData.phoneNumber,
+        email: this.currentUser.personalData.email,
+      });
+    } else {
+      console.error('Form is not initialized or personalData is missing');
+    }
   }
   changeIsEditingStatus(): void {
     this.isEditing = !this.isEditing;

@@ -21,8 +21,9 @@ import { take } from 'rxjs/operators';
   templateUrl: './auth-dialog.component.html',
   styleUrls: ['./auth-dialog.component.scss'],
 })
-export class AuthDialogComponent implements OnInit{
-  public authForm!: FormGroup;
+export class AuthDialogComponent implements OnInit {
+  public loginForm!: FormGroup;
+  public registerForm!: FormGroup;
   public checkPassword = false;
   public isLogin = true;
 
@@ -37,45 +38,53 @@ export class AuthDialogComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.initAuthForm();
+    this.initLoginForm();
+    this.initRegisterForm();
   }
 
   changeIsLoginStatus(): void {
     this.isLogin = !this.isLogin;
-    this.initAuthForm();
+    this.initLoginForm();
+    this.initRegisterForm();
   }
-  initAuthForm(): void {
-    this.authForm = this.fb.group(
-      {
-        firstName: [null, this.isLogin ? [] : [Validators.required]],
-        lastName: [null, this.isLogin ? [] : [Validators.required]],
-        phoneNumber: [null, this.isLogin ? [] : [Validators.required]],
-        email: [null, [Validators.required, Validators.email]],
-        password: [null, [Validators.required]],
-        repeatPassword: [null, this.isLogin ? [] : [Validators.required]],
-      }
-    );
+  initLoginForm(): void {
+    this.loginForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]]
+    });
+  }
+  initRegisterForm(): void {
+    this.registerForm = this.fb.group({
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
+      confirmedPassword: [null, [Validators.required]],
+    });
   }
   // перевірка чи збігаються пароль і повторний пароль
 
-
   onSubmit(): void {
-    if (this.authForm.invalid) {
-      console.log('invalid')
-      return;
-    }
     if (this.isLogin) {
-
-      this.loginUser();
+      if(this.loginForm.valid){
+        this.loginUser();
+      }
+      else {
+        this.toastr.error('login form invalid')
+      }
     } else {
-      this.registerUser();
+      if(this.registerForm.valid){
+        this.registerUser();
+      }
+      else {
+        this.toastr.error('register form is invalid')
+      }
     }
   }
 
-
   loginUser(): void {
-    const { email, password } = this.authForm.value;
-    console.log('Calling login with:', email, password);
+    const { email, password } = this.loginForm.value;
     this.login(email, password).catch((e) => {
       this.toastr.error(e.message);
     });
@@ -89,47 +98,48 @@ export class AuthDialogComponent implements OnInit{
         password
       );
       docData(doc(this.afs, 'users', credential.user.uid))
-        .pipe(take(1)) // Підписка буде оброблена лише один раз
+        .pipe(take(1)) // Підписка буде оброблена лише один раз, зробив для того щоб тостер не висткакував кілька разів
         .subscribe({
-        next: (user) => {
-          if (this.auth.currentUser) {
-            const currentUser = { ...user, uid: credential.user.uid };
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            if (user && user['personalData'].role === ROLE.USER) {
-              this.router.navigate(['/cabinet']);
-              this.accountService.isUserLogin$.next(true);
-              this.toastr.success('User successfully logged in');
-              //-----------------------
-            } else if (user && user['personalData'].role === ROLE.ADMIN) {
-              this.toastr.error('You are not a User');
-              localStorage.removeItem('currentUser');
-              this.accountService.isUserLogin$.next(false);
+          next: (user) => {
+            if (this.auth.currentUser) {
+              const currentUser = { ...user, uid: credential.user.uid };
+              localStorage.setItem('currentUser', JSON.stringify(currentUser));
+              if (user && user['personalData'].role === ROLE.USER) {
+                this.router.navigate(['/cabinet']);
+                this.accountService.isUserLogin$.next(true);
+                //-----------------------
+              } else if (user && user['personalData'].role === ROLE.ADMIN) {
+                this.toastr.error('You are not a User');
+                localStorage.removeItem('currentUser');
+                this.accountService.isUserLogin$.next(false);
+              }
             }
-          }
-        },
-        error: (e) => {
-          console.log('error', e);
-          this.toastr.error('Error occurred while logging in.');
-        },
-      });
+          },
+          error: (e) => {
+            console.log('error', e);
+            this.toastr.error('Error occurred while logging in.');
+          },
+        });
     } catch (e: any) {
       this.toastr.error(e.message);
     }
   }
 
   registerUser(): void {
-    const { email, password } = this.authForm.value;
-    if (this.authForm.valid) {
+    const { email, password } = this.registerForm.value;
+    if (this.registerForm.valid) {
       this.emailSignUp(email, password)
-        .then(() => {
-          this.isLogin = !this.isLogin;
-          this.login(email, password)
+        .then( async () => {
+
+          await this.login(email, password).then(()=>{
+            this.closeDialog();
+            this.isLogin = !this.isLogin;
+          })
             .catch((e) => {
               this.toastr.error(e.message);
             })
             .finally(() => {
-              this.router.navigate(['/cabinet']);
-              this.authForm.reset();
+              this.registerForm.reset();
             });
         })
         .catch((e) => {
@@ -149,40 +159,43 @@ export class AuthDialogComponent implements OnInit{
     const user = {
       personalData: {
         email: credential.user.email,
-        firstName: this.authForm.value.firstName,
-        lastName: this.authForm.value.lastName,
-        phoneNumber: this.authForm.value.phoneNumber,
+        firstName: this.registerForm.value.firstName,
+        lastName: this.registerForm.value.lastName,
+        phoneNumber: this.registerForm.value.phoneNumber,
         role: 'USER',
       },
       purchaseHistory: [],
       notifications: [],
-      deliveryAddresses: []
+      deliveryAddresses: [],
     };
     await setDoc(doc(this.afs, 'users', credential.user.uid), user);
   }
 
-  closeDialog(): void{
+  closeDialog(): void {
     this.dialogRef.close();
   }
 
-  checkConfirmedPassword(): void{
+  checkConfirmedPassword (): void {
     this.checkPassword = this.password.value === this.confirmed.value;
-    if(this.password.value !== this.confirmed.value ){
-      this.authForm.controls['repeatPassword'].setErrors({
-        matchError: `Password confirmation doesn't match`
-      })
+    if (this.password.value !== this.confirmed.value) {
+      this.registerForm.controls['confirmedPassword'].setErrors({
+        matchError: 'Password confirmation doesnt match',
+      });
+    } else {
+      // Якщо паролі збігаються, видаляємо помилку
+      this.registerForm.controls['confirmedPassword'].setErrors(null);
     }
   }
 
-  get password(): AbstractControl{
-      return  this.authForm.controls['password']
+  get password(): AbstractControl {
+    return this.registerForm.controls['password'];
   }
 
-  get confirmed(): AbstractControl{
-     return  this.authForm.controls['repeatPassword']
+  get confirmed(): AbstractControl {
+    return this.registerForm.controls['confirmedPassword'];
   }
 
-  checkVisibilityError(control: string, name: string): boolean | null{
-    return this.authForm.controls[control].errors?.[name];
+  checkVisibilityError(control: string, name: string): boolean | null {
+    return this.registerForm.controls[control].errors?.[name];
   }
 }
