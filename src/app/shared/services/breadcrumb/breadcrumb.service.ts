@@ -26,7 +26,6 @@ export class BreadcrumbService {
     breadcrumbs: Breadcrumb[] = []
   ): Breadcrumb[] {
     const children: ActivatedRoute[] = route.children;
-
     if (children.length === 0) {
       return breadcrumbs;
     }

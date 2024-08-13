@@ -7,7 +7,7 @@ import { productInfoResolver } from '../../shared/services/product/product-info.
 
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent},
+  { path: '', component: ProductsComponent },
   {
     path: ':id',
     component: ProductInfoComponent,

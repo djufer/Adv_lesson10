@@ -21,7 +21,7 @@ const routes: Routes = [
 
   {
     path: 'products/:category',
-    loadChildren: () => import('./pages/products/products.module').then(m=> m.ProductsModule)                     ,
+    loadChildren: () => import('./pages/products/products.module').then(m=> m.ProductsModule),
     data: { breadcrumb: 'Products' },
   },
   { path: 'delivery-payment',
