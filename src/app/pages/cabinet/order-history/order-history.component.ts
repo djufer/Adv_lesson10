@@ -1,24 +1,37 @@
 import { Component } from '@angular/core';
-import { OrderRequest, UserProfile } from 'src/app/shared/interfaces/interfaces';
+import { OrderRequest, OrderResponse } from 'src/app/shared/interfaces/interfaces';
+import { OrdersService } from '../../../shared/services/orders/orders.service';
+import { ToastrService } from 'ngx-toastr';
+
+
 
 @Component({
   selector: 'app-order-history',
   templateUrl: './order-history.component.html',
   styleUrls: ['./order-history.component.scss'],
 })
-export class OrderHistoryComponent {
-  public ordersByUser!: OrderRequest[];
+export class OrderHistoryComponent{
+  public ordersByUser!: OrderResponse[];
 
-  constructor() { }
+  constructor(
+    private ordersService: OrdersService,
+    private toastr: ToastrService
+  ) { }
   ngOnInit(): void {
-    this.getOrdersByUser();
+    this.getOrdersByUserId();
   }
 
-  getOrdersByUser(): void{
+  getCurrentUserId(): string{
     const currentUser = JSON.parse(
       localStorage.getItem('currentUser') as string
     );
-    this.ordersByUser = currentUser.ordersHistory;
+    return  currentUser.uid;
   }
-  
+  getOrdersByUserId(): void{
+    this.ordersService.getOrdersById(this.getCurrentUserId()).then((data)=>{
+      this.ordersByUser = data;
+    }).catch((e)=>{
+      this.toastr.error('щось не те..')
+    })
+  }
 }

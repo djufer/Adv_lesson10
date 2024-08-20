@@ -1,0 +1,27 @@
+@import "../../../shared/styles/variables";
+
+  thead{
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+
+.blue-border-bottom{
+  border-bottom: 3px solid $mainColor;
+}
+.repeat-btn{
+  color: $mainColor;
+  font-weight: bold;
+}
+.smaller-text{
+  font-size: 0.9rem;
+}
+
+//
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table tbody tr td.border-bottom-0 {
+  border-bottom: 10px solid white !important;
+}

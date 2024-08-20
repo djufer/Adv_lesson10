@@ -1,21 +1,38 @@
 <h3 class="title">Історія покупок</h3>
 
 <div *ngIf="ordersByUser; else noPurchases" class="container">
-  <div class="purchase-item" *ngFor="let purchase of ordersByUser">
-    <div class="purchase-details">
-      <p>
-        <strong>Дата:</strong> {{ purchase.orderDate | date : "shortDate" }}
-      </p>
-      <p>
-        <strong>Продукт:</strong>
+  <table class="w-100">
+    <thead>
+    <tr class="blue-border-bottom">
+      <th class="py-3">№ замовлення</th>
+      <th>Дата та час</th>
+      <th>Адреса</th>
+      <th>Сума</th>
+      <th>Статус</th>
+      <th>Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container  *ngFor="let order of ordersByUser">
+      <tr class="border-bottom">
+        <td class="py-4"> <b>№ {{ order.orderID }}</b></td>
+        <td>{{ order.orderDate | date: 'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ order.shippingAddress }}</td>
+        <td><b>{{ order.totalPrice }}</b></td>
+        <td>{{ order.status.name }}</td>
+        <td>
+          <button class="repeat-btn">Повторити</button>
+        </td>
+      </tr>
 
-        {{ purchase.products }}
-      </p>
-      <p><strong>Кількість:</strong> {{ purchase.products.length }}</p>
-      <p><strong>Загальна ціна:</strong> {{ purchase.amount | currency }}</p>
-      <p><strong>Статус:</strong> {{ purchase.status }}</p>
-    </div>
-  </div>
+      <tr class="smaller-text" *ngFor="let prod of order.products; let last = last" [ngClass]="{'blue-border-bottom': last, 'border-bottom': !last}">
+        <td colspan="3" class="py-2 text-center" >{{ prod.name }}</td>
+        <td >{{ prod.price }}</td>
+        <td colspan="2" class="text-center">{{ prod.count }}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
 </div>
 
 <ng-template #noPurchases>

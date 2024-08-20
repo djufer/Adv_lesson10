@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Auth} from '@angular/fire/auth';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -167,6 +167,7 @@ export class AuthDialogComponent implements OnInit {
       purchaseHistory: [],
       notifications: [],
       deliveryAddresses: [],
+      pickupLocations: []
     };
     await setDoc(doc(this.afs, 'users', credential.user.uid), user);
   }

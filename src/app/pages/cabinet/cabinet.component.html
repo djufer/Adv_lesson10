@@ -23,6 +23,11 @@
             >Адреси доставок</a
           >
         </li>
+        <li class="nav-bar-item">
+          <a [routerLink]="['change-password']" routerLinkActive="active"
+            >Зміна паролю
+          </a>
+        </li>
       </ul>
       <button class="my-btn exit-btn" (click)="logout()">ВИХІД</button>
       <button class="my-btn del-btn" (click)="deleteAccount()">видалити акаунт</button>

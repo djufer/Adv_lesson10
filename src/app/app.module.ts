@@ -12,7 +12,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { CallBackModalComponent } from './modals/call-back-modal/call-back-modal.component';
 import { CartModalComponent } from './modals/cart-modal/cart-modal.component';
 import { CarruselComponent } from './pages/home/carrusel/carrusel.component';
-import { DetailOrderComponent } from './modals/detail-order/detail-order.component';
 
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -34,7 +33,6 @@ import { SharedModule } from './shared/shared.module';
     CallBackModalComponent,
     CartModalComponent,
     CarruselComponent,
-    DetailOrderComponent,
     BreadcrumbsComponent,
   ],
   imports: [

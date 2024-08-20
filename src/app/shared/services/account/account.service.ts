@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { ILogin, PersonalData } from '../../interfaces/interfaces';
 import { Observable, Subject } from 'rxjs';
-import { deleteDoc, doc } from 'firebase/firestore';
-import { Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
+// import { doc } from 'firebase/firestore';
+import { Firestore, getDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -75,7 +75,7 @@ export class AccountService {
           'personalData.phoneNumber': personal.phoneNumber,
           'personalData.email': personal.email,
         });
-          
+
          const updatedUserDoc = await getDoc(userDocRef);
          const updatedUserData = updatedUserDoc.data();
 

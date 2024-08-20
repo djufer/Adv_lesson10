@@ -40,16 +40,15 @@ export interface ProductResponse extends ProductRequest{
 }
 // ------------------------------------------------------------
 export interface OrderRequest {
-  clientName: string;
+  userId: string;
   products: ProductResponse[];
   totalPrice: number;
-  status: number;
-  amount: number;
+  status: OrderStatus;
   shippingAddress: string;
   orderDate: Date;
 }
 export interface OrderResponse extends OrderRequest {
-  id: number;
+  orderID: string;
 }
 // ------------------------------------------------------------
 export interface OrderStatus {
@@ -75,7 +74,7 @@ export interface UserProfile {
   personalData: PersonalData;
   ordersHistory: OrderRequest[];
   notifications: UserNotification[];
-  deliveryAddresses: DeliveryAddress[];
+  deliveryAddresses: String[];
 }
 export interface PersonalData {
   firstName: string;
@@ -91,13 +90,4 @@ export interface UserNotification {
   message: string;
   date: Date;
   read: boolean;
-}
-
-export interface DeliveryAddress {
-  id: string;
-  street: string;
-  houseNumber: string;
-  apartmentNumber?: string; 
-  city: string;
-  postalCode: string;
 }

@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/shared/services/account/account.service';
-import {
-  UserProfile,
-  PersonalData,
-  UserNotification,
-  DeliveryAddress,
-} from '../../shared/interfaces/interfaces';
+import { UserProfile } from '../../shared/interfaces/interfaces';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cabinet',
@@ -16,21 +12,21 @@ import {
 export class CabinetComponent {
   public currentUser!: UserProfile[];
 
-  constructor(private router: Router, private accountService: AccountService) {}
-
-  // логіка для відкриття і закриття пунктів дропдауна  ____
-
-
-  // ___
-
-  getUser(): void{
-
-  }
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    private toastr: ToastrService
+  ) {}
 
   logout(): void {
-    this.router.navigate(['/']);
-    localStorage.removeItem('currentUser');
-    this.accountService.isUserLogin$.next(true);
+    this.router.navigate(['/']).then(()=>{
+      localStorage.removeItem('currentUser');
+      this.accountService.isUserLogin$.next(true);
+      }
+    ).catch((e)=>{
+      this.toastr.error(e);
+    })
+
   }
 
   async deleteAccount(): Promise<void> {

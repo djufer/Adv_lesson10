@@ -7,8 +7,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
-import firebase from "firebase/compat";
-import UserCredential = firebase.auth.UserCredential;
 
 @Component({
   selector: 'app-authorization',
