@@ -12,7 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CallBackModalComponent } from './modals/call-back-modal/call-back-modal.component';
 import { CartModalComponent } from './modals/cart-modal/cart-modal.component';
 import { CarruselComponent } from './pages/home/carrusel/carrusel.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideStorage, getStorage } from '@angular/fire/storage';
@@ -20,7 +20,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrService} from 'ngx-toastr';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -40,15 +40,17 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     AngularFireStorageModule,
-    ToastrModule.forRoot(),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: ToastrService, useValue: {}}
+  ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule {}

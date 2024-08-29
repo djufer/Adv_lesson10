@@ -4,8 +4,6 @@ import { ProductsComponent } from './products.component';
 import { ProductInfoComponent } from './product-info/product-info.component';
 import { productInfoResolver } from '../../shared/services/product/product-info.resolver';
 
-
-
 const routes: Routes = [
   { path: '', component: ProductsComponent },
   {

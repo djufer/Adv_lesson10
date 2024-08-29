@@ -17,21 +17,19 @@ const MATERIAL = [
 // other modules
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
     declarations: [TruncatePipe  ],
     imports: [...MATERIAL,
       FormsModule,
-      ReactiveFormsModule,
-      HttpClientModule,
+      ReactiveFormsModule
 
     ],
     exports: [...MATERIAL,
       FormsModule,
       ReactiveFormsModule,
-      HttpClientModule,
       TruncatePipe
     ]
 })

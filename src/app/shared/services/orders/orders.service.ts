@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  OrderResponse } from '../../interfaces/interfaces';
+import { OrderResponse } from '../../interfaces/interfaces';
 import { Subject } from 'rxjs';
 import {
   Firestore,
@@ -9,8 +9,7 @@ import {
   query,
   where,
   getDocs,
-  Timestamp,
-  updateDoc, doc
+  Timestamp
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -18,7 +17,6 @@ import {
 })
 export class OrdersService {
   public changeBasket = new Subject<boolean>();
-
   public ordersCollection: CollectionReference<OrderResponse>;
   constructor(private afs: Firestore) {
     // Створюємо посилання на колекцію 'orders'
@@ -35,17 +33,13 @@ export class OrdersService {
     }
   }
 
-
-
   async getOrdersById(id: string): Promise<OrderResponse[]> {
     try {
       const q = query(
         this.ordersCollection,
         where('userId', '==', id)
       );
-
       const querySnapshot = await getDocs(q);
-
       return querySnapshot.docs.map(doc => {
         const data = doc.data() as OrderResponse;
         if (data.orderDate instanceof Timestamp) {

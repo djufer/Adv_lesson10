@@ -18,11 +18,9 @@ export class AdminProductsComponent {
   public isOpenForm = false;
 
   public updateStatus = false;
-  public currentEditProductId = 0; //id
-  public currentCategoryId = 0; //id
+  public currentEditProductId = 0;
   public adminCategories: CategoryResponse[] = [];
   public adminProducts: ProductResponse[] = [];
-  public newId!: number | null;
 
   public productForm!: FormGroup;
 
@@ -152,14 +150,7 @@ export class AdminProductsComponent {
       .catch((err) => {
         console.log(err);
       });
-    //   const task = ref(this.storage, this.valueByControl('img'));
-    //   deleteObject(task).then(() => {
-    //     this.isUploaded = false;
-    //     this.uploadPercent = 0;
-    //     this.productForm.patchValue({
-    //       imagePath: null,
-    //     });
-    //   });
+
   }
   valueByControl(control: string): string {
     return this.productForm.get(control)?.value;

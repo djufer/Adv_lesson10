@@ -25,7 +25,7 @@ export class HeaderComponent {
   public headerCategories: CategoryResponse[] = [];
 
   public totalCount: number = 0;
-  private basket: ProductResponse[] = [];
+  public basket: ProductResponse[] = [];
   // total price
   public total = 0;
 

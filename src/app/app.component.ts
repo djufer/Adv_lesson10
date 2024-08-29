@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { OverlayService } from './shared/services/overlay/overlay.service';
 import { ModalsService } from './shared/services/modals/modals.service';
 

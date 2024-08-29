@@ -17,14 +17,6 @@ export class PromotionInfoComponent {
   ) { }
   ngOnInit(): void {
     this.currentPromotion = this.activatedRoute.snapshot.data['promotionInfo'];
-    // this.getOnePromotion();
    }
-
-  // getOnePromotion(): void{
-  //   let DISCOUNT_ID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-  //   this.promotionService.getOne(DISCOUNT_ID).subscribe((data) => {
-  //     this.currentPromotion = data;
-  //   });
-  // }
 }
 

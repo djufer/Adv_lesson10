@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PromotionComponent } from './promotion.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PromotionComponent', () => {
   let component: PromotionComponent;
@@ -8,7 +9,8 @@ describe('PromotionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PromotionComponent]
+      declarations: [PromotionComponent],
+      imports: [ HttpClientTestingModule ]
     });
     fixture = TestBed.createComponent(PromotionComponent);
     component = fixture.componentInstance;

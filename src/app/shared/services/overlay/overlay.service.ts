@@ -11,8 +11,6 @@ export class OverlayService {
   getOverlayStatus(): Observable<boolean> {
     return this.overlayStatus;
   }
-
- 
   openOverlay(): void{
     this.$overlayStatusSource.next(true);
      this.getOverlayStatus()

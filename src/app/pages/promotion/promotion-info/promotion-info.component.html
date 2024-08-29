@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="col-12">
-    <div class="block-info">
-      <div class="block-info-img">
+    <div *ngIf="currentPromotion" class="block-info">
+      <div class="block-info-img" >
         <img [src]="currentPromotion.imagePath" />
       </div>
       <h5 class="title text-cut-2 text-center ">{{ currentPromotion.title }}</h5>

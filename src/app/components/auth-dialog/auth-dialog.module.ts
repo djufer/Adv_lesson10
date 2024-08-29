@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { AuthDialogRoutingModule } from './auth-dialog-routing.module';
 import { AuthDialogComponent } from './auth-dialog.component';
-import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
-import {environment} from "../../../environments/environment";
-import {getStorage, provideStorage} from "@angular/fire/storage";
-import {getFirestore, provideFirestore} from "@angular/fire/firestore";
-import {getAuth, provideAuth} from "@angular/fire/auth";
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../../../environments/environment';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [ AuthDialogComponent],
@@ -15,6 +16,7 @@ import {getAuth, provideAuth} from "@angular/fire/auth";
     CommonModule,
     SharedModule,
     AuthDialogRoutingModule,
+    BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),

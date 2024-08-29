@@ -34,7 +34,9 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.loginSubscription.unsubscribe();
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
   }
 
   initAuthForm(): void {
