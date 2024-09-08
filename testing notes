@@ -1,0 +1,60 @@
+=============================== Coverage summary   First test  ===============================
+Statements   : 35.16% ( 307/873 )
+Branches     : 8.78% ( 13/148 )
+Functions    : 34.81% ( 94/270 )
+Lines        : 34.8% ( 299/859 )
+
+
+
+
+
+describe('SomeService - testing HTTP request method getData()', () => {
+let httpTestingController: HttpTestingController
+beforeEach(() => {
+TestBed.configureTestingModule({
+imports: [HttpClientTestingModule],
+providers: [SomeService],
+})
+someService = TestBed.get(SomeService)
+httpTestingController = TestBed.get(
+HttpTestingController
+)
+})
+it('can test HttpClient.get', () => {
+const data = [1, 2, 3]
+someService
+.getData()
+.subscribe((response) => expect(response).toBe(data))
+const req = httpTestingController.expectOne('/api/data')
+expect(req.request.method).toBe('GET')
+req.flush(data)
+})
+afterEach(() => httpTestingController.verify())
+})
+
+
+
+
+Приклад покриття тестом pipe
+cut-text.pipe.ts
+@Pipe({ name: 'cutText' })
+export class CutTextPipe implements PipeTransform {
+transform(text: string, length: number): string {
+if (text.length <= length) return text
+else return `${text.substr(0, length)}...`
+}
+}
+cut-text.pipe.spec.ts
+describe('CutTextPipe', () => {
+let cutText = new CutTextPipe()
+it('doesn\'t transform "Hello, World!"', () => {
+expect(cutText.transform('Hello, World!', 50)).toBe(
+'Hello, World!'
+)
+})
+it('transforms "Hello, World!" to "Hello..."', () => {
+expect(cutText.transform('Hello, World!', 5)).toBe(
+'Hello...'
+)
+})
+})

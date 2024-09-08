@@ -28,14 +28,16 @@ export class AuthDialogComponent implements OnInit {
   public isLogin = true;
 
   constructor(
-    private toastr: ToastrService,
+    public toastr: ToastrService,
     private fb: FormBuilder,
-    private afs: Firestore,
-    private router: Router,
-    private accountService: AccountService,
-    private auth: Auth,
-    private dialogRef: MatDialogRef<AuthDialogComponent>
+    public afs: Firestore,
+    public router: Router,
+    public accountService: AccountService,
+    public auth: Auth,
+    public dialogRef: MatDialogRef<AuthDialogComponent>
   ) {}
+
+
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -84,6 +86,11 @@ export class AuthDialogComponent implements OnInit {
   }
 
   loginUser(): void {
+    // Перевірка валідності форми
+    if (!this.loginForm.valid) {
+      this.toastr.error('Login form is invalid');
+      return;
+    }
     const { email, password } = this.loginForm.value;
     this.login(email, password).catch((e) => {
       this.toastr.error(e.message);
@@ -104,11 +111,14 @@ export class AuthDialogComponent implements OnInit {
             if (this.auth.currentUser) {
               const currentUser = { ...user, uid: credential.user.uid };
               localStorage.setItem('currentUser', JSON.stringify(currentUser));
-              if (user && user['personalData'].role === ROLE.USER) {
+              console.log('1111')
+              if (user && user['personalData'] && user['personalData'].role === ROLE.USER) {
                 this.router.navigate(['/cabinet']);
+                console.log('222')
                 this.accountService.isUserLogin$.next(true);
+                console.log('333')
                 //-----------------------
-              } else if (user && user['personalData'].role === ROLE.ADMIN) {
+              } else if (user && user['personalData'] && user['personalData'].role === ROLE.ADMIN) {
                 this.toastr.error('You are not a User');
                 localStorage.removeItem('currentUser');
                 this.accountService.isUserLogin$.next(false);

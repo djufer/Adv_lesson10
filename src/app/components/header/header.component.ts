@@ -35,7 +35,7 @@ export class HeaderComponent {
   constructor(
     private overlayService: OverlayService,
     private modalsService: ModalsService,
-    private categoryService: CategoryService,
+    public categoryService: CategoryService,
     private ordersService: OrdersService,
     private accountService: AccountService,
     private router: Router,
