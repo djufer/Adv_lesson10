@@ -7,7 +7,7 @@ import { AdminPromotionComponent } from './admin-promotion/admin-promotion.compo
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { AdminProductsComponent} from './admin-products/admin-products.component';
 import { SharedModule } from '../shared/shared.module';
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [

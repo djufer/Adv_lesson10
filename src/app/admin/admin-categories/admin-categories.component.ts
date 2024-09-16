@@ -15,7 +15,6 @@ export class AdminCategoriesComponent {
   public isOpenForm = false;
   public editedCategoryId!: number;
   public updateStatus = false;
-  public currentIconPath!: string;
   public adminCategories: CategoryResponse[] = [];
 
   public categoryForm!: FormGroup;
@@ -61,7 +60,7 @@ export class AdminCategoriesComponent {
     if (this.categoryForm.invalid) {
       // Якщо форма недійсна, встановіть відповідні флаги для відображення помилок
       this.showNameError = this.categoryForm.controls['name'].invalid;
-      this.showTitleError = this.categoryForm.controls['title'].invalid;
+      this.showTitleError = this.categoryForm.controls['path'].invalid;
       return; // Перервіть відправку форми
     }
     // Якщо форма валідна, відправляйте дані
@@ -128,8 +127,8 @@ export class AdminCategoriesComponent {
       });
   }
 
- 
-  
+
+
   deleteFormImage(): void {
     this.imageService
       .deleteUploadFile(this.valueByControl('imagePath'))

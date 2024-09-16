@@ -24,11 +24,6 @@ export class ProductsService {
       `${this.api.products}?category.path=${name}`
     );
   }
-  getAllBySubCategory(name: string): Observable<ProductResponse[]> {
-    return this.http.get<ProductResponse[]>(
-      `${this.api.products}?subCategory.path=${name}`
-    );
-  }
 
   getOne(id: number): Observable<ProductResponse> {
     return this.http.get<ProductResponse>(`${this.api.products}/${id}`);

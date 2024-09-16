@@ -67,9 +67,9 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
       doc(this.afs, 'users', credential.user.uid)
     ).subscribe({
       next: (user) => {
-        const currentUser = { ...user, uid: credential.user.uid };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        if (user && user['personalData']['role'] === ROLE.ADMIN) {
+        if (user && user['personalData'] && user['personalData']['role'] === ROLE.ADMIN) {
+          const currentUser = { ...user, uid: credential.user.uid };
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
           this.router.navigate(['/admin']);
           this.accountService.isUserLogin$.next(true);
         } else {
@@ -83,4 +83,5 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
       },
     });
   }
+
 }

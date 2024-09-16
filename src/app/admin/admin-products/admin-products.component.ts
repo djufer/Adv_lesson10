@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  CategoryResponse,
-  ProductResponse,
-} from './../../shared/interfaces/interfaces';
+import { CategoryResponse, ProductResponse } from './../../shared/interfaces/interfaces';
 import { ProductsService } from '../../shared/services/product/product.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import * as test from "node:test";
 
 @Component({
   selector: 'app-admin-products',
@@ -29,7 +27,7 @@ export class AdminProductsComponent {
   public isUploading = false; // поки що тру
 
   constructor(
-    private productsService: ProductsService,
+    public  productsService: ProductsService,
     private categoryService: CategoryService,
     private fb: FormBuilder,
     private imageService: ImageService,
@@ -83,8 +81,8 @@ export class AdminProductsComponent {
       this.productsService
         .updateProduct(this.productForm.value, this.currentEditProductId)
         .subscribe(() => {
-          this.getProducts();
           this.toastr.success('Product successfully updated');
+          this.getProducts();
           this.updateStatus = false;
         });
     } else {
@@ -93,9 +91,9 @@ export class AdminProductsComponent {
         .subscribe(() => {
           this.getProducts();
           this.toastr.success('Product successfully added');
+          this.productForm.reset();
         });
     }
-    this.productForm.reset();
     this.productForm.patchValue({
       measurementType: 'weight',
     });
@@ -106,17 +104,17 @@ export class AdminProductsComponent {
   removeProduct(product: ProductResponse): void {
     this.productsService.removeProduct(product.id).subscribe(() => {
       this.getProducts();
-       this.toastr.success('Product successfully deleted');
+      this.toastr.success('Product successfully deleted');
     });
   }
 
   editProduct(product: ProductResponse): void {
+    this.productForm.reset();
     this.productForm.patchValue(product);
     this.isOpenForm = true;
     this.isUploaded = true;
     this.updateStatus = true;
     this.currentEditProductId = product.id;
-    // // заносимо дані в інпути
   }
 
   // ----------------------------

@@ -20,7 +20,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
-import { ToastrService} from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -39,18 +39,17 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    RouterModule,
+    RouterModule.forRoot([]),
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     AngularFireStorageModule,
-    SharedModule
+    SharedModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [
-    { provide: ToastrService, useValue: {}}
-  ],
+
   bootstrap: [ AppComponent ],
 })
 export class AppModule {}

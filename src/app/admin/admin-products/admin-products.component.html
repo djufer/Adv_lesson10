@@ -4,6 +4,7 @@
       type="button"
       class="open-close-form-btn"
       (click)="isOpenForm = !isOpenForm"
+      (click)="productForm.reset()"
       [ngClass]="isOpenForm ? 'close-form-btn' : 'open-form-btn'"
     >
       {{ isOpenForm ? "Close" : "Open form" }}
@@ -51,7 +52,7 @@
                 id="name"
               />
             </div>
-            
+
             <div class="col">
               <label for="path" class="form-label">Path</label>
               <input
@@ -182,7 +183,7 @@
     </div>
   </div>
   </ng-container>
-  
+
   <!--  -->
 
   <table>
@@ -237,8 +238,8 @@
           </button>
         </td>
         </ng-container>
-        
-        
+
+
       </tr>
     </tbody>
   </table>

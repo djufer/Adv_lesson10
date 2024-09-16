@@ -37,7 +37,7 @@ export class AdminPromotionComponent {
   public uploadPercent!: number;
   public isUploaded = false;
   public isUploading = false;
-  
+
 
   constructor(
     private promotionService: PromotionService,
@@ -77,7 +77,6 @@ export class AdminPromotionComponent {
       this.showFileError = this.promotionForm.controls['imagePath'].invalid;
       return;
     } else if (this.updateStatus) {
-      //   ОНОВЛЕННЯ
       this.promotionService
         .updatePromotion(
           this.promotionForm.value,
@@ -88,6 +87,7 @@ export class AdminPromotionComponent {
           this.updateStatus = false;
           this.isUploaded = false;
           this.uploadPercent = 0;
+          // this.promotionForm.reset();
         });
     } else {
       //    ДОДАВАННЯ
@@ -106,9 +106,10 @@ export class AdminPromotionComponent {
         this.showTitleError = false;
         this.showDescriptionError = false;
         this.showFileError = false;
+        this.promotionForm.reset();
       });
     }
-    this.promotionForm.reset();
+
     this.editStatus = false;
     this.uploadPercent = 0;
   }
@@ -125,10 +126,11 @@ export class AdminPromotionComponent {
       this.getPromotions();
     });
 
-    
+
   }
   editPromotion(promotion: PromotionResponse): void {
     // заносимо дані у форму
+
     this.promotionForm.patchValue({
       name: promotion.name,
       title: promotion.title,
@@ -162,7 +164,7 @@ export class AdminPromotionComponent {
     name: string,
     file: File | null
   ): Promise<string> {
-    
+
     const path = `${folder}/${name}`;
     let url = '';
     if (file) {
@@ -173,7 +175,7 @@ export class AdminPromotionComponent {
           this.uploadPercent = data.progress;
         });
         await task;
-      
+
         url = await getDownloadURL(storageRef);
       } catch (e: any) {
         console.error(e);
@@ -197,7 +199,7 @@ export class AdminPromotionComponent {
       this.promotionForm.patchValue({
         imagePath: null
       })
-      
+
     })
   }
 }
