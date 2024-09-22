@@ -5,7 +5,7 @@ export interface CategoryRequest {
   imagePath: string;
 }
 export interface CategoryResponse extends CategoryRequest {
-  id: number;
+  id: number | string;
 }
 
 // -----------------------------------------
@@ -17,7 +17,7 @@ export interface PromotionRequest {
   imagePath: string;
 }
 export interface PromotionResponse extends PromotionRequest{
-  id: number;
+  id: number | string;
 }
 // ---------------------------------------------
 export interface ProductRequest {
@@ -36,7 +36,7 @@ export interface ProductRequest {
   count: number
 }
 export interface ProductResponse extends ProductRequest{
-  id: number
+  id: number | string;
 }
 // ------------------------------------------------------------
 export interface OrderRequest {

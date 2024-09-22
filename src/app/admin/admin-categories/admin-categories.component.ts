@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AdminCategoriesComponent {
   public isOpenForm = false;
-  public editedCategoryId!: number;
+  public editedCategoryId!: number | string;
   public updateStatus = false;
   public adminCategories: CategoryResponse[] = [];
 
@@ -50,35 +50,31 @@ export class AdminCategoriesComponent {
   }
 
   getCategories() {
-    this.categoryService.getAll().subscribe((data) => {
-      this.adminCategories = data;
+    this.categoryService.getAllFirebase().subscribe((data) => {
+      this.adminCategories = data as CategoryResponse[];
     });
   }
 
   addCategory(): void {
-    // Перевірте, чи форма є валідною
     if (this.categoryForm.invalid) {
-      // Якщо форма недійсна, встановіть відповідні флаги для відображення помилок
       this.showNameError = this.categoryForm.controls['name'].invalid;
       this.showTitleError = this.categoryForm.controls['path'].invalid;
-      return; // Перервіть відправку форми
+      return;
     }
-    // Якщо форма валідна, відправляйте дані
     if (this.updateStatus) {
       this.categoryService
-        .updateCategory(this.categoryForm.value, this.editedCategoryId)
-        .subscribe(() => {
+        .updateCategoryFirebase(this.categoryForm.value, this.editedCategoryId as string)
+        .then(() => {
           this.getCategories();
           this.toastr.success('Category successfully updated');
           this.updateStatus = false;
         });
     } else {
-      this.categoryService
-        .createCategory(this.categoryForm.value)
-        .subscribe(() => {
+        this.categoryService
+        .createCategoryFirebase(this.categoryForm.value)
+        .then(() => {
           this.getCategories();
           this.toastr.success('Category successfully added');
-          // приховую блоки помилок
           this.showNameError = false;
           this.showTitleError = false;
         });
@@ -92,7 +88,7 @@ export class AdminCategoriesComponent {
 
   removeCategory(category: CategoryResponse): void {
     if (confirm('Are you sure?')) {
-      this.categoryService.removeCategory(category.id).subscribe(() => {
+      this.categoryService.removeCategoryFirebase(category.id as string).then(() => {
         this.getCategories();
         this.toastr.success('Category successfully deleted');
       });
@@ -100,14 +96,14 @@ export class AdminCategoriesComponent {
   }
 
   editCategory(editCategory: CategoryResponse): void {
-    this.updateStatus = true; //по цій змінній даективую кнопки "видалити"
-    this.isOpenForm = true; //відкриваємо блок з формою
+    this.updateStatus = true;
+    this.isOpenForm = true;
     this.categoryForm.patchValue({
       name: editCategory.name,
       path: editCategory.path,
       imagePath: editCategory.imagePath,
     });
-    this.editedCategoryId = editCategory.id;
+    this.editedCategoryId = editCategory.id as number;
     this.isUploaded = true;
   }
 
@@ -126,8 +122,6 @@ export class AdminCategoriesComponent {
         console.log(err);
       });
   }
-
-
 
   deleteFormImage(): void {
     this.imageService

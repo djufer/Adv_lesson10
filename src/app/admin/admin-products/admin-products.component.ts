@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { CategoryResponse, ProductResponse } from './../../shared/interfaces/interfaces';
+import { CategoryRequest, CategoryResponse, ProductResponse } from './../../shared/interfaces/interfaces';
 import { ProductsService } from '../../shared/services/product/product.service';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import * as test from "node:test";
 
 @Component({
   selector: 'app-admin-products',
@@ -16,8 +15,8 @@ export class AdminProductsComponent {
   public isOpenForm = false;
 
   public updateStatus = false;
-  public currentEditProductId = 0;
-  public adminCategories: CategoryResponse[] = [];
+  public currentEditProductId: string = '';
+  public adminCategories: CategoryRequest[] = [];
   public adminProducts: ProductResponse[] = [];
 
   public productForm!: FormGroup;
@@ -35,8 +34,8 @@ export class AdminProductsComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getProducts();
     this.getCategories();
+    this.getProducts();
     this.initProductForm();
   }
 
@@ -59,16 +58,16 @@ export class AdminProductsComponent {
   }
 
   getProducts(): void {
-    this.productsService.getAll().subscribe((data) => {
-      this.adminProducts = data;
+    this.productsService.getAllFirebase().subscribe((data) => {
+      this.adminProducts = data as ProductResponse[];
       this.productForm.patchValue({
         category: this.adminCategories[0],
       });
     });
   }
   getCategories() {
-    this.categoryService.getAll().subscribe((data) => {
-      this.adminCategories = data;
+    this.categoryService.getAllFirebase().subscribe((data) => {
+      this.adminCategories = data as CategoryResponse[];
     });
   }
 
@@ -79,16 +78,16 @@ export class AdminProductsComponent {
     }
     if (this.updateStatus) {
       this.productsService
-        .updateProduct(this.productForm.value, this.currentEditProductId)
-        .subscribe(() => {
+        .updateProductsFirebase(this.productForm.value, this.currentEditProductId as string)
+        .then(() => {
           this.toastr.success('Product successfully updated');
           this.getProducts();
           this.updateStatus = false;
         });
     } else {
       this.productsService
-        .addNewProduct(this.productForm.value)
-        .subscribe(() => {
+        .createProductsFirebase(this.productForm.value)
+        .then(() => {
           this.getProducts();
           this.toastr.success('Product successfully added');
           this.productForm.reset();
@@ -102,11 +101,16 @@ export class AdminProductsComponent {
   }
 
   removeProduct(product: ProductResponse): void {
-    this.productsService.removeProduct(product.id).subscribe(() => {
+    if (!product.id) {
+      console.error('Product ID is undefined', product);
+      return;
+    }
+    this.productsService.removeProductsFirebase(product.id as string).then(() => {
       this.getProducts();
       this.toastr.success('Product successfully deleted');
     });
   }
+
 
   editProduct(product: ProductResponse): void {
     this.productForm.reset();
@@ -114,7 +118,7 @@ export class AdminProductsComponent {
     this.isOpenForm = true;
     this.isUploaded = true;
     this.updateStatus = true;
-    this.currentEditProductId = product.id;
+    this.currentEditProductId = product.id as string;
   }
 
   // ----------------------------
@@ -136,7 +140,6 @@ export class AdminProductsComponent {
       });
   }
 
-  // метод для видалення картинки, шлях до якої береться з заповненої в даниймомент форми ;
   deleteImage(): void {
     this.imageService
       .deleteUploadFile(this.valueByControl('imagePath'))

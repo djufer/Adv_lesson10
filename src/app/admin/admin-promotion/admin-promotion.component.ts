@@ -13,6 +13,8 @@ import {
   ref,
   uploadBytesResumable,
 } from '@angular/fire/storage';
+import { Timestamp } from "@angular/fire/firestore";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-admin-promotion',
@@ -25,7 +27,7 @@ export class AdminPromotionComponent {
   public updateStatus = false; // статус оновлення
 
   public adminPromotions: PromotionResponse[] = [];
-  public currentEditingPromotionId!: number;
+  public currentEditingPromotionId!: number | string;
   // змінні для показу&приховування помилок
   public showNameError = false;
   public showTitleError = false;
@@ -42,7 +44,8 @@ export class AdminPromotionComponent {
   constructor(
     private promotionService: PromotionService,
     private fb: FormBuilder,
-    private storage: Storage
+    private storage: Storage,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -60,8 +63,19 @@ export class AdminPromotionComponent {
   }
 
   getPromotions(): void {
-    this.promotionService.getAll().subscribe((data) => {
-      this.adminPromotions = data;
+    this.promotionService.getAllFirebase().subscribe((data) => {
+      this.adminPromotions = data.map(promotion => {
+        // Переконайтесь, що всі властивості присутні
+        const date = promotion['date'] instanceof Timestamp ? promotion['date'].toDate() : promotion['date'];
+        return {
+          id: promotion.id || '', // Переконайтесь, що `id` не пустий
+          name: promotion['name'] || '', // Переконайтесь, що `name` не пустий
+          title: promotion['title'] || '', // Переконайтесь, що `title` не пустий
+          description: promotion['description'] || '', // Переконайтесь, що `description` не пустий
+          imagePath: promotion['imagePath'] || '', // Переконайтесь, що `imagePath` не пустий
+          date: date instanceof Date ? date : new Date() // Встановлює нову дату, якщо `date` не є дійсним об'єктом Date
+        } as PromotionResponse; // Явне перетворення типу
+      });
     });
   }
   // показ і приховування блоку з додавання і редагування даних
@@ -78,11 +92,11 @@ export class AdminPromotionComponent {
       return;
     } else if (this.updateStatus) {
       this.promotionService
-        .updatePromotion(
+        .updatePromotionFirebase(
           this.promotionForm.value,
-          this.currentEditingPromotionId
+          this.currentEditingPromotionId as string
         )
-        .subscribe(() => {
+        .then(() => {
           this.getPromotions();
           this.updateStatus = false;
           this.isUploaded = false;
@@ -96,7 +110,7 @@ export class AdminPromotionComponent {
         date: new Date(), // Додаємо поточну дату до об'єкту нової акції
       };
       // додавання нового promotion на сервер
-      this.promotionService.addNewPromotion(newPromotion).subscribe(() => {
+      this.promotionService.createPromotionFirebase(newPromotion).then(() => {
         // оновлення всього масиву promotions
         this.getPromotions();
         this.isUploaded = false;
@@ -119,14 +133,12 @@ export class AdminPromotionComponent {
     if (imagePath) {
       const imageRef = ref(this.storage, imagePath);
       deleteObject(imageRef).then(() => {
-        console.log('Image deleted successfully');
       })
     }
-    this.promotionService.removePromotion(promotion.id).subscribe(() => {
+    this.promotionService.removePromotionFirebase(promotion.id as string).then(() => {
       this.getPromotions();
+      this.toastr.success('Promotion succefully deleted')
     });
-
-
   }
   editPromotion(promotion: PromotionResponse): void {
     // заносимо дані у форму
@@ -139,7 +151,7 @@ export class AdminPromotionComponent {
     });
 
     this.editStatus = true;
-    this.currentEditingPromotionId = promotion.id;
+    this.currentEditingPromotionId = promotion.id as string;
     this.updateStatus = true;
   }
 

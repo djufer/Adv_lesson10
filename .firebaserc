@@ -1,6 +1,7 @@
 {
   "projects": {
-    "lesson08": "lesson08-abebb"
+    "lesson08": "lesson08-abebb",
+    "default": "lesson08-abebb"
   },
   "targets": {},
   "etags": {}

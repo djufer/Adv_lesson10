@@ -29,8 +29,8 @@ export class HomeComponent {
   ngOnInit(): void {}
 
   loadProducts(): void {
-    this.productsService.getAll().subscribe((data) => {
-      this.homeProducts = data;
+    this.productsService.getAllFirebase().subscribe((data) => {
+      this.homeProducts = data as ProductResponse[];
     });
   }
 

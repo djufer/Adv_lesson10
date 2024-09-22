@@ -22,7 +22,7 @@ export class CarruselComponent {
   public isMagnetActive = false;
   public mouseMoveX = 0; // перетягування мишкою праворуч-ліворуч
   public selectedIndex = 0; // індекс активного елемента, за замовчуванням 0
- 
+
   constructor(
     private elementRef: ElementRef,
     private promotionService: PromotionService
@@ -36,8 +36,8 @@ export class CarruselComponent {
   }
 
   getPromotions(): void {
-    this.promotionService.getAll().subscribe((data) => {
-      this.carouselPromotions = data;
+    this.promotionService.getAllFirebase().subscribe((data) => {
+      this.carouselPromotions = data as PromotionResponse[];
       this.getWidthOfCarousel();
       this.getPoints();
       this.getIndicators();

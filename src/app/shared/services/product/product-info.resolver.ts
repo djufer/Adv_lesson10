@@ -3,12 +3,10 @@ import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { ProductsService } from './product.service';
 import { ProductResponse } from '../../interfaces/interfaces';
 
-export const productInfoResolver: ResolveFn<ProductResponse> = (
+export const productInfoResolver: ResolveFn<ProductResponse | null> = (
   route: ActivatedRouteSnapshot
 ) => {
   const productsService = inject(ProductsService);
-
-  route.paramMap.get('id');
-  const id = Number(route.paramMap.get('id'));
-  return productsService.getOne(id);
+  const id = route.paramMap.get('id');
+  return id ? productsService.getOneById(id) : Promise.resolve(null);
 };

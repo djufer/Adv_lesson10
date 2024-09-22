@@ -1,48 +1,74 @@
 import { Injectable } from '@angular/core';
-import { ProductResponse, ProductRequest } from './../../interfaces/interfaces';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { ProductResponse, PromotionRequest } from '../../interfaces/interfaces';
+import { from, Observable } from 'rxjs';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  CollectionReference,
+  deleteDoc,
+  doc,
+  docData, Firestore, getDoc, getDocs, query,
+  updateDoc, where
+} from '@angular/fire/firestore';
+import { DocumentData } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private url = environment.BACKEND_URL;
-  private api = {
-    products: `${this.url}/products`,
-  };
+  public productsCollection: CollectionReference<DocumentData>;
 
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<ProductResponse[]> {
-    return this.http.get<ProductResponse[]>(this.api.products);
+  constructor(public afs: Firestore) {
+    this.productsCollection = collection(this.afs, 'products');
   }
 
   getAllByCategory(name: string): Observable<ProductResponse[]> {
-    return this.http.get<ProductResponse[]>(
-      `${this.api.products}?category.path=${name}`
+    const productsRef = collection(this.afs, 'products');
+    const q = query(productsRef, where('category.path', '==', name));
+
+    return from(
+      getDocs(q).then(snapshot => {
+        const products: ProductResponse[] = [];
+        snapshot.forEach(doc => {
+          products.push(doc.data() as ProductResponse);
+        });
+        return products;
+      })
     );
   }
 
-  getOne(id: number): Observable<ProductResponse> {
-    return this.http.get<ProductResponse>(`${this.api.products}/${id}`);
+  async getOneById(id: string | null): Promise<ProductResponse | null> {
+    if (!id) return Promise.resolve(null);
+    const docRef = doc(this.afs, 'products', id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data() as ProductResponse;
+    } else {
+      return null;
+    }
   }
 
-  addNewProduct(product: ProductRequest): Observable<ProductResponse> {
-    return this.http.post<ProductResponse>(this.api.products, product);
+  getAllFirebase(){
+    return collectionData(this.productsCollection, { idField: 'id'})
   }
 
-  removeProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.api.products}/${id}`);
+  getOneFirebase(id: string){
+    const productsDocumentReference = doc(this.afs, `products/${id}`);
+    return docData(productsDocumentReference, { idField: 'id'})
   }
-  updateProduct(
-    newProduct: ProductRequest,
-    id: number
-  ): Observable<ProductResponse> {
-    return this.http.patch<ProductResponse>(
-      `${this.api.products}/${id}`,
-      newProduct
-    );
+
+  createProductsFirebase(newPromotion: PromotionRequest)   {
+    return addDoc(this.productsCollection, newPromotion)
+  }
+
+  updateProductsFirebase(promotion: PromotionRequest, id: string){
+    const Promotion = doc(this.afs, `products/${id}`);
+    return updateDoc(Promotion, {...promotion})
+  }
+
+  removeProductsFirebase(id: string){
+    const productsDocumentReference = doc(this.afs, `products/${id}`);
+    return deleteDoc(productsDocumentReference);
   }
 }

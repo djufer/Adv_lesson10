@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { ProductsService } from './product.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import {environment} from "../../../../environments/environment";
+import {getStorage, provideStorage} from "@angular/fire/storage";
 
 describe('ProductService', () => {
   let service: ProductsService;
@@ -8,7 +11,9 @@ describe('ProductService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideStorage(() => getStorage())
       ],
       providers: [ ProductsService ]
     });

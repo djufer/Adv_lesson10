@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { ILogin, PersonalData } from '../../interfaces/interfaces';
 import { Observable, Subject } from 'rxjs';
-// import { doc } from 'firebase/firestore';
 import { Firestore, getDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
 import { Auth, deleteUser } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
@@ -38,21 +37,11 @@ export class AccountService {
 
     if (user) {
       try {
-        // Видалити дані користувача з Firestore
         await deleteDoc(doc(this.afs, 'users', user.uid));
-
-        // Видалити обліковий запис користувача з Firebase Authentication
         await deleteUser(user);
-
-        // Оновити статус входу користувача
         this.isUserLogin$.next(false);
-
-        // Очистити localStorage
         localStorage.removeItem('currentUser');
-
-        // Перенаправити користувача на головну сторінку
         this.router.navigate(['/']);
-
         this.toastr.success('Обліковий запис успішно видалено');
       } catch (error) {
         console.error('Error deleting user account:', error);
@@ -64,7 +53,6 @@ export class AccountService {
   }
   async updatePersonalData(personal: PersonalData): Promise<void> {
     const user = this.auth.currentUser;
-
     if (user) {
       const userUid = user.uid;
       const userDocRef = doc(this.afs, 'users', userUid);
@@ -78,11 +66,9 @@ export class AccountService {
 
          const updatedUserDoc = await getDoc(userDocRef);
          const updatedUserData = updatedUserDoc.data();
-
          if (updatedUserData) {
            localStorage.setItem('currentUser', JSON.stringify(updatedUserData));
          }
-
         this.toastr.success('Особисті дані успішно оновлено');
       } catch (error) {
         console.error('Error updating personal data:', error);

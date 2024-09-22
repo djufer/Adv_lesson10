@@ -114,7 +114,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let promotion of adminPromotions; let i = index">
-        <td>{{ promotion.date | date : "MM.yyyy" }}</td>
+        <td>{{ promotion.date  | date : "MM.yyyy" }}</td>
         <td>{{ promotion.name }}</td>
         <td>{{ promotion.title }}</td>
         <td>{{ promotion.description | truncate : 60 : true : "..." }}</td>

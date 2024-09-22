@@ -6,7 +6,6 @@ import { OverlayService } from '../overlay/overlay.service';
   providedIn: 'root',
 })
 export class ModalsService {
-  // модаока корзини cart-modal
   private $cartModalStatusSource = new BehaviorSubject<boolean>(false);
   public cartModalStatus = this.$cartModalStatusSource.asObservable();
 
@@ -28,7 +27,6 @@ export class ModalsService {
     this.$callBackModalStatusSource.next(false);
   }
 
-  // модалка call-back START
   private $callBackModalStatusSource = new BehaviorSubject<boolean>(false);
   public callBackModalStatus = this.$callBackModalStatusSource.asObservable();
   getCallBackModalStatus(): Observable<boolean> {
@@ -40,35 +38,6 @@ export class ModalsService {
   closeCallBackModal(): void {
     this.$callBackModalStatusSource.next(false);
   }
-  // модалка call-back FIN
 
-  // ---------------------
 
-  // модалка user-login START
-  private $userLoginModalStatusSource = new BehaviorSubject<boolean>(false);
-  public userLoginModalStatus = this.$userLoginModalStatusSource.asObservable();
-  getUserLoginModalStatus(): Observable<boolean> {
-    return this.userLoginModalStatus;
-  }
-  openUserLoginModal(): void {
-    this.$userLoginModalStatusSource.next(true);
-  }
-  closeUserLoginModal(): void {
-    this.$userLoginModalStatusSource.next(false);
-  }
-  // модалка user-login FIN
-
-  private $detailOrderModalStatusSource = new BehaviorSubject<boolean>(false);
-  public detailOrderModalStatus =
-    this.$detailOrderModalStatusSource.asObservable();
-  getDetailOrderModalStatus(): Observable<boolean> {
-    return this.detailOrderModalStatus;
-  }
-  openDetailOrderModal(): void {
-    this.$detailOrderModalStatusSource.next(true);
-  }
-  closeDetailOrderModal(): void {
-    this.$detailOrderModalStatusSource.next(false);
-  }
-  //
 }

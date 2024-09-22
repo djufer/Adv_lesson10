@@ -10,7 +10,7 @@ import { PromotionResponse } from '../../../shared/interfaces/interfaces';
 })
 export class PromotionInfoComponent {
 
-  public currentPromotion!: PromotionResponse;
+  public currentPromotion: PromotionResponse | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute

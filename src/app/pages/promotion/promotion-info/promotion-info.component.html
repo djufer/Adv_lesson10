@@ -2,7 +2,7 @@
   <div class="col-12">
     <div *ngIf="currentPromotion" class="block-info">
       <div class="block-info-img" >
-        <img [src]="currentPromotion.imagePath" />
+        <img [src]="currentPromotion.imagePath"  [alt]="currentPromotion.name"/>
       </div>
       <h5 class="title text-cut-2 text-center ">{{ currentPromotion.title }}</h5>
       <hr />

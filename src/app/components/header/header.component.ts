@@ -54,8 +54,8 @@ export class HeaderComponent {
   }
 
   getCategories() {
-    this.categoryService.getAll().subscribe((data) => {
-      this.headerCategories = data;
+    this.categoryService.getAllFirebase().subscribe((data) => {
+      this.headerCategories = data as CategoryResponse[];
     });
   }
 

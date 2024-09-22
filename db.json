@@ -1,48 +1,5 @@
 {
-  "categories": [
-    {
-      "name": "Піца",
-      "path": "pizza",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Ficon-for-pizza.jpg?alt=media&token=7006a350-4be5-47cb-82db-54a1004d89db",
-      "id": 1
-    },
-    {
-      "name": "Салати",
-      "path": "salads",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Ficon-salade.png?alt=media&token=d6883f3c-be8e-455a-9b17-a416044d03f3",
-      "id": 2
-    },
-    {
-      "name": "Десерти",
-      "path": "desserts",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdesserts.png?alt=media&token=b6e78fbb-5801-4c64-82f9-5e1c6657ccec",
-      "id": 3
-    },
-    {
-      "name": "Напої",
-      "path": "drinks",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fcategories%2Fdrinks-icon.png?alt=media&token=e2ec9414-0342-4237-86f7-2a6577d4c983",
-      "id": 4
-    }
-  ],
-  "promotions": [
-    {
-      "name": "рол тижня",
-      "title": "50% знижка на 'Рол тижня",
-      "description": "Щотижня діє знижка 50% на один з ролів нашого меню  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates tempore eaque fugit, culpa hic est totam quo nesciunt velit voluptatem optio aliquid animi vitae praesentium doloremque voluptatibus ab minus autem inventore, repudiandae enim sed minima. Doloremque modi dolore cupiditate? Incidunt, dolore praesentium. Odio eum ad impedit facilis atque magni totam?",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fpromotions%2F2.webp?alt=media&token=3d4ccb97-18c7-44c5-8d96-e1695f55783b",
-      "date": "2024-06-10T21:18:04.503Z",
-      "id": 13
-    },
-    {
-      "name": "2 замість 1",
-      "title": "Купуй один рол, отримуй два",
-      "description": "Кожного понеділка можеш отримати два роли за ціною одного Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates tempore eaque fugit, culpa hic est totam quo nesciunt velit voluptatem optio aliquid animi vitae praesentium doloremque voluptatibus ab minus autem inventore, repudiandae enim sed minima. Doloremque modi dolore cupiditate? Incidunt, dolore praesentium. Odio eum ad impedit facilis atque magni totam?",
-      "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fpromotions%2F4.webp?alt=media&token=a55c35ba-2cd8-4519-bb1e-77d634b425b7",
-      "date": "2024-06-10T21:21:24.544Z",
-      "id": 14
-    }
-  ],
+
   "products": [
     {
       "category": {
@@ -94,7 +51,7 @@
         "id": 3
       },
       "subCategory": null,
-      "name": " Сіннабон шоколадний",
+      "name": "Сіннабон шоколадний",
       "path": "desserts",
       "description": "Борошно пшеничне, какао порошок, молоко, цукор, дріжджі, яйце куряче, масло вершкове, сіль морська, кориця мелена, олія соняшникова, крем-сир, шоколад чорний, шоколад молочний.",
       "weight": "125 г",
@@ -127,23 +84,6 @@
       "imagePath": "https://firebasestorage.googleapis.com/v0/b/lesson08-abebb.appspot.com/o/images%2Fproducts%2Frich_apple.webp?alt=media&token=eb52782a-9225-45aa-aef2-73492e1fc163",
       "count": 1,
       "id": 6
-    }
-  ],
-  "orders": [],
-  "auth": [
-    {
-      "id": 1,
-      "email": "admin@gmail.com",
-      "password": "qwerty123",
-      "fullName": "Petro Petriv",
-      "role": "ADMIN"
-    },
-    {
-      "id": 2,
-      "email": "user@gmail.com",
-      "password": "qwerty123",
-      "fullName": "Pavlo Pavliv",
-      "role": "USER"
     }
   ]
 }

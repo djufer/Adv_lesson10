@@ -19,17 +19,14 @@ export class OrdersService {
   public changeBasket = new Subject<boolean>();
   public ordersCollection: CollectionReference<OrderResponse>;
   constructor(private afs: Firestore) {
-    // Створюємо посилання на колекцію 'orders'
     this.ordersCollection = collection(this.afs, 'orders') as CollectionReference<OrderResponse>;
   }
-
-// Додаємо замовлення в колекцію 'orders' і додаємо ID до самого ордера
   async addOrder(order: OrderResponse): Promise<void> {
     try {
       const orderDocRef = await addDoc(this.ordersCollection, order);
     } catch (error) {
       console.error('Error adding order: ', error);
-      throw error; // Передаємо помилку далі, щоб її можна було обробити в компоненті
+      throw error;
     }
   }
 

@@ -2,10 +2,6 @@ import { Component } from '@angular/core';
 import { PromotionService } from '../../shared/services/promotion/promotion.service';
 import { PromotionResponse } from '../../shared/interfaces/interfaces';
 
-
-  
-
-
 @Component({
   selector: 'app-promotion',
   templateUrl: './promotion.component.html',
@@ -20,10 +16,8 @@ export class PromotionComponent {
   }
 
   getPromotions(): void {
-    this.promotionService.getAll().subscribe((data) => {  
-      this.userPromotions = data;
+    this.promotionService.getAllFirebase().subscribe((data) => {
+      this.userPromotions = data as PromotionResponse[];
     });
   }
-  
-
 }
